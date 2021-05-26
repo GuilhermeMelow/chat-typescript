@@ -1,28 +1,28 @@
 <template>
-    <div class="hello">
-        <section>
-            <h1 v-html="usuario.nome" data-test="h1-title" />
-        </section>
-        <section>
-            <input type="text" v-model="nome" data-teste='nome-usuario' />
+    <div class="login-content">
+        <div class="form-content">
+            <label for="nome">Nome:</label>
+            <input id="nome" type="text" v-model="nome" data-teste='nome-usuario' />
             <button data-test="btn-entrar" @click="entrar">Entrar</button>
-        </section>
-        <section>
+        </div>
+        <div class="error-content">
             <p font-color="red" v-html="error" data-teste="error-message" />
-        </section>
+        </div>
     </div>
 </template>
 
 <script lang="ts">
-    import { defineComponent } from "vue";
+    import { defineComponent, ref } from "vue";
     import useLogin from "./functions/UseLogin";
 
     export default defineComponent({
         name: "Login",
 
         setup() {
+            const nome = ref("");
+
             return {
-                ...useLogin(),
+                ...useLogin(nome),
             };
         },
     });

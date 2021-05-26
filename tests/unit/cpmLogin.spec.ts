@@ -19,19 +19,10 @@ describe('Login.vue', () => {
         return {
             wrapper,
             textbox: wrapper.get("[data-teste='nome-usuario']"),
-            title: wrapper.get('h1'),
             loginButton: wrapper.get("[data-test='btn-entrar']"),
             service,
         }
     }
-
-    it('inicia deslogado', () => {
-        // Arrange Act
-        const { title } = build();
-
-        // Assert
-        expect(title.text()).toEqual('')
-    })
 
     it('ao clicar no botão de login, exibe nome do usuário', async () => {
         // Arrange
