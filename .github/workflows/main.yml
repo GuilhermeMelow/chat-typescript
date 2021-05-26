@@ -1,0 +1,16 @@
+name: Teste
+
+on: [push, pull_request]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v2
+    
+    - name: Run|Install yarn
+      run: yarn
+      
+    - name: Run jest
+      run: yarn jest

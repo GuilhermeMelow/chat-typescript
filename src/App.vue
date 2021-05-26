@@ -1,7 +1,5 @@
 <template>
     <div id="nav">
-        <router-link to="/">Home</router-link> |
-        <router-link to="/about">About</router-link>
     </div>
     <router-view />
 </template>
@@ -14,7 +12,6 @@
         setup() {
             const memoryChat = new InMemoryChat();
 
-            provide("user", "Carlo Miguel Dy");
             provide("chatService", readonly(memoryChat));
         },
     });

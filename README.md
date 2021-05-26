@@ -1,4 +1,4 @@
-# t2
+# Chat
 
 ## Project setup
 ```
