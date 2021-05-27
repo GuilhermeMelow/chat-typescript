@@ -1,26 +1,27 @@
 import { shallowMount } from '@vue/test-utils'
 import Tabs from '@/components/chat/Tabs.vue'
-import IDictionary from '@/types/IDictionary';
+import ITabs from '@/types/ITabs';
 
 describe('Tabs.vue', () => {
-    const dictionary: IDictionary<string, string> = {}
-    dictionary[0] = { Key: "teste1", Value: "testeValue1" };
-    dictionary[1] = { Key: "teste2", Value: "testeValue2" };
+    const tabs: ITabs[] = [
+        { name: "tab1", component: "componentValue1" },
+        { name: "tab2", component: "componentValue2" }
+    ];
 
     function build() {
         const wrapper = shallowMount(Tabs, {
             props: {
-                tabs: dictionary,
+                tabs: tabs,
             },
         });
 
-        return { wrapper, dictionary };
+        return { wrapper, tabs };
     }
 
     it("ao selecionar uma tab, deve abrir o conteudo da mesma", async () => {
         // Arrange
-        const { wrapper, dictionary } = build();
-        const tab = wrapper.get("[data-teste='" + dictionary[1].Value + "']");
+        const { wrapper, tabs } = build();
+        const tab = wrapper.get("[data-teste='" + tabs[1].name + "']");
 
         // Act
         await tab.trigger('click');
@@ -28,7 +29,7 @@ describe('Tabs.vue', () => {
 
         // Assert
         const componentResultName = componentResult.element.nodeName.toLowerCase();
-        const componentName = dictionary[1].Value.toLowerCase();
+        const componentName = tabs[1].component.toLowerCase();
 
         expect(componentResultName).toEqual(componentName);
     })

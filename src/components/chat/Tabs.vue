@@ -3,11 +3,11 @@
         <ul class="tab-nav">
             <li
                 v-for="tab in tabs"
-                :class=" { active: currentTab.Key === tab.Key }"
-                :key="tab.Key"
-                :data-teste="tab.Value"
+                :class=" { active: currentTab.name === tab.name }"
+                :key="tab.name"
+                :data-teste="tab.name"
                 @click="currentTab = tab">
-                {{tab.Value}}
+                {{tab.name}}
             </li>
         </ul>
         <component :is="currentTabComponent" data-teste="componentTab" />
@@ -15,7 +15,7 @@
 </template>
 
 <script lang="ts">
-    import IDictionary from "@/types/IDictionary";
+    import Itabs from "@/types/ITabs";
     import { defineComponent, toRefs, Ref } from "vue";
     import useTabs from "./functions/UseTabs";
 
@@ -25,9 +25,9 @@
         },
         setup(props) {
             const { tabs } = toRefs(props);
-            const tabsDictionary = tabs as Ref<IDictionary<string, string>>;
+            const tabsResult = tabs as Ref<Itabs[]>;
 
-            return { ...useTabs(tabsDictionary) };
+            return { ...useTabs(tabsResult) };
         },
     });
 </script>
