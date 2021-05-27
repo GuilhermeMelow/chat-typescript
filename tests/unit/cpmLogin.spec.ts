@@ -1,4 +1,4 @@
-import { shallowMount, VueWrapper } from '@vue/test-utils'
+import { shallowMount } from '@vue/test-utils'
 import Login from '@/components/login/Login.vue'
 import { IUser } from '@/types/IChatService'
 
