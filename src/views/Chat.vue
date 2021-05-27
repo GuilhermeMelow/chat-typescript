@@ -1,18 +1,16 @@
 <template>
-    <div id="box-user">
-        <Box-user></Box-user>
+    <div id="list-chat">
+        <List-chats />
     </div>
 </template>
 
 <script lang="ts">
-    import BoxUser from "@/components/chat/BoxUser.vue";
+    import ListChats from "@/components/chat/ListChats.vue";
     import { defineComponent } from "vue";
 
     export default defineComponent({
+        components: { ListChats },
         name: "Chat",
-        components: {
-            BoxUser,
-        },
     });
 </script>
 
