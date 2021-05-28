@@ -1,12 +1,12 @@
 import { shallowMount } from '@vue/test-utils'
 import Login from '@/components/login/Login.vue'
-import { IUser } from '@/types/IChatService'
+import { IChat } from '@/types/IChatService'
 
 
 describe('Login.vue', () => {
     function build() {
         const service = { entrar: jest.fn() };
-        const user: IUser = { id: "123", nome: "teste" };
+        const user: IChat = { id: "123", nome: "teste" };
         service.entrar.mockReturnValue(user);
 
         const wrapper = shallowMount(Login, {
@@ -25,7 +25,7 @@ describe('Login.vue', () => {
         }
     }
 
-    it('ao clicar no botão de login, exibe nome do usuário', async () => {
+    it('ao clicar no botão de login, deve executar a entrada.', async () => {
         // Arrange
         const { textbox, loginButton, service } = build();
         textbox.setValue("teste");
@@ -35,7 +35,7 @@ describe('Login.vue', () => {
 
         // Assert
         expect(service.entrar).toHaveBeenCalledTimes(1);
-    })
+    });
 
     it('ao enviar um nome invalido, deve não entrar', async () => {
         // Arrange
@@ -48,5 +48,5 @@ describe('Login.vue', () => {
 
         // Assert
         expect(errorMessage.text() === "").toBeFalsy();
-    })
-})
+    });
+});
