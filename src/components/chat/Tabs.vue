@@ -1,13 +1,13 @@
 <template>
-    <div class="box-user">
+    <div class="box">
         <ul class="tab-nav">
             <li
                 v-for="tab in tabs"
-                :class=" { active: currentTab === tab }"
-                :key="tab"
-                :data-teste="tab"
+                :class=" { active: currentTab.name === tab.name }"
+                :key="tab.name"
+                :data-teste="tab.name"
                 @click="currentTab = tab">
-                {{tab}}
+                {{tab.name}}
             </li>
         </ul>
         <component :is="currentTabComponent" data-teste="componentTab" />
@@ -15,16 +15,19 @@
 </template>
 
 <script lang="ts">
-    import useTabs from "@/components/chat/functions/UseTabs";
-
-    import { defineComponent } from "vue";
-    import ListUsuarios from "@/components/chat/ListUsuarios.vue";
-    import ListChats from "@/components/chat/ListChats.vue";
+    import Itabs from "@/types/ITabs";
+    import { defineComponent, toRefs, Ref } from "vue";
+    import useTabs from "./functions/UseTabs";
 
     export default defineComponent({
-        components: { ListChats, ListUsuarios },
-        setup() {
-            return { ...useTabs() };
+        props: {
+            tabs: null,
+        },
+        setup(props) {
+            const { tabs } = toRefs(props);
+            const tabsResult = tabs as Ref<Itabs[]>;
+
+            return { ...useTabs(tabsResult) };
         },
     });
 </script>
@@ -54,7 +57,7 @@
     ul.tab-nav li.active {
         background: rgb(71, 70, 70);
     }
-    .box-user {
+    .box {
         width: 500px;
         height: 500px;
     }

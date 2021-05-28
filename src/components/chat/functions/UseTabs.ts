@@ -1,12 +1,10 @@
-import { ref, computed } from "vue";
+import ITabs from "@/types/ITabs";
+import { Ref, ref, computed } from "vue";
 
-export default function useTabs() {
-    const tabs = ref(["Usuários", "Chats"]);
+export default function useTabs(tabs: Ref<ITabs[]>) {
     const currentTab = ref(tabs.value[0]);
 
-    const currentTabComponent = computed(() => {
-        return currentTab.value === "Usuários" ? "ListUsuarios" : "ListChats"
-    });
+    const currentTabComponent = computed(() => currentTab.value.component);
 
     return { currentTabComponent, currentTab, tabs }
 }

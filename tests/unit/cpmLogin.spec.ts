@@ -16,6 +16,7 @@ describe('Login.vue', () => {
                 }
             }
         })
+
         return {
             wrapper,
             textbox: wrapper.get("[data-teste='nome-usuario']"),
