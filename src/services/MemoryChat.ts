@@ -14,6 +14,7 @@ export class InMemoryChat implements IChatService {
             throw new Error("Não é possível entrar com este nome.");
 
         const chat: IChat = { id: "sadf", nome: nome };
+        await this.adicionar(chat);
 
         return new Promise<IChat>((resolve) => resolve(chat));
     }
