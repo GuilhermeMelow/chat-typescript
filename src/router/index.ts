@@ -8,7 +8,7 @@ const routes: Array<RouteRecordRaw> = [
         component: Home
     },
     {
-        path: '/chat/:nome',
+        path: '/chat/',
         name: 'Chat',
         component: () => import('@/views/Chat.vue')
     }

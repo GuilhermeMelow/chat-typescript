@@ -1,10 +1,13 @@
-import { IChatService, IUser } from "@/types/IChatService";
+import { IChatService, IChat } from "@/types/IChatService";
 
 export class ChatService implements IChatService {
-    entrar(): IUser {
+    adicionar(chat: IChat): Promise<number> {
         throw new Error("Method not implemented.");
     }
-    adicionar(usuario: IUser): void {
-        alert(`Chamando API para ${usuario.id}`);
+    entrar(nome: string): Promise<IChat> {
+        throw new Error("Method not implemented.");
+    }
+    pegarChats(): Promise<IChat[]> {
+        throw new Error("Method not implemented.");
     }
 }

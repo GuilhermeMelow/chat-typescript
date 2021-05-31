@@ -13,7 +13,7 @@
 
 <script lang="ts">
     import { defineComponent, ref } from "vue";
-    import useLogin from "./functions/UseLogin";
+    import * as FunctionsLogin from "./functions/Index";
 
     export default defineComponent({
         name: "Login",
@@ -22,7 +22,7 @@
             const nome = ref("");
 
             return {
-                ...useLogin(nome),
+                ...FunctionsLogin.useLogin(nome),
             };
         },
     });

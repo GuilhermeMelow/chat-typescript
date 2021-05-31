@@ -20,3 +20,10 @@
         },
     });
 </script>
+
+<style lang="scss">
+    .box {
+        height: 300px;
+        width: 300px;
+    }
+</style>

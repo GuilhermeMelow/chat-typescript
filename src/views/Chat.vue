@@ -1,21 +1,18 @@
 <template>
-    <div id="list-chat">
+    <div id="list">
         <List-chats :chats="chats" />
     </div>
 </template>
 
 <script lang="ts">
     import ListChats from "@/components/chat/ListChats.vue";
-    import { IChatService } from "@/types/IChatService";
-    import { defineComponent, inject, ref } from "vue";
+    import { defineComponent } from "vue";
+    import useChats from "@/components/chat/functions/UseChats";
 
     export default defineComponent({
         components: { ListChats },
-        async setup() {
-            const service = inject("chatService") as IChatService;
-            const chats = ref(await service.pegarChats());
-
-            return { chats };
+        setup() {
+            return { useChats };
         },
     });
 </script>

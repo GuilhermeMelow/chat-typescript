@@ -2,7 +2,7 @@ import { IChatService, IChat } from "@/types/IChatService";
 import { inject, Ref, ref } from "vue";
 import { useRouter } from "vue-router";
 
-export default function useLogin(nome: Ref<string>) {
+export function useLogin(nome: Ref<string>) {
     const service = inject("chatService") as IChatService;
     const router = useRouter();
     const error = ref("");
@@ -17,7 +17,7 @@ export default function useLogin(nome: Ref<string>) {
             const user = await service.entrar(nome.value);
             chat.value.nome = user.nome;
 
-            await router.push('/chat/' + nome.value);
+            await router.push('/chat');
         }
         catch (catched) {
             error.value = catched;
