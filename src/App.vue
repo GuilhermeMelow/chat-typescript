@@ -5,14 +5,14 @@
 </template>
 
 <script lang="ts">
-    import { defineComponent, provide, readonly } from "vue";
+    import { defineComponent, provide } from "vue";
     import { InMemoryChat } from "./services/MemoryChat";
 
     export default defineComponent({
         setup() {
             const memoryChat = new InMemoryChat();
 
-            provide("chatService", readonly(memoryChat));
+            provide("chatService", memoryChat);
         },
     });
 </script>
