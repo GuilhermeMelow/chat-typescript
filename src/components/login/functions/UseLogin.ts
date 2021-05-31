@@ -1,4 +1,4 @@
-import { IChatService, IUser } from "@/types/IChatService";
+import { IChatService, IChat } from "@/types/IChatService";
 import { inject, Ref, ref } from "vue";
 import { useRouter } from "vue-router";
 
@@ -7,20 +7,22 @@ export default function useLogin(nome: Ref<string>) {
     const router = useRouter();
     const error = ref("");
 
-    const usuario: Ref<IUser> = ref({
+    const chat: Ref<IChat> = ref({
         id: "",
         nome: "",
     });
 
     const entrar = async () => {
-        if (nome.value === "")
-            return error.value = "Não possível entrar com este nome de usuário."
+        try {
+            const user = await service.entrar(nome.value);
+            chat.value.nome = user.nome;
 
-        const user = service.entrar(nome.value);
-        usuario.value.nome = user.nome;
+            await router.push('/chat/' + nome.value);
+        }
+        catch (catched) {
+            error.value = catched;
+        }
+    }
 
-        await router.push('/chat/' + nome.value)
-    };
-
-    return { usuario, entrar, nome, error };
+    return { chat, entrar, nome, error };
 }

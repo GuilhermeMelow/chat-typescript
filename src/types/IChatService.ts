@@ -1,10 +1,12 @@
 export interface IChatService {
-    adicionar(usuario: IUser): void;
+    adicionar(chat: IChat): Promise<number>;
 
-    entrar(username: string): IUser;
+    entrar(nome: string): Promise<IChat>;
+
+    pegarChats(): Promise<IChat[]>;
 }
 
-export interface IUser {
+export interface IChat {
     id: string;
     nome: string;
 }
