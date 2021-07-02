@@ -8,15 +8,16 @@
 </template>
 
 <script lang="ts">
-    import { defineComponent } from "vue";
+    import { defineComponent, onMounted } from "vue";
+    import useChats from "@/components/chat/functions/UseChats";
 
     export default defineComponent({
         name: "ListChats",
-        props: {
-            chats: null,
-        },
         setup() {
-            return {};
+            const chats = useChats();
+            onMounted(async () => await chats.inicializar());
+
+            return { ...chats };
         },
     });
 </script>
