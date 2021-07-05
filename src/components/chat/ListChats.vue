@@ -8,14 +8,15 @@
 </template>
 
 <script lang="ts">
-    import { defineComponent, onMounted } from "vue";
-    import useChats from "@/components/chat/functions/UseChats";
+    import { defineComponent, toRefs } from "vue";
 
     export default defineComponent({
         name: "ListChats",
-        setup() {
-            const chats = useChats();
-            onMounted(async () => await chats.inicializar());
+        props: {
+            chats: null,
+        },
+        setup(props) {
+            const { chats } = toRefs(props);
 
             return { ...chats };
         },

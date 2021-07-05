@@ -1,6 +1,5 @@
 <template>
     <div class="criarChat">
-        <pre>{{ chats }}</pre>
         <label for="nome"> Nome Chat: </label>
         <input type="text" v-model="nomeChat" />
 
@@ -13,11 +12,11 @@
     import useChats from "@/components/chat/functions/UseChats";
 
     export default defineComponent({
-        async setup() {
+        setup() {
             const nomeChat = ref("");
-            const x = await useChats();
+            const chatFunctions = useChats();
 
-            return { nomeChat, ...x };
+            return { nomeChat, ...chatFunctions };
         },
     });
 </script>
