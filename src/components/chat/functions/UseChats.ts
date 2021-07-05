@@ -1,9 +1,15 @@
 import { IChat, IChatService } from "@/types/IChatService";
 import { inject, Ref, ref } from "vue";
 
+interface IUseChats {
+    inicializar(): void,
+    adicionar(nome: string): void,
+    chats: Ref<IChat[]>
+}
+
 const chats: Ref<IChat[]> = ref([]);
 
-export default function useChats() {
+export default function useChats(): IUseChats {
     const service = inject("chatService") as IChatService;
 
     const inicializar = async () => {
