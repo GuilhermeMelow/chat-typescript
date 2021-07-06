@@ -1,5 +1,6 @@
+import InjectStrict from "@/Utils/InjectStrict";
 import { IChat, IChatService } from "@/types/IChatService";
-import { inject, Ref, ref } from "vue";
+import { Ref, ref } from "vue";
 
 interface IUseChats {
     inicializar(): void,
@@ -10,7 +11,7 @@ interface IUseChats {
 const chats: Ref<IChat[]> = ref([]);
 
 export default function useChats(): IUseChats {
-    const service = inject("chatService") as IChatService;
+    const service = InjectStrict<IChatService>("chatService");
 
     const inicializar = async () => {
         const response = await service.pegarChats();

@@ -15,7 +15,7 @@
 
         setup() {
             const chats = useChats();
-            onMounted(async () => await chats.inicializar());
+            onMounted(chats.inicializar);
 
             return { ...chats };
         },
