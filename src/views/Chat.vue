@@ -1,26 +1,23 @@
 <template>
-    <div class="main">
-        <List-chats :chats="chats" />
-    </div>
+    <List-chats :chats="chats" />
+
+    <Criar-Chat />
 </template>
 
 <script lang="ts">
-    import { defineComponent, onMounted, Ref, ref } from "vue";
+    import { defineComponent, onMounted } from "vue";
     import ListChats from "@/components/chat/ListChats.vue";
+    import CriarChat from "@/components/chat/CriarChat.vue";
     import useChats from "@/components/chat/functions/UseChats";
-    import { IChat } from "@/types/IChatService";
 
     export default defineComponent({
-        components: { ListChats },
+        components: { ListChats, CriarChat },
+
         setup() {
-            const chats: Ref<IChat[]> = ref([]);
+            const chats = useChats();
+            onMounted(chats.inicializar);
 
-            onMounted(async () => {
-                const res = await useChats();
-                chats.value = res.chats.value;
-            });
-
-            return { chats };
+            return { ...chats };
         },
     });
 </script>
