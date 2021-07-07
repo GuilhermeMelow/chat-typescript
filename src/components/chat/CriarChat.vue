@@ -1,22 +1,19 @@
 <template>
     <div class="criarChat">
         <label for="nome"> Nome Chat: </label>
-        <input type="text" v-model="nomeChat" />
+        <input type="text" v-model="nome" />
 
-        <button @click="adicionar(nomeChat)">Criar</button>
+        <button @click="adicionar(nome)">Criar</button>
     </div>
 </template>
 
 <script lang="ts">
-    import { defineComponent, ref } from "vue";
+    import { defineComponent } from "vue";
     import useChats from "@/components/chat/functions/UseChats";
 
     export default defineComponent({
         setup() {
-            const nomeChat = ref("");
-            const chatFunctions = useChats();
-
-            return { nomeChat, ...chatFunctions };
+            return { nome: "", ...useChats() };
         },
     });
 </script>
