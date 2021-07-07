@@ -1,6 +1,7 @@
+import { Store } from "@/store";
+import { IChat } from "@/types/IChatService";
+import { Ref } from "vue";
 import InjectStrict from "@/Utils/InjectStrict";
-import { IChat, IChatService } from "@/types/IChatService";
-import { Ref, ref } from "vue";
 
 interface IUseChats {
     inicializar(): void,
@@ -8,22 +9,15 @@ interface IUseChats {
     chats: Ref<IChat[]>
 }
 
-const chats: Ref<IChat[]> = ref([]);
-
 export default function useChats(): IUseChats {
-    const service = InjectStrict<IChatService>("chatService");
+    const store = InjectStrict<Store>("store");
 
-    const inicializar = async () => {
-        const response = await service.pegarChats();
-        chats.value = response;
+    const inicializar = async () => await store.inicializar();
+
+    const adicionar = (nome: string) => {
+        const chat: IChat = { id: "asdf", nome }
+        store.adicionar(chat);
     }
 
-    const adicionar = async (nome: string) => {
-        const chat = { id: "asdf", nome };
-
-        await service.adicionar(chat);
-        chats.value.push(chat);
-    }
-
-    return { adicionar, chats, inicializar };
+    return { adicionar, inicializar, chats: store.state.chats };
 }

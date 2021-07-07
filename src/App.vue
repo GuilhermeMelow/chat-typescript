@@ -7,12 +7,15 @@
 <script lang="ts">
     import { defineComponent, provide } from "vue";
     import { InMemoryChat } from "./services/MemoryChat";
+    import { Store } from "./store";
 
     export default defineComponent({
         setup() {
             const memoryChat = new InMemoryChat();
+            const store: Store = new Store(memoryChat);
 
             provide("chatService", memoryChat);
+            provide("store", store);
         },
     });
 </script>

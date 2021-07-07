@@ -2,7 +2,6 @@ import { shallowMount } from '@vue/test-utils'
 import Login from '@/components/login/Login.vue'
 import { IChat } from '@/types/IChatService'
 
-
 describe('Login.vue', () => {
     function build() {
         const service = { entrar: jest.fn() };
