@@ -1,12 +1,28 @@
-import { createStore } from 'vuex'
+import { IChat, IChatService } from "@/types/IChatService"
+import { ref, Ref } from "vue"
 
-export default createStore({
-  state: {
-  },
-  mutations: {
-  },
-  actions: {
-  },
-  modules: {
-  }
-})
+export interface IState {
+    chats: Ref<IChat[]>
+}
+
+export class Store {
+    private service: IChatService;
+
+    constructor(service: IChatService) {
+        this.service = service;
+    }
+
+    public readonly state: IState = {
+        chats: ref([])
+    };
+
+    public async inicializar(): Promise<void> {
+        const chats = await this.service.pegarChats();
+        this.state.chats.value = chats;
+    }
+
+    public adicionar(chat: IChat): void {
+        this.service.adicionar(chat);
+        this.state.chats.value.push(chat);
+    }
+}
