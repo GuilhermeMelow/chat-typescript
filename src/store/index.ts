@@ -13,7 +13,7 @@ export class Store {
     }
 
     public readonly state: IState = {
-        chats: ref([])
+        chats: ref([]),
     };
 
     public async inicializar(): Promise<void> {
@@ -24,5 +24,14 @@ export class Store {
     public adicionar(chat: IChat): void {
         this.service.adicionar(chat);
         this.state.chats.value.push(chat);
+
+        this.abrirConversa(chat.id);
+    }
+
+    public abrirConversa(id: string): void {
+        const chat = this.state.chats.value.find(c => c.id == id);
+        if (chat == null) throw new Error("Não existe a conversa.");
+
+        chat.aberto = true;
     }
 }
