@@ -1,23 +1,23 @@
 <template>
     <List-chats :chats="chats" />
 
+    <ListChatsOpen :chatsOpen="chatsOpen" />
+
     <Criar-Chat />
 </template>
 
 <script lang="ts">
-    import { defineComponent, onMounted } from "vue";
+    import { defineComponent } from "vue";
     import ListChats from "@/components/chat/ListChats.vue";
     import CriarChat from "@/components/chat/CriarChat.vue";
-    import useChats from "@/components/chat/functions/UseChats";
+    import ListChatsOpen from "@/components/chat/ListChatsOpen.vue";
+    import UseChats from "@/components/chat/functions/UseChats";
 
     export default defineComponent({
-        components: { ListChats, CriarChat },
+        components: { ListChats, CriarChat, ListChatsOpen },
 
         setup() {
-            const chats = useChats();
-            onMounted(chats.inicializar);
-
-            return { ...chats };
+            return { ...UseChats() };
         },
     });
 </script>
