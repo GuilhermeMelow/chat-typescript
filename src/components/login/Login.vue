@@ -3,7 +3,7 @@
         <div class="form-content">
             <label for="nome">Nome:</label>
             <input id="nome" type="text" v-model="nome" data-teste='nome-usuario' />
-            <button data-test="btn-entrar" @click="entrar">Entrar</button>
+            <button data-test="btn-entrar" @click="entrar(nome)">Entrar</button>
         </div>
         <div class="error-content">
             <p font-color="red" v-html="error" data-teste="error-message" />
@@ -12,17 +12,16 @@
 </template>
 
 <script lang="ts">
-    import { defineComponent, ref } from "vue";
+    import { defineComponent } from "vue";
     import * as FunctionsLogin from "./functions/Index";
 
     export default defineComponent({
         name: "Login",
 
         setup() {
-            const nome = ref("");
-
             return {
-                ...FunctionsLogin.useLogin(nome),
+                ...FunctionsLogin.useLogin(),
+                nome: "",
             };
         },
     });

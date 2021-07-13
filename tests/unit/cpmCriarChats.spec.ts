@@ -11,18 +11,16 @@ describe("CriaChat.vue", () => {
 
         const wrapper = shallowMount(CriarChat, {
             global: {
-                provide: {
-                    'store': store
-                }
+                provide: { 'store': store }
             }
         })
         return {
             wrapper,
+            store,
             componentes: {
                 textbox: wrapper.get("[data-teste='nome']"),
                 button: wrapper.get("[data-teste='criar']"),
             },
-            store
         }
     }
 
