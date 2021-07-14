@@ -3,24 +3,24 @@ import Conversations from "@/components/chat/ListChatsOpen.vue";
 
 describe("Conversation.vue", () => {
     function build() {
-        const conversations = [{ id: "01", nome: "teste" }];
+        const chatsOpen = [{ id: "01", nome: "teste" }];
         const wrapper = shallowMount(Conversations, {
             props: {
-                conversations: conversations
+                chatsOpen: chatsOpen
             }
         })
 
-        return { conversations, wrapper }
+        return { chatsOpen, wrapper }
     }
 
     it("ao receber as conversas deve renderizar", () => {
         // Arrange
-        const { wrapper, conversations } = build();
+        const { wrapper, chatsOpen } = build();
 
         // Act
-        const component = wrapper.get("[data-teste='" + conversations[0].id + "']");
+        const component = wrapper.get("[data-teste='" + chatsOpen[0].id + "']");
 
         // Assert
-        expect(component.text()).toEqual(conversations[0].nome);
+        expect(component.text()).toEqual(chatsOpen[0].nome);
     })
 });
