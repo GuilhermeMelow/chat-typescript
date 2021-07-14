@@ -1,18 +1,13 @@
 import { shallowMount } from "@vue/test-utils"
-import ListChats from "@/components/chat/ListChats.vue"
-import { IChat } from "@/types/IChatService";
 import { IState } from "@/store";
 import { ref } from "vue";
+import { chats } from "../ChatSetup";
+import ListChats from "@/components/chat/ListChats.vue"
 
 describe('ListChats.vue', () => {
     function build() {
         const state: IState = { chats: ref([]) }
         const store = { state, abrirConversa: jest.fn() }
-
-        var chats: IChat[] = [
-            { id: "1", nome: "teste1", aberto: false },
-            { id: "2", nome: "teste2", aberto: false }
-        ];
 
         const wrapper = shallowMount(ListChats, {
             global: {
