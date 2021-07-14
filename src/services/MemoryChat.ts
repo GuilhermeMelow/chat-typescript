@@ -13,7 +13,7 @@ export class InMemoryChat implements IChatService {
     async entrar(nome: string): Promise<IChat> {
         if (nome === "") throw new Error("Não é possível entrar com este nome.");
 
-        const chat: IChat = { id: "sadf", nome: nome };
+        const chat: IChat = { id: "sadf", nome: nome, aberto: false };
         await this.adicionar(chat);
 
         return new Promise<IChat>((resolve) => resolve(chat));

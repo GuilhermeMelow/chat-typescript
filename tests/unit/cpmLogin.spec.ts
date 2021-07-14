@@ -5,7 +5,7 @@ import { IChat } from '@/types/IChatService'
 describe('Login.vue', () => {
     function build() {
         const service = { entrar: jest.fn() };
-        const user: IChat = { id: "123", nome: "teste" };
+        const user: IChat = { id: "123", nome: "teste", aberto: false };
         service.entrar.mockReturnValue(user);
 
         const wrapper = shallowMount(Login, {

@@ -1,21 +1,16 @@
-import { IChatService, IChat } from "@/types/IChatService";
-import { inject, Ref, ref } from "vue";
+import { IChatService } from "@/types/IChatService";
+import { inject, ref } from "vue";
 import { useRouter } from "vue-router";
+import { IUseLogin } from "../../../types/IUseLogin";
 
-export function useLogin(nome: Ref<string>) {
+export function useLogin(): IUseLogin {
     const service = inject("chatService") as IChatService;
     const router = useRouter();
     const error = ref("");
 
-    const chat: Ref<IChat> = ref({
-        id: "",
-        nome: "",
-    });
-
-    const entrar = async () => {
+    const entrar = async (nome: string) => {
         try {
-            const user = await service.entrar(nome.value);
-            chat.value.nome = user.nome;
+            await service.entrar(nome);
 
             await router.push('/chat');
         }
@@ -24,5 +19,5 @@ export function useLogin(nome: Ref<string>) {
         }
     }
 
-    return { chat, entrar, nome, error };
+    return { entrar, error };
 }

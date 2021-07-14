@@ -9,4 +9,5 @@ export interface IChatService {
 export interface IChat {
     id: string;
     nome: string;
+    aberto: boolean;
 }
