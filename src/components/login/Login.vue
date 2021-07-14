@@ -6,7 +6,7 @@
             <button data-test="btn-entrar" @click="entrar(nome)">Entrar</button>
         </div>
         <div class="error-content">
-            <p font-color="red" v-html="error" data-teste="error-message" />
+            <p font-color="red" v-text="error" data-teste="error-message" />
         </div>
     </div>
 </template>

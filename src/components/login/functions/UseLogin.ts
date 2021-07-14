@@ -15,7 +15,7 @@ export function useLogin(): IUseLogin {
             await router.push('/chat');
         }
         catch (catched) {
-            error.value = catched;
+            error.value = catched.message;
         }
     }
 

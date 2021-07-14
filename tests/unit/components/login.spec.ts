@@ -1,15 +1,15 @@
 import { shallowMount } from '@vue/test-utils'
-import { chat } from '../ChatSetup';
+import * as functions from "@/components/login/functions/Index"
 import Login from '@/components/login/Login.vue'
-import { IChat } from '@/types/IChatService'
+import router from '@/router';
 
 describe('Login.vue', () => {
     function build() {
         const service = { entrar: jest.fn() };
-        service.entrar.mockReturnValue(chat);
 
         const wrapper = shallowMount(Login, {
             global: {
+                plugins: [router],
                 provide: {
                     'chatService': service
                 }
@@ -17,35 +17,34 @@ describe('Login.vue', () => {
         })
 
         return {
-            wrapper,
-            textbox: wrapper.get("[data-teste='nome-usuario']"),
-            loginButton: wrapper.get("[data-test='btn-entrar']"),
             service,
+            components: {
+                textbox: wrapper.get("[data-teste='nome-usuario']"),
+                loginButton: wrapper.get("[data-test='btn-entrar']"),
+            },
         }
     }
 
-    it('ao clicar no botão de login, deve executar a entrada.', async () => {
+    it('ao clicar no botão de login, deve executar a entrada', async () => {
         // Arrange
-        const { textbox, loginButton, service } = build();
-        textbox.setValue("teste");
+        const { components, service } = build();
+        components.textbox.setValue("teste");
 
         // Act
-        await loginButton.trigger('click');
+        await components.loginButton.trigger('click');
 
         // Assert
         expect(service.entrar).toHaveBeenCalledTimes(1);
     });
 
-    it('ao enviar um nome invalido, deve não entrar', async () => {
+    it('ao enviar um nome invalido, deve ter uma mensagem de erro', async () => {
         // Arrange
-        const { textbox, wrapper, loginButton } = build();
-        const errorMessage = wrapper.get("[data-teste='error-message']");
-        textbox.setValue("");
+        const useLogin = functions.useLogin();
 
         // Act
-        await loginButton.trigger('click');
+        await useLogin.entrar("");
 
         // Assert
-        expect(errorMessage.text() === "").toBeFalsy();
+        expect(useLogin.error).not.toBe("");
     });
 });
