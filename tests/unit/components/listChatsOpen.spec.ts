@@ -1,16 +1,16 @@
 import { shallowMount } from "@vue/test-utils";
+import { chats } from "../ChatSetup";
 import Conversations from "@/components/chat/ListChatsOpen.vue";
 
 describe("Conversation.vue", () => {
     function build() {
-        const chatsOpen = [{ id: "01", nome: "teste" }];
         const wrapper = shallowMount(Conversations, {
             props: {
-                chatsOpen: chatsOpen
+                chatsOpen: chats
             }
         })
 
-        return { chatsOpen, wrapper }
+        return { chatsOpen: chats, wrapper }
     }
 
     it("ao receber as conversas deve renderizar", () => {
