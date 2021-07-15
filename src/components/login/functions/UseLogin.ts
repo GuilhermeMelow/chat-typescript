@@ -1,10 +1,11 @@
 import { IChatService } from "@/types/IChatService";
-import { inject, ref } from "vue";
+import { ref } from "vue";
 import { useRouter } from "vue-router";
 import { IUseLogin } from "../../../types/IUseLogin";
+import InjectStrict from "@/Utils/InjectStrict";
 
-export function useLogin(): IUseLogin {
-    const service = inject("chatService") as IChatService;
+export default function useLogin(): IUseLogin {
+    const service = InjectStrict<IChatService>("chatService");
     const router = useRouter();
     const error = ref("");
 
@@ -15,7 +16,7 @@ export function useLogin(): IUseLogin {
             await router.push('/chat');
         }
         catch (catched) {
-            error.value = catched;
+            error.value = catched.message;
         }
     }
 

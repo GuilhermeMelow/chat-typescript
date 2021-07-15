@@ -6,21 +6,21 @@
             <button data-test="btn-entrar" @click="entrar(nome)">Entrar</button>
         </div>
         <div class="error-content">
-            <p font-color="red" v-html="error" data-teste="error-message" />
+            <p font-color="red" v-text="error" data-teste="error-message" />
         </div>
     </div>
 </template>
 
 <script lang="ts">
     import { defineComponent } from "vue";
-    import * as FunctionsLogin from "./functions/Index";
+    import useLogin from "./functions/UseLogin";
 
     export default defineComponent({
         name: "Login",
 
         setup() {
             return {
-                ...FunctionsLogin.useLogin(),
+                ...useLogin(),
                 nome: "",
             };
         },
