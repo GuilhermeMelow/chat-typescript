@@ -1,5 +1,4 @@
 import { Store } from "@/store";
-import { IChat } from "@/types/IChatService";
 import { computed, onMounted } from "vue";
 import { IUseChats } from "../../../types/IUseChats";
 import InjectStrict from "@/Utils/InjectStrict";
@@ -15,8 +14,8 @@ export default function useChats(): IUseChats {
     const chatsOpen = computed(() => chats.value.filter((c) => c.aberto));
 
     const adicionar = (nome: string) => {
-        const chat: IChat = { id: "asdf", nome, aberto: false }
-        store.adicionar(chat);
+        const chat = store.adicionar({ id: "", nome, aberto: false });
+        store.abrirConversa(chat.id);
     }
 
     return { adicionar, chats, abrirConversa, chatsOpen };

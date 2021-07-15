@@ -21,13 +21,13 @@ export class Store {
         this.state.chats.value = chats;
     }
 
-    public adicionar(chat: IChat): void {
-        if (chat == null) throw new Error("Não existe a conversa.");
+    public adicionar(chat: IChat): IChat {
+        if (chat.id === "") chat.id = Math.random().toString(36).substring(7);
 
         this.service.adicionar(chat);
         this.state.chats.value.push(chat);
 
-        this.abrirConversa(chat.id);
+        return chat;
     }
 
     public abrirConversa(id: string): void {

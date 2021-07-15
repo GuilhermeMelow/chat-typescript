@@ -6,7 +6,7 @@ import { ref } from "@vue/runtime-dom";
 describe("CriaChat.vue", () => {
     function build() {
         const state: IState = { chats: ref([]) }
-        const store = { state, adicionar: jest.fn() }
+        const store = { state, adicionar: jest.fn(), abrirConversa: jest.fn() }
         store.adicionar.mockReturnValue("success")
 
         const wrapper = shallowMount(CriarChat, {
