@@ -13,14 +13,14 @@
 
 <script lang="ts">
     import { defineComponent } from "vue";
-    import * as FunctionsLogin from "./functions/Index";
+    import useLogin from "./functions/UseLogin";
 
     export default defineComponent({
         name: "Login",
 
         setup() {
             return {
-                ...FunctionsLogin.useLogin(),
+                ...useLogin(),
                 nome: "",
             };
         },

@@ -1,5 +1,4 @@
 import { shallowMount } from '@vue/test-utils'
-import * as functions from "@/components/login/functions/Index"
 import Login from '@/components/login/Login.vue'
 import router from '@/router';
 
@@ -35,16 +34,5 @@ describe('Login.vue', () => {
 
         // Assert
         expect(service.entrar).toHaveBeenCalledTimes(1);
-    });
-
-    it('ao enviar um nome invalido, deve ter uma mensagem de erro', async () => {
-        // Arrange
-        const useLogin = functions.useLogin();
-
-        // Act
-        await useLogin.entrar("");
-
-        // Assert
-        expect(useLogin.error).not.toBe("");
     });
 });
