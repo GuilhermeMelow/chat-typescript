@@ -1,9 +1,10 @@
 <template>
     <div class="box">
-        <div class="item" v-for="chat in chats" :key="chat" @click="abrirConversa(chat.id)">
+        <p class="item" v-for="chat in chats" :key="chat" @click="abrirConversa(chat.id)">
             <span v-html="chat.nome" :data-teste="chat.nome" />
+            |
             <span v-html="chat.id" :data-teste="chat.id" />
-        </div>
+        </p>
     </div>
 </template>
 
@@ -24,7 +25,14 @@
 
 <style lang="scss">
     .box {
-        height: 300px;
+        text-align: center;
         width: 300px;
+    }
+    p.item {
+        cursor: pointer;
+    }
+    p.item:hover {
+        background: rgb(71, 70, 70);
+        color: rgb(255, 255, 255);
     }
 </style>
