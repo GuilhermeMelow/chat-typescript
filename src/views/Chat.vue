@@ -5,19 +5,19 @@
             <ListChatsOpen :chatsOpen="chatsOpen" />
         </div>
 
-        <Criar-Chat />
+        <Enviador :labelButton="'Criar chat'" @sendInformation="adicionar" />
     </div>
 </template>
 
 <script lang="ts">
     import { defineComponent } from "vue";
     import ListChats from "@/components/chat/ListChats.vue";
-    import CriarChat from "@/components/chat/CriarChat.vue";
+    import Enviador from "@/components/chat/Enviador.vue";
     import ListChatsOpen from "@/components/chat/ListChatsOpen.vue";
     import UseChats from "@/components/chat/functions/UseChats";
 
     export default defineComponent({
-        components: { ListChats, CriarChat, ListChatsOpen },
+        components: { ListChats, Enviador, ListChatsOpen },
 
         setup() {
             return { ...UseChats() };
