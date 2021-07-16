@@ -46,7 +46,4 @@
             background: rgb(71, 70, 70);
         }
     }
-    p.messages {
-        padding: 5px 0px 5px 0;
-    }
 </style>
