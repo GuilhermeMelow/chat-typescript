@@ -1,9 +1,12 @@
 <template>
-    <List-chats :chats="chats" />
+    <div class="main">
+        <div class="content">
+            <List-chats :chats="chats" />
+            <ListChatsOpen :chatsOpen="chatsOpen" />
+        </div>
 
-    <ListChatsOpen :chatsOpen="chatsOpen" />
-
-    <Criar-Chat />
+        <Criar-Chat />
+    </div>
 </template>
 
 <script lang="ts">
@@ -23,4 +26,7 @@
 </script>
 
 <style lang="scss">
+    div.content {
+        display: flex;
+    }
 </style>
