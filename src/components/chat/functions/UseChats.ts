@@ -8,10 +8,9 @@ export default function useChats(): IUseChats {
     const chats = store.state.chats;
 
     const abrirConversa = (id: string) => store.abrirConversa(id);
+    const chatsOpen = computed(() => chats.value.filter((c) => c.aberto));
 
     onMounted(async () => await store.inicializar());
-
-    const chatsOpen = computed(() => chats.value.filter((c) => c.aberto));
 
     const adicionar = (nome: string) => {
         const chat = store.adicionar({ id: "", nome, aberto: false });
