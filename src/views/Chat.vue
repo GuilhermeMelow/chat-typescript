@@ -4,19 +4,20 @@
             <List :values="chats">
                 <template #="{ item }">
                     <p v-text="item.nome" :data-teste="item.id" @click="abrirConversa(item.id)" />
+                    <hr>
                 </template>
             </List>
             <ListChatsOpen :chatsOpen="chatsOpen" />
         </div>
 
-        <Enviador :labelButton="'Criar chat'" @sendInformation="adicionar" />
+        <Enviador :label="'Criar chat:'" @send="adicionar" />
     </div>
 </template>
 
 <script lang="ts">
     import { defineComponent } from "vue";
     import List from "@/components/chat/List.vue";
-    import Enviador from "@/components/chat/Enviador.vue";
+    import Enviador from "@/components/Enviador.vue";
     import ListChatsOpen from "@/components/chat/ListChatsOpen.vue";
     import UseChats from "@/components/chat/functions/UseChats";
 

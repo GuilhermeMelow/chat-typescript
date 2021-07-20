@@ -1,5 +1,5 @@
 import { shallowMount } from "@vue/test-utils"
-import Enviador from "@/components/chat/Enviador.vue";
+import Enviador from "@/components/Enviador.vue";
 
 
 describe("CriaChat.vue", () => {
