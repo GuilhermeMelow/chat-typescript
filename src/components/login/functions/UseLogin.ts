@@ -9,15 +9,10 @@ export default function useLogin(): IUseLogin {
     const router = useRouter();
     const error = ref("");
 
-    const entrar = async (nome: string) => {
-        try {
-            await service.entrar(nome);
-
-            await router.push('/chat');
-        }
-        catch (catched) {
-            error.value = catched.message;
-        }
+    const entrar = (nome: string) => {
+        service.entrar(nome)
+            .then(() => router.push('/chat'))
+            .catch(catched => error.value = catched);
     }
 
     return { entrar, error };
