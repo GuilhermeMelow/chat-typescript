@@ -1,10 +1,6 @@
 <template>
     <div class="login-content">
-        <div class="form-content">
-            <label for="nome">Nome:</label>
-            <input id="nome" type="text" v-model="nome" data-teste='nome-usuario' />
-            <button data-test="btn-entrar" @click="entrar(nome)">Entrar</button>
-        </div>
+        <enviador :label="'Escreva seu nome:'" @send="entrar"></enviador>
         <div class="error-content">
             <p font-color="red" v-text="error" data-teste="error-message" />
         </div>
@@ -13,10 +9,12 @@
 
 <script lang="ts">
     import { defineComponent } from "vue";
+    import Enviador from "@/components/Enviador.vue";
     import useLogin from "./functions/UseLogin";
 
     export default defineComponent({
         name: "Login",
+        components: { Enviador },
 
         setup() {
             return {

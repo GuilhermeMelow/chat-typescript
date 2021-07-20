@@ -1,23 +1,28 @@
 <template>
     <div class="main">
         <div class="content">
-            <List-chats :chats="chats" />
+            <List :values="chats">
+                <template #="{ item }">
+                    <p v-text="item.nome" :data-teste="item.id" @click="abrirConversa(item.id)" />
+                    <hr>
+                </template>
+            </List>
             <ListChatsOpen :chatsOpen="chatsOpen" />
         </div>
 
-        <Criar-Chat />
+        <Enviador :label="'Criar chat:'" @send="adicionar" />
     </div>
 </template>
 
 <script lang="ts">
     import { defineComponent } from "vue";
-    import ListChats from "@/components/chat/ListChats.vue";
-    import CriarChat from "@/components/chat/CriarChat.vue";
+    import List from "@/components/chat/List.vue";
+    import Enviador from "@/components/Enviador.vue";
     import ListChatsOpen from "@/components/chat/ListChatsOpen.vue";
     import UseChats from "@/components/chat/functions/UseChats";
 
     export default defineComponent({
-        components: { ListChats, CriarChat, ListChatsOpen },
+        components: { List, Enviador, ListChatsOpen },
 
         setup() {
             return { ...UseChats() };
