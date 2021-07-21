@@ -19,13 +19,17 @@
     import List from "@/components/chat/List.vue";
     import Enviador from "@/components/Enviador.vue";
     import ListChatsOpen from "@/components/chat/ListChatsOpen.vue";
-    import UseChats from "@/components/chat/functions/UseChats";
+    import * as functions from "@/components/chat/functions/Index";
 
     export default defineComponent({
         components: { List, Enviador, ListChatsOpen },
 
         setup() {
-            return { ...UseChats() };
+            return {
+                ...functions.UseChats(),
+                ...functions.UseAbrirConversa(),
+                ...functions.UseCriarConversa(),
+            };
         },
     });
 </script>
