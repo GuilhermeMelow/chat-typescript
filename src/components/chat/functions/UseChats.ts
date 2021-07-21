@@ -1,24 +1,15 @@
 import InjectStrict from "@/Utils/InjectStrict";
 import { Store } from "@/store";
+import { IUseChats } from "@/types/composableFunctions/IUseChats";
 import { computed, onMounted } from "vue";
-import { IUseChats } from "../../../types/IUseChats";
-import { Chat } from "@/types/Chat";
 
-export default function useChats(): IUseChats {
-    const chatsOpen = computed(() => chats.value.filter((c) => c.isAberto()));
+export function UseChats(): IUseChats {
     const store = InjectStrict<Store>("store");
+
     const chats = store.state.chats;
+    const chatsOpen = computed(() => chats.value.filter((c) => c.isAberto()));
 
     onMounted(async () => await store.inicializar());
 
-    const abrirConversa = (id: string) => store.abrirConversa(id);
-
-    const criarConversa = (nome: string) => {
-        const chat = new Chat(nome);
-
-        store.adicionar(chat);
-        store.abrirConversa(chat.id)
-    }
-
-    return { criarConversa, chats, abrirConversa, chatsOpen };
+    return { chats, chatsOpen };
 }
