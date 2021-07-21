@@ -10,7 +10,7 @@
             <ListChatsOpen :chatsOpen="chatsOpen" />
         </div>
 
-        <Enviador :label="'Criar chat:'" @send="adicionar" />
+        <Enviador :label="'Criar chat:'" @send="criarConversa" />
     </div>
 </template>
 

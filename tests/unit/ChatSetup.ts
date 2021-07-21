@@ -1,9 +1,7 @@
-import { IChat } from "@/types/IChatService";
+import { Chat } from "@/types/Chat";
 
 export const chats = [
-    { id: "1", nome: "teste1", aberto: false },
-    { id: "2", nome: "teste2", aberto: false },
-    { id: "3", nome: "teste3", aberto: false },
+    new Chat("teste1", "1"), new Chat("teste2", "2"), new Chat("teste3", "3")
 ];
 
-export const chat: IChat = { id: "123", nome: "teste", aberto: false };
+export const chat = new Chat("teste", "123");

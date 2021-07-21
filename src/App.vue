@@ -6,12 +6,12 @@
 
 <script lang="ts">
     import { defineComponent, provide } from "vue";
-    import { InMemoryChat } from "./services/MemoryChat";
+    import { ChatService } from "./services/ChatService";
     import { Store } from "./store";
 
     export default defineComponent({
         setup() {
-            const memoryChat = new InMemoryChat();
+            const memoryChat = new ChatService();
             const store: Store = new Store(memoryChat);
 
             provide("chatService", memoryChat);

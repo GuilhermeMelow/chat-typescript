@@ -1,9 +1,9 @@
-import { IChat } from "@/types/IChatService";
+import { Chat } from "@/types/Chat";
 import { ComputedRef, Ref } from "vue";
 
 export interface IUseChats {
-    adicionar(nome: string): void;
+    criarConversa(nome: string): void;
     abrirConversa(id: string): void;
-    chats: Ref<IChat[]>;
-    chatsOpen: ComputedRef<IChat[]>;
+    chats: Ref<Chat[]>;
+    chatsOpen: ComputedRef<Chat[]>;
 }

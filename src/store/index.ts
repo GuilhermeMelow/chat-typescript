@@ -1,8 +1,9 @@
-import { IChat, IChatService } from "@/types/IChatService"
+import { IChatService } from "@/types/IChatService"
+import { Chat } from "@/types/Chat";
 import { ref, Ref } from "vue"
 
 export interface IState {
-    chats: Ref<IChat[]>
+    chats: Ref<Chat[]>
 }
 
 export class Store {
@@ -21,13 +22,9 @@ export class Store {
         this.state.chats.value = chats;
     }
 
-    public adicionar(chat: IChat): IChat {
-        if (chat.id === "") chat.id = Math.random().toString(36).substring(7);
-
+    public adicionar(chat: Chat): void {
         this.service.adicionar(chat);
         this.state.chats.value.push(chat);
-
-        return chat;
     }
 
     public abrirConversa(id: string): void {
@@ -35,6 +32,6 @@ export class Store {
 
         if (chat == null) throw new Error("Não existe a conversa.");
 
-        chat.aberto = true;
+        chat.abrir();
     }
 }

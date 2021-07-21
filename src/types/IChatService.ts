@@ -1,13 +1,9 @@
+import { Chat } from "./Chat";
+
 export interface IChatService {
-    adicionar(chat: IChat): Promise<number>;
+    adicionar(chat: Chat): Promise<number>;
 
-    entrar(nome: string): Promise<IChat>;
+    entrar(nome: string): Promise<Chat>;
 
-    pegarChats(): Promise<IChat[]>;
-}
-
-export interface IChat {
-    id: string;
-    nome: string;
-    aberto: boolean;
+    pegarChats(): Promise<Chat[]>;
 }
