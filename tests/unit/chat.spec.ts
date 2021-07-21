@@ -24,5 +24,5 @@ test("Ao fechar o chat, o mesmo deve constar como fechado", () => {
     chat.fechar();
 
     // Assert
-    expect(!chat.isAberto()).toBe(true);
+    expect(chat.isAberto()).toBe(false);
 })
