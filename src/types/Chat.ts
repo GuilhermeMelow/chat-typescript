@@ -9,11 +9,9 @@ export class Chat {
         this.aberto = false;
     }
 
-    public isAberto(): boolean {
-        return this.aberto;
-    }
+    public isAberto = () => this.aberto;
 
-    public abrir(): void {
-        this.aberto = true;
-    }
+    public abrir = () => this.aberto = true;
+
+    public fechar = () => this.aberto = false;
 }
