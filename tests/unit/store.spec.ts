@@ -35,15 +35,3 @@ test("Ao inicializar a lista de chats deve conter os chats", async () => {
     // Assert
     expect(store.state.chats.value).toEqual(chats);
 });
-
-test("Ao abrir o chat, o mesmo deve constar como aberto", () => {
-    // Arrange
-    const { store, chat } = build();
-
-    // Act
-    store.adicionar(chat);
-    store.abrirConversa(chat.id);
-
-    // Assert
-    expect(store.state.chats.value[0].isAberto()).toBe(true);
-})
