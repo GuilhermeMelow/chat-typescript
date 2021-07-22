@@ -28,10 +28,19 @@ export class Store {
     }
 
     public abrirConversa(id: string): void {
-        const chat = this.state.chats.value.find(c => c.id == id);
+        const chat = this.findChat(id)
+        chat.abrir();
+    }
 
+    public adicionarMensagem(mensagem: string, id: string): void {
+        const chat = this.findChat(id);
+        chat.adicionarMensagem(mensagem);
+    }
+
+    private findChat(id: string): Chat {
+        const chat = this.state.chats.value.find(c => c.id == id);
         if (chat == null) throw new Error("Não existe a conversa.");
 
-        chat.abrir();
+        return chat;
     }
 }
