@@ -7,7 +7,7 @@
                     <hr>
                 </template>
             </List>
-            <ListChatsOpen :chatsOpen="chatsOpen" />
+            <ListChatsOpen />
         </div>
 
         <Enviador :label="'Criar chat:'" @send="criarConversa" />
