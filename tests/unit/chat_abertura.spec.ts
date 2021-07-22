@@ -1,7 +1,6 @@
-import { Chat } from "@/types/Chat";
+import { chat } from "./ChatSetup";
 
 function build() {
-    const chat = new Chat("132", "teste");
     return { chat }
 }
 
