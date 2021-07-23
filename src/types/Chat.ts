@@ -2,7 +2,7 @@ export class Chat {
     public id: string;
     public nome: string;
     private aberto: boolean;
-    private mensagens: string[] = [];
+    private _mensagens: string[] = [];
 
     constructor(nome: string, id?: string) {
         this.id = id ?? Math.random().toString(36).substring(7);
@@ -23,11 +23,11 @@ export class Chat {
     }
 
     public adicionarMensagem(mensagem: string): void {
-        this.mensagens.push(mensagem);
+        this._mensagens.push(mensagem);
     }
 
-    public getMensagens(): string[] {
-        const copyMensagens = this.mensagens.map(m => m);
+    public get mensagens(): string[] {
+        const copyMensagens = this._mensagens.map(m => m);
         return copyMensagens;
     }
 }
