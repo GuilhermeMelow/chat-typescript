@@ -10,7 +10,7 @@
             </ul>
         </div>
         <div class="content" v-if="chatOpen">
-            <List :values="chatOpen.getMensagens()">
+            <List :values="chatOpen.mensagens">
                 <template #="{ item }">
                     <p v-text="item" />
                     <hr>
@@ -22,27 +22,20 @@
 </template>
 
 <script lang="ts">
-    import { Store } from "@/store";
-    import InjectStrict from "@/Utils/InjectStrict";
-    import { defineComponent, ref } from "vue";
+    import { Chat } from "@/types/Chat";
+    import { defineComponent, ref, Ref } from "vue";
     import Enviador from "../Enviador.vue";
-    import { UseChatsOpen } from "./functions/UseChatsOpen";
     import List from "./List.vue";
+    import * as functions from "./functions/Index";
 
     export default defineComponent({
-        components: { List, Enviador },
         name: "chatsOpen",
+        components: { List, Enviador },
         setup() {
-            const store = InjectStrict<Store>("store");
-            const chats = UseChatsOpen().chatsOpen;
-            const chatOpen = ref(chats.value[0]);
+            const chats = functions.UseChatsOpen().chatsOpen;
+            const chatOpen: Ref<Chat> | Ref<undefined> = ref(undefined);
 
-            const send = (mensagem: string) => {
-                if (mensagem !== "")
-                    store.adicionarMensagem(mensagem, chatOpen.value.id);
-            };
-
-            return { chats, send, chatOpen };
+            return { ...functions.UseMensagens(chatOpen), chats, chatOpen };
         },
     });
 </script>
