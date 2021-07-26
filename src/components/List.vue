@@ -1,6 +1,6 @@
 <template>
-    <div class="box" data-teste="itens">
-        <div class="item" v-for="item in values" :key="item.id">
+    <div class="list-box" data-teste="itens">
+        <div class="list-item" v-for="item in values" :key="item.id">
             <slot v-bind="{item}" :data-teste="item.id"></slot>
         </div>
     </div>
@@ -18,15 +18,16 @@
 </script>
 
 <style lang="scss">
-    .box {
-        text-align: center;
-        width: 300px;
+    .list-box {
+        border-block: 2px solid;
+        max-width: 100%;
+        height: 100%;
+        overflow: hidden;
     }
-    p.item {
-        cursor: pointer;
-    }
-    p.item:hover {
-        background: rgb(71, 70, 70);
-        color: rgb(255, 255, 255);
+    .list-item {
+        border-left: 2px solid;
+        margin: 20px;
+        padding: 10px;
+        background-color: #eaeaea !important;
     }
 </style>

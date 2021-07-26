@@ -1,5 +1,5 @@
 import { shallowMount } from "@vue/test-utils"
-import List from "@/components/chat/List.vue"
+import List from "@/components/List.vue"
 import { chats } from "../ChatSetup";
 
 describe('List.vue', () => {
