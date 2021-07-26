@@ -4,12 +4,12 @@ import { Ref } from "vue";
 import InjectStrict from "@/Utils/InjectStrict";
 import { IUseMensagens } from "@/types/composableFunctions/IUseMensagens";
 
-export function UseMensagens(chatOpen: Ref<Chat> | Ref<undefined>): IUseMensagens {
+export function UseMensagens(activeChat: Ref<Chat | null>): IUseMensagens {
     const store = InjectStrict<Store>("store");
 
     const send = (mensagem: string): void => {
-        if (chatOpen.value) {
-            store.adicionarMensagem(mensagem, chatOpen.value.id);
+        if (activeChat.value) {
+            store.adicionarMensagem(mensagem, activeChat.value.id);
         }
     };
 
