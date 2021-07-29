@@ -41,4 +41,15 @@
             }
         }
     }
+    input[type="text"] {
+        padding: 10px 10px;
+        border: 1;
+    }
+    button {
+        background-color: #333;
+        border: none;
+        border-radius: 5em;
+        padding: 10px 20px;
+        color: white;
+    }
 </style>
