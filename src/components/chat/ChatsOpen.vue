@@ -36,42 +36,6 @@
 </script>
 
 <style lang="scss" scoped>
-    .tabs-content {
-        height: 13%;
-        overflow: auto;
-        .tab-nav {
-            list-style-type: none;
-            margin: 0;
-            padding: 0;
-            width: 100%;
-            height: 60%;
-            display: inline-flex;
-            li {
-                float: left;
-                display: list-item;
-                text-align: center;
-                padding: 1% 15%;
-                margin-right: 0.5%;
-                background: #333;
-                cursor: pointer;
-                color: white;
-                &:hover {
-                    background: rgb(71, 70, 70);
-                }
-                li.active {
-                    background: rgb(71, 70, 70);
-                }
-            }
-        }
-    }
-    .load-content {
-        height: 87%;
-        .list {
-            height: 87%;
-            overflow: auto;
-        }
-        .enviador {
-            height: 13%;
-        }
-    }
+    @import "@/../style/custom-tabs.scss";
+    @import "@/../style/layout-chatsOpen.scss";
 </style>

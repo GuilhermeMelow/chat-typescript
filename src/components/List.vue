@@ -18,21 +18,5 @@
 </script>
 
 <style lang="scss">
-    .list-box {
-        border-block: 2px solid;
-        max-width: 100%;
-        overflow: hidden;
-    }
-    .list-item {
-        border-left: 0.7em solid #333;
-        margin: 1em;
-        padding: 1em;
-        background-color: #eaeaea !important;
-        &:hover {
-            border-left-color: rgb(94, 94, 94);
-            background-color: #969696 !important;
-            color: #e4e3e3;
-            cursor: pointer;
-        }
-    }
+    @import "@/../style/custom-list.scss";
 </style>
