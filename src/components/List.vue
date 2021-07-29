@@ -18,16 +18,5 @@
 </script>
 
 <style lang="scss">
-    .list-box {
-        border-block: 2px solid;
-        max-width: 100%;
-        height: 100%;
-        overflow: hidden;
-    }
-    .list-item {
-        border-left: 2px solid;
-        margin: 20px;
-        padding: 10px;
-        background-color: #eaeaea !important;
-    }
+    @import "@/../style/custom-list.scss";
 </style>

@@ -1,9 +1,8 @@
 <template>
     <div class="login-content">
+        <h3> Logar </h3>
         <enviador :label="'Escreva seu nome:'" @send="entrar"></enviador>
-        <div class="error-content">
-            <p font-color="red" v-text="error" data-teste="error-message" />
-        </div>
+        <p v-text="error" data-teste="error-message" />
     </div>
 </template>
 
@@ -25,19 +24,10 @@
     });
 </script>
 
-<style scoped lang="scss">
-    h3 {
-        margin: 40px 0 0;
-    }
-    ul {
-        list-style-type: none;
-        padding: 0;
-    }
-    li {
-        display: inline-block;
-        margin: 0 10px;
-    }
-    a {
-        color: #42b983;
+<style lang="scss">
+    .login-content {
+        margin: auto;
+        width: 25%;
+        padding: 7.5em;
     }
 </style>

@@ -8,7 +8,6 @@
     import { defineComponent, provide } from "vue";
     import { ChatService } from "./services/ChatService";
     import { Store } from "./store";
-
     export default defineComponent({
         setup() {
             const memoryChat = new ChatService();
@@ -21,6 +20,12 @@
 </script>
 
 <style lang="scss">
+    @import "../style/custom-scrollbar.scss";
+    @import "../style/form-elements.scss";
+
+    * {
+        margin: 0;
+    }
     #app {
         font-family: Avenir, Helvetica, Arial, sans-serif;
         -webkit-font-smoothing: antialiased;
@@ -28,14 +33,13 @@
         color: #2c3e50;
         height: 100%;
     }
-
     #nav {
-        padding: 30px;
-
+        padding: 20px;
+        margin-bottom: 3em;
+        background-color: #333;
         a {
             font-weight: bold;
             color: #2c3e50;
-
             &.router-link-exact-active {
                 color: #42b983;
             }
