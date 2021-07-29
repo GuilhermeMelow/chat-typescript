@@ -21,6 +21,9 @@
 </script>
 
 <style lang="scss">
+    * {
+        margin: 0;
+    }
     #app {
         font-family: Avenir, Helvetica, Arial, sans-serif;
         -webkit-font-smoothing: antialiased;
@@ -30,12 +33,12 @@
     }
 
     #nav {
-        padding: 30px;
-
+        padding: 20px;
+        margin-bottom: 3em;
+        background-color: #333;
         a {
             font-weight: bold;
             color: #2c3e50;
-
             &.router-link-exact-active {
                 color: #42b983;
             }
@@ -51,5 +54,19 @@
         border-radius: 5em;
         padding: 10px 20px;
         color: white;
+    }
+
+    ::-webkit-scrollbar {
+        width: 0.5em;
+        height: 0.5em;
+    }
+    ::-webkit-scrollbar-track {
+        background: #ffffff;
+    }
+    ::-webkit-scrollbar-thumb {
+        background: #333;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+        background: #888;
     }
 </style>

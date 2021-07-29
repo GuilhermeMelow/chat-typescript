@@ -47,6 +47,7 @@
         }
         .list {
             height: 90%;
+            overflow: auto;
         }
     }
     .main-container {
