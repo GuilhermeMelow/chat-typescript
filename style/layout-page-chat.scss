@@ -8,9 +8,14 @@
 .side-menu {
     width: 30%;
     height: 100%;
+    padding: 2%;
+    border: 2px solid #333;
+    border-radius: 0.75rem;
+    
     .enviador {
         height: 10%;
     }
+    
     .list {
         height: 90%;
         overflow: auto;
@@ -21,4 +26,7 @@
     margin: 0 auto;
     width: 50%;
     height: 100%;
+    padding: 2%;
+    border: 2px solid #333;
+    border-radius: 0.75rem;
 }
