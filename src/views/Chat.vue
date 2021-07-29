@@ -1,17 +1,15 @@
 <template>
     <div class="main">
-        <div class="content">
-            <div class="side-menu">
-                <List :values="chats">
-                    <template #="{ item }">
-                        <div v-text="item.nome" :data-teste="item.id" @click="abrirConversa(item.id)" />
-                    </template>
-                </List>
-                <Enviador @send="criarConversa" />
-            </div>
-            <div class="main-container">
-                <ChatsOpen />
-            </div>
+        <div class="side-menu">
+            <List class="list" :values="chats">
+                <template #="{ item }">
+                    <div v-text="item.nome" :data-teste="item.id" @click="abrirConversa(item.id)" />
+                </template>
+            </List>
+            <Enviador class="enviador" @send="criarConversa" />
+        </div>
+        <div class="main-container">
+            <ChatsOpen />
         </div>
     </div>
 </template>
@@ -29,29 +27,31 @@
         setup() {
             return {
                 ...functions.UseChats(),
-                ...functions.UseAbrirConversa(),
-                ...functions.UseCriarConversa(),
             };
         },
     });
 </script>
 
 <style lang="scss">
-    div.content {
-        display: flex;
-        height: 100%;
-    }
     .main {
         margin: auto;
-        width: 80%;
-        height: 100;
+        width: 95%;
+        display: flex;
+        height: 500px;
     }
     .side-menu {
         width: 30%;
+        height: 100%;
+        .enviador {
+            height: 10%;
+        }
+        .list {
+            height: 90%;
+        }
     }
     .main-container {
-        margin-left: auto;
-        margin-right: auto;
+        margin: 0 auto;
         width: 50%;
+        height: 100%;
     }
 </style>
