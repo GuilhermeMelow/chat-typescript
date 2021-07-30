@@ -9,7 +9,7 @@
             <Enviador class="enviador" @send="criarConversa" />
         </div>
         <div class="main-container">
-            <ChatsOpen />
+            <Chats-open />
         </div>
     </div>
 </template>
@@ -18,8 +18,8 @@
     import { defineComponent } from "vue";
     import List from "@/components/List.vue";
     import Enviador from "@/components/Enviador.vue";
-    import ChatsOpen from "@/components/chat/ChatsOpen.vue";
-    import * as functions from "@/components/chat/functions/Index";
+    import * as functions from "@/views/chat/functions/Index";
+    import ChatsOpen from "./components/ChatsOpen.vue";
 
     export default defineComponent({
         components: { List, Enviador, ChatsOpen },

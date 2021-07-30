@@ -23,9 +23,9 @@
 
 <script lang="ts">
     import { defineComponent } from "vue";
-    import Enviador from "../Enviador.vue";
-    import List from "../List.vue";
-    import * as functions from "./functions/Index";
+    import Enviador from "@/components/Enviador.vue";
+    import List from "@/components/List.vue";
+    import * as functions from "@/views/chat/functions/Index";
 
     export default defineComponent({
         name: "chatsOpen",
