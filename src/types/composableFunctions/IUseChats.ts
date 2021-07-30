@@ -3,6 +3,6 @@ import { Ref } from "vue";
 
 export interface IUseChats {
     chats: Ref<Chat[]>;
-    abrirConversa(id: string): void;
+    abrirConversa(chat: Chat): void;
     criarConversa(nome: string): void;
 }

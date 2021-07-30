@@ -9,7 +9,7 @@ test("Ao enviar uma mensagem, a mesma deve estar na lista de mensagens", () => {
     const { chat, mensagem } = build();
 
     // Act
-    chat.adicionarMensagem(mensagem);
+    chat.enviarMensagem(mensagem);
     const resultMessage = chat.mensagens.find(p => p == mensagem);
 
     // Assert

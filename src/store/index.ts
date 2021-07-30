@@ -1,11 +1,7 @@
 import { IChatService } from "@/types/IChatService"
 import { Chat } from "@/types/Chat";
-import { ref, Ref } from "vue"
-
-export interface IState {
-    chats: Ref<Chat[]>
-    chat: Ref<Chat | null>
-}
+import { ref } from "vue"
+import { IState } from "../types/IState";
 
 export class Store {
     private service: IChatService;
@@ -19,6 +15,13 @@ export class Store {
         chat: ref(null)
     };
 
+    private getChatAtivo(): Chat {
+        if (!this.state.chat.value)
+            throw new Error("Não existe chat ativo...");
+
+        return this.state.chat.value;
+    }
+
     public async inicializar(): Promise<void> {
         const chats = await this.service.pegarChats();
         this.state.chats.value = chats;
@@ -28,26 +31,16 @@ export class Store {
         this.service.adicionar(chat);
         this.state.chats.value.push(chat);
 
-        this.abrirConversa(chat.id);
+        this.abrirConversa(chat);
     }
 
-    public abrirConversa(id: string): void {
-        const chat = this.findChat(id);
+    public abrirConversa(chat: Chat): void {
         this.state.chat.value = chat;
+
         chat.abrir();
     }
 
-    public adicionarMensagem(mensagem: string): void {
-        const chatAtivo = this.state.chat;
-
-        if (chatAtivo.value)
-            chatAtivo.value.adicionarMensagem(mensagem);
-    }
-
-    public findChat(id: string): Chat {
-        const chat = this.state.chats.value.find(c => c.id == id);
-        if (chat == null) throw new Error("Não existe a conversa.");
-
-        return chat;
+    public enviarMensagem(mensagem: string): void {
+        this.getChatAtivo().enviarMensagem(mensagem);
     }
 }

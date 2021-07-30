@@ -22,7 +22,7 @@ export class Chat {
         this.aberto = false;
     }
 
-    public adicionarMensagem(mensagem: string): void {
+    public enviarMensagem(mensagem: string): void {
         this._mensagens.push(mensagem);
     }
 

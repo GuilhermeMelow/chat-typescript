@@ -43,7 +43,7 @@ test("Ao enviar uma mensagem, deve registrar no conversa ativa", () => {
     store.adicionar(chat);
 
     // Act
-    store.adicionarMensagem(mensagem);
+    store.enviarMensagem(mensagem);
 
     // Assert
     expect(store.state.chat.value?.mensagens[0]).toBe(mensagem);
