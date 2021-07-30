@@ -1,13 +1,8 @@
 import { Store } from "@/store";
 import { Chat } from "@/types/Chat";
-import { computed, ComputedRef, Ref } from "vue";
+import { computed, ComputedRef } from "vue";
 import InjectStrict from "@/Utils/InjectStrict";
-
-interface IUseChatsOpen {
-    chatsOpen: ComputedRef<Chat[]>;
-    activeChat: Ref<Chat | null>;
-    send(mensagem: string): void;
-}
+import { IUseChatsOpen } from "../../../types/composableFunctions/IUseChatsOpen";
 
 export function UseChatsOpen(): IUseChatsOpen {
     const store = InjectStrict<Store>("store");
@@ -17,7 +12,7 @@ export function UseChatsOpen(): IUseChatsOpen {
     });
 
     const send = (mensagem: string): void => {
-        store.adicionarMensagem(mensagem);
+        store.enviarMensagem(mensagem);
     };
 
     return { chatsOpen, activeChat: store.state.chat, send };
