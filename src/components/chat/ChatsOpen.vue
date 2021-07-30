@@ -5,7 +5,8 @@
                 :key="chat"
                 v-text="chat.nome"
                 :data-teste="chat.id"
-                @click="activeChat = chat" />
+                @click="activeChat = chat"
+                :class='{"tab_selected": activeChat != null && chat == activeChat}' />
         </ul>
     </div>
 
