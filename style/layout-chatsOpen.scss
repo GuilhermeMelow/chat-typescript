@@ -1,17 +1,16 @@
 .tabs-content {
-    height: 13%;
-    overflow: auto;
+  height: 13%;
 }
 
 .load-content {
+  height: 87%;
+
+  .list {
     height: 87%;
+    overflow: auto;
+  }
 
-    .list {
-        height: 87%;
-        overflow: auto;
-    }
-
-    .enviador {
-        height: 13%;
-    }
+  .enviador {
+    height: 13%;
+  }
 }

@@ -35,3 +35,16 @@ test("Ao inicializar a lista de chats deve conter os chats", async () => {
     // Assert
     expect(store.state.chats.value).toEqual(chats);
 });
+
+test("Ao enviar uma mensagem, deve registrar no conversa ativa", () => {
+    // Arrange
+    const { store, chat } = build();
+    const mensagem = "Teste123";
+    store.adicionar(chat);
+
+    // Act
+    store.enviarMensagem(mensagem);
+
+    // Assert
+    expect(store.state.chat.value?.mensagens[0]).toBe(mensagem);
+})

@@ -10,13 +10,13 @@ export function UseChats(): IUseChats {
 
     onMounted(async () => await store.inicializar());
 
-    const abrirConversa = (id: string): void => store.abrirConversa(id);
+    const abrirConversa = (chat: Chat): void => store.abrirConversa(chat);
 
     const criarConversa = (nome: string): void => {
         const chat = new Chat(nome);
 
         store.adicionar(chat);
-        store.abrirConversa(chat.id)
+        store.abrirConversa(chat);
     }
 
     return { chats, abrirConversa, criarConversa };

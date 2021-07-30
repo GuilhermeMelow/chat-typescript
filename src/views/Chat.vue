@@ -3,7 +3,7 @@
         <div class="side-menu">
             <List class="list" :values="chats">
                 <template #="{ item }">
-                    <div v-text="item.nome" :data-teste="item.id" @click="abrirConversa(item.id)" />
+                    <div v-text="item.nome" :data-teste="item.id" @click="abrirConversa(item)" />
                 </template>
             </List>
             <Enviador class="enviador" @send="criarConversa" />

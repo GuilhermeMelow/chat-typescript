@@ -1,13 +1,8 @@
 import { Store } from "@/store";
 import { Chat } from "@/types/Chat";
-import { computed, ComputedRef, Ref, shallowRef } from "vue";
+import { computed, ComputedRef } from "vue";
 import InjectStrict from "@/Utils/InjectStrict";
-
-interface IUseChatsOpen {
-    chatsOpen: ComputedRef<Chat[]>;
-    activeChat: Ref<Chat>;
-    send(mensagem: string): void;
-}
+import { IUseChatsOpen } from "../../../types/composableFunctions/IUseChatsOpen";
 
 export function UseChatsOpen(): IUseChatsOpen {
     const store = InjectStrict<Store>("store");
@@ -16,11 +11,9 @@ export function UseChatsOpen(): IUseChatsOpen {
         return store.state.chats.value.filter((c) => c.isAberto());
     });
 
-    const activeChat = shallowRef(chatsOpen.value[0]);
-
     const send = (mensagem: string): void => {
-        store.adicionarMensagem(mensagem, activeChat.value.id);
+        store.enviarMensagem(mensagem);
     };
 
-    return { chatsOpen, activeChat, send };
+    return { chatsOpen, activeChat: store.state.chat, send };
 }
