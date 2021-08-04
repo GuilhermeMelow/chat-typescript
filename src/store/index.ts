@@ -1,7 +1,12 @@
 import { IChatService } from "@/types/IChatService"
 import { Chat } from "@/types/Chat";
-import { ref } from "vue"
+import { reactive, readonly, ref } from "vue"
 import { IState } from "../types/IState";
+
+export interface IStore {
+    state: IState,
+    adicionar(): void,
+}
 
 export class Store {
     private service: IChatService;
@@ -10,32 +15,34 @@ export class Store {
         this.service = service;
     }
 
-    public readonly state: IState = {
-        chats: ref([]),
-        chat: ref(null)
+    public state: IState = {
+        chats: [],
+        chat: null
     };
 
     private getChatAtivo(): Chat {
-        if (!this.state.chat.value)
+        if (!this.state.chat)
             throw new Error("Não existe chat ativo...");
 
-        return this.state.chat.value;
+        return this.state.chat;
     }
 
-    public async inicializar(): Promise<void> {
+    public async carregarConversas(): Promise<void> {
         const chats = await this.service.pegarChats();
-        this.state.chats.value = chats;
+        this.state.chats = chats;
     }
 
-    public adicionar(chat: Chat): void {
+    public adicionar(nome: string): void {
+        const chat = new Chat(nome);
+
         this.service.adicionar(chat);
-        this.state.chats.value.push(chat);
+        this.state.chats.push(chat);
 
         this.abrirConversa(chat);
     }
 
     public abrirConversa(chat: Chat): void {
-        this.state.chat.value = chat;
+        this.state.chat = chat;
 
         chat.abrir();
     }
