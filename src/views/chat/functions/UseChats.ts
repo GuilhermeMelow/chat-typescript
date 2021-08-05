@@ -8,12 +8,8 @@ export function UseChats() {
 
     onMounted(async () => await store.carregarConversas());
 
-    const chatsOpen: ComputedRef<Chat[]> = computed<Chat[]>(() => {
-        return store.state.chats.filter((c) => c.isAberto());
-    });
-
     return {
         ...store,
-        chatsOpen
+        chatsOpen: computed<Chat[]>(() => store.conversasAbertas())
     };
 }

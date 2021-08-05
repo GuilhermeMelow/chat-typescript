@@ -1,6 +1,6 @@
 import { IChatService } from "@/types/IChatService"
 import { Chat } from "@/types/Chat";
-import { reactive, readonly, ref } from "vue"
+import { reactive } from "vue"
 import { IState } from "../types/IState";
 import { IStore } from "./IStore";
 
@@ -10,6 +10,8 @@ export function CreateStore(service: IChatService): IStore {
         chats: [],
         chat: null
     });
+
+    const conversasAbertas = () => state.chats.filter(p => p.isAberto())
 
     const chatAtivo = (): Chat => {
         if (!state.chat)
@@ -27,18 +29,18 @@ export function CreateStore(service: IChatService): IStore {
         abrirConversa(chat);
     }
 
-    const abrirConversa = (chat: Chat): void => {
-        if (!chat) return;
-        chat.abrir();
-
-        state.chat = chat;
-    }
-
     const carregarConversas = async (): Promise<void> => {
         const chats = await service.pegarChats();
         state.chats = chats;
 
         abrirConversa(chats[0]);
+    }
+
+    const abrirConversa = (chat: Chat): void => {
+        if (!chat) return;
+
+        chat.abrir();
+        state.chat = chat;
     }
 
     const enviarMensagem = (mensagem: string): void => {
@@ -47,6 +49,7 @@ export function CreateStore(service: IChatService): IStore {
 
     return {
         state,
+        conversasAbertas,
         adicionar,
         abrirConversa,
         carregarConversas,

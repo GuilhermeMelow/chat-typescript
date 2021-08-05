@@ -51,4 +51,18 @@ describe('Store class', () => {
         // Assert
         expect(store.state.chat?.mensagens[0]).toBe(mensagem);
     });
+
+    it("Ao chamar conversas abertas, deve vir todas conversas com este estado", () => {
+        // Arrange
+        const { store } = build();
+        store.adicionar(chat.nome);
+
+        // Act
+        const conversas = store.conversasAbertas();
+
+        // Assert 
+        expect(conversas[0].nome).toBe(chat.nome);
+        expect(conversas[0].isAberto()).toBeTruthy();
+    });
+
 });
