@@ -1,10 +1,12 @@
 import { Store } from "@/store";
 import { Chat } from "@/types/Chat";
-import { computed, ComputedRef } from "vue";
+import { computed, ComputedRef, onMounted } from "vue";
 import InjectStrict from "@/Utils/InjectStrict";
 
 export function UseChats() {
     const store = InjectStrict<Store>("store");
+
+    onMounted(async () => await store.carregarConversas());
 
     const chatsOpen: ComputedRef<Chat[]> = computed<Chat[]>(() => {
         return store.state.chats.filter((c) => c.isAberto());
