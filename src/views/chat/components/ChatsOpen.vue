@@ -15,7 +15,7 @@
                 <div v-text="item" />
             </template>
         </List>
-        <Enviador class="enviador" @send=" send" />
+        <Enviador class="enviador" @send=" enviarMensagem" />
     </div>
 
 </template>
