@@ -1,23 +1,20 @@
-import InjectStrict from "@/Utils/InjectStrict";
 import { Store } from "@/store";
-import { IUseChats } from "@/types/composableFunctions/IUseChats";
-import { onMounted } from "vue";
 import { Chat } from "@/types/Chat";
+import { computed, ComputedRef } from "vue";
+import InjectStrict from "@/Utils/InjectStrict";
 
-export function UseChats(): IUseChats {
+export function UseChats() {
     const store = InjectStrict<Store>("store");
-    const chats = store.state.chats;
 
-    onMounted(async () => await store.inicializar());
+    const chatsOpen: ComputedRef<Chat[]> = computed<Chat[]>(() => {
+        return store.state.chats.filter((c) => c.isAberto());
+    });
 
-    const abrirConversa = (chat: Chat): void => store.abrirConversa(chat);
-
-    const criarConversa = (nome: string): void => {
-        const chat = new Chat(nome);
-
-        store.adicionar(chat);
-        store.abrirConversa(chat);
-    }
-
-    return { chats, abrirConversa, criarConversa };
+    return {
+        state: store.state,
+        chatsOpen,
+        adicionar: (nome: string) => store.adicionar(nome),
+        abrirConversa: (chat: Chat) => store.abrirConversa(chat),
+        send: (mensagem: string) => store.enviarMensagem(mensagem)
+    };
 }

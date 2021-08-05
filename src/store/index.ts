@@ -15,10 +15,10 @@ export class Store {
         this.service = service;
     }
 
-    public state: IState = {
+    public state: IState = reactive({
         chats: [],
         chat: null
-    };
+    });
 
     private getChatAtivo(): Chat {
         if (!this.state.chat)
