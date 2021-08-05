@@ -30,6 +30,8 @@ export class Store {
     public async carregarConversas(): Promise<void> {
         const chats = await this.service.pegarChats();
         this.state.chats = chats;
+
+        this.abrirConversa(chats[0]);
     }
 
     public adicionar(nome: string): void {
@@ -42,9 +44,10 @@ export class Store {
     }
 
     public abrirConversa(chat: Chat): void {
-        this.state.chat = chat;
-
+        if (!chat) return;
         chat.abrir();
+
+        this.state.chat = chat;
     }
 
     public enviarMensagem(mensagem: string): void {

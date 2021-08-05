@@ -4,7 +4,7 @@
             <li v-for="chat in chatsOpen"
                 :key="chat"
                 v-text="chat.nome"
-                @click="state.chat = chat"
+                @click="abrirConversa(chat)"
                 :class='{"tab_selected": state.chat != null && chat == state.chat}' />
         </ul>
     </div>
@@ -18,7 +18,6 @@
         <Enviador class="enviador" @send=" send" />
     </div>
 
-    <pre> {{activeChat}}</pre>
 </template>
 
 <script lang="ts">
@@ -30,8 +29,11 @@
     export default defineComponent({
         name: "chatsOpen",
         components: { List, Enviador },
+
         setup() {
-            return { ...UseChats() };
+            return {
+                ...UseChats(),
+            };
         },
     });
 </script>
