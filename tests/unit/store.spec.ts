@@ -1,4 +1,4 @@
-import { Store } from "@/store"
+import { CreateStore } from "@/store"
 import { chats, chat } from "./ChatSetup"
 
 function build() {
@@ -7,7 +7,7 @@ function build() {
         adicionar: jest.fn(),
         entrar: jest.fn()
     };
-    const store = new Store(service);
+    const store = CreateStore(service);
 
     service.pegarChats.mockReturnValue(chats);
 

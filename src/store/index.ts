@@ -5,52 +5,58 @@ import { IState } from "../types/IState";
 
 export interface IStore {
     state: IState,
-    adicionar(): void,
+    adicionar(nome: string): void,
+    abrirConversa(chat: Chat): void,
+    carregarConversas(): Promise<void>,
+    enviarMensagem(mensagem: string): void
 }
 
-export class Store {
-    private service: IChatService;
+export function CreateStore(service: IChatService): IStore {
 
-    constructor(service: IChatService) {
-        this.service = service;
-    }
-
-    public state: IState = reactive({
+    const state: IState = reactive({
         chats: [],
         chat: null
     });
 
-    private getChatAtivo(): Chat {
-        if (!this.state.chat)
+    const chatAtivo = (): Chat => {
+        if (!state.chat)
             throw new Error("Não existe chat ativo...");
 
-        return this.state.chat;
+        return state.chat;
     }
 
-    public async carregarConversas(): Promise<void> {
-        const chats = await this.service.pegarChats();
-        this.state.chats = chats;
-
-        this.abrirConversa(chats[0]);
-    }
-
-    public adicionar(nome: string): void {
+    const adicionar = (nome: string): void => {
         const chat = new Chat(nome);
 
-        this.service.adicionar(chat);
-        this.state.chats.push(chat);
+        service.adicionar(chat);
+        state.chats.push(chat);
 
-        this.abrirConversa(chat);
+        abrirConversa(chat);
     }
 
-    public abrirConversa(chat: Chat): void {
+    const abrirConversa = (chat: Chat): void => {
         if (!chat) return;
         chat.abrir();
 
-        this.state.chat = chat;
+        state.chat = chat;
     }
 
-    public enviarMensagem(mensagem: string): void {
-        this.getChatAtivo().enviarMensagem(mensagem);
+    const carregarConversas = async (): Promise<void> => {
+        const chats = await service.pegarChats();
+        state.chats = chats;
+
+        abrirConversa(chats[0]);
+    }
+
+    const enviarMensagem = (mensagem: string): void => {
+        chatAtivo().enviarMensagem(mensagem);
+    }
+
+    return {
+        state,
+        adicionar,
+        abrirConversa,
+        carregarConversas,
+        enviarMensagem
     }
 }
