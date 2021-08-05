@@ -1,6 +1,6 @@
 <template>
     <div class="enviador-content">
-        <input type="text" id="Data" v-model="data" data-teste="nome" style="width:65%" />
+        <input type="text" v-model="data" data-teste="nome" style="width:65%" />
         <button @click="send(data)" data-teste="criar" v-text="'Enviar'" style="width:25%" />
     </div>
 </template>
