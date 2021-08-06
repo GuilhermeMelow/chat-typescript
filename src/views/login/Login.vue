@@ -9,7 +9,7 @@
 <script lang="ts">
     import { defineComponent } from "vue";
     import Enviador from "@/components/Enviador.vue";
-    import useLogin from "./functions/UseLogin";
+    import { useLogin } from "./functions/UseLogin";
 
     export default defineComponent({
         name: "Login",

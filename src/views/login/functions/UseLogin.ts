@@ -3,7 +3,7 @@ import { ref } from "vue";
 import { useRouter } from "vue-router";
 import InjectStrict from "@/Utils/InjectStrict";
 
-export default function useLogin() {
+export function useLogin() {
     const service = InjectStrict<IChatService>("chatService");
     const router = useRouter();
     const error = ref("");

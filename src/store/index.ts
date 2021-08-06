@@ -32,8 +32,9 @@ export function CreateStore(service: IChatService): IStore {
     const carregarConversas = async (): Promise<void> => {
         const chats = await service.pegarChats();
         state.chats = chats;
+        const lastIndex = chats.length - 1;
 
-        abrirConversa(chats[0]);
+        abrirConversa(chats[lastIndex]);
     }
 
     const abrirConversa = (chat: Chat): void => {
