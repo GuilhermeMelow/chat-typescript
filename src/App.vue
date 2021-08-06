@@ -7,11 +7,13 @@
 <script lang="ts">
     import { defineComponent, provide } from "vue";
     import { ChatService } from "./services/ChatService";
-    import { Store } from "./store";
+    import { CreateStore } from "./store";
+    import { IStore } from "./store/IStore";
+
     export default defineComponent({
         setup() {
             const memoryChat = new ChatService();
-            const store: Store = new Store(memoryChat);
+            const store: IStore = CreateStore(memoryChat);
 
             provide("chatService", memoryChat);
             provide("store", store);

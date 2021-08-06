@@ -4,34 +4,36 @@
             <li v-for="chat in chatsOpen"
                 :key="chat"
                 v-text="chat.nome"
-                :data-teste="chat.id"
-                @click="activeChat = chat"
-                :class='{"tab_selected": activeChat != null && chat == activeChat}' />
+                @click="abrirConversa(chat)"
+                :class='{"tab_selected": state.chat != null && chat == state.chat}' />
         </ul>
     </div>
 
-    <div v-if="activeChat" class="load-content">
-        <List class="list" :values="activeChat.mensagens">
+    <div v-if="state.chat" class="load-content">
+        <List class="list" :values="state.chat.mensagens">
             <template #="{ item }">
                 <div v-text="item" />
             </template>
         </List>
-
-        <Enviador class="enviador" @send=" send" />
+        <Enviador class="enviador" @send=" enviarMensagem" />
     </div>
+
 </template>
 
 <script lang="ts">
     import { defineComponent } from "vue";
     import Enviador from "@/components/Enviador.vue";
     import List from "@/components/List.vue";
-    import * as functions from "@/views/chat/functions/Index";
+    import { UseChats } from "../functions/UseChats";
 
     export default defineComponent({
         name: "chatsOpen",
         components: { List, Enviador },
+
         setup() {
-            return { ...functions.UseChatsOpen() };
+            return {
+                ...UseChats(),
+            };
         },
     });
 </script>

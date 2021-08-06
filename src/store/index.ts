@@ -1,46 +1,59 @@
 import { IChatService } from "@/types/IChatService"
 import { Chat } from "@/types/Chat";
-import { ref } from "vue"
+import { reactive } from "vue"
 import { IState } from "../types/IState";
+import { IStore } from "./IStore";
 
-export class Store {
-    private service: IChatService;
+export function CreateStore(service: IChatService): IStore {
 
-    constructor(service: IChatService) {
-        this.service = service;
-    }
+    const state: IState = reactive({
+        chats: [],
+        chat: null
+    });
 
-    public readonly state: IState = {
-        chats: ref([]),
-        chat: ref(null)
-    };
+    const conversasAbertas = () => state.chats.filter(p => p.isAberto())
 
-    private getChatAtivo(): Chat {
-        if (!this.state.chat.value)
+    const chatAtivo = (): Chat => {
+        if (!state.chat)
             throw new Error("Não existe chat ativo...");
 
-        return this.state.chat.value;
+        return state.chat;
     }
 
-    public async inicializar(): Promise<void> {
-        const chats = await this.service.pegarChats();
-        this.state.chats.value = chats;
+    const adicionar = (nome: string): void => {
+        const chat = new Chat(nome);
+
+        service.adicionar(chat);
+        state.chats.push(chat);
+
+        abrirConversa(chat);
     }
 
-    public adicionar(chat: Chat): void {
-        this.service.adicionar(chat);
-        this.state.chats.value.push(chat);
+    const carregarConversas = async (): Promise<void> => {
+        const chats = await service.pegarChats();
+        state.chats = chats;
+        const lastIndex = chats.length - 1;
 
-        this.abrirConversa(chat);
+        abrirConversa(chats[lastIndex]);
     }
 
-    public abrirConversa(chat: Chat): void {
-        this.state.chat.value = chat;
+    const abrirConversa = (chat: Chat): void => {
+        if (!chat) return;
 
         chat.abrir();
+        state.chat = chat;
     }
 
-    public enviarMensagem(mensagem: string): void {
-        this.getChatAtivo().enviarMensagem(mensagem);
+    const enviarMensagem = (mensagem: string): void => {
+        chatAtivo().enviarMensagem(mensagem);
+    }
+
+    return {
+        state,
+        conversasAbertas,
+        adicionar,
+        abrirConversa,
+        carregarConversas,
+        enviarMensagem
     }
 }
