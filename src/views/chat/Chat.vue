@@ -33,5 +33,36 @@
 </script>
 
 <style lang="scss">
-    @import "@/../style/layout-page-chat";
+    .main {
+        margin: auto;
+        width: 95%;
+        display: flex;
+        height: 500px;
+    }
+
+    .side-menu {
+        width: 30%;
+        height: 100%;
+        padding: 1%;
+        border: 2px solid #333;
+        border-radius: 0.75rem;
+
+        .enviador {
+            height: 10%;
+        }
+
+        .list {
+            height: 90%;
+            overflow: auto;
+        }
+    }
+
+    .main-container {
+        margin: 0 auto;
+        width: 50%;
+        height: 100%;
+        padding: 1%;
+        border: 2px solid #333;
+        border-radius: 0.75rem;
+    }
 </style>
