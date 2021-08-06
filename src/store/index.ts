@@ -1,6 +1,6 @@
 import { IChatService } from "@/types/IChatService"
 import { Chat } from "@/types/Chat";
-import { reactive } from "vue"
+import { reactive, readonly } from "vue"
 import { IState } from "../types/IState";
 import { IStore } from "./IStore";
 
@@ -11,16 +11,7 @@ export function CreateStore(service: IChatService): IStore {
         chat: null
     });
 
-    const conversasAbertas = () => state.chats.filter(p => p.isAberto())
-
-    const chatAtivo = (): Chat => {
-        if (!state.chat)
-            throw new Error("Não existe chat ativo...");
-
-        return state.chat;
-    }
-
-    const adicionar = (nome: string): void => {
+    const criarConversa = (nome: string): void => {
         const chat = new Chat(nome);
 
         service.adicionar(chat);
@@ -40,18 +31,20 @@ export function CreateStore(service: IChatService): IStore {
     const abrirConversa = (chat: Chat): void => {
         if (!chat) return;
 
-        chat.abrir();
         state.chat = chat;
+        state.chat.abrir();
     }
 
     const enviarMensagem = (mensagem: string): void => {
-        chatAtivo().enviarMensagem(mensagem);
+        if (!state.chat)
+            throw new Error("Não existe chat ativo...");
+
+        state.chat.enviarMensagem(mensagem);
     }
 
     return {
         state,
-        conversasAbertas,
-        adicionar,
+        criarConversa,
         abrirConversa,
         carregarConversas,
         enviarMensagem

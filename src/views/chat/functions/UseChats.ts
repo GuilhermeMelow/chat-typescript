@@ -10,6 +10,6 @@ export function UseChats() {
 
     return {
         ...store,
-        chatsOpen: computed<Chat[]>(() => store.conversasAbertas())
+        chatsOpen: computed<Chat[]>(() => store.state.chats.filter(p => p.isAberto()))
     };
 }

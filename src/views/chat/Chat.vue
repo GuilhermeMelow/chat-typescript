@@ -6,7 +6,7 @@
                     <div v-text="item.nome" :data-teste="item.id" @click="abrirConversa(item)" />
                 </template>
             </List>
-            <Enviador class="enviador" @send="adicionar" />
+            <Enviador class="enviador" @send="criarConversa" />
         </div>
         <div class="main-container">
             <Chats-open />
