@@ -39,6 +39,20 @@
 </script>
 
 <style lang="scss" scoped>
-    @import "@/../style/custom-tabs.scss";
-    @import "@/../style/layout-chatsOpen.scss";
+    .tabs-content {
+        height: 13%;
+    }
+
+    .load-content {
+        height: 87%;
+
+        .list {
+            height: 87%;
+            overflow: auto;
+        }
+
+        .enviador {
+            height: 13%;
+        }
+    }
 </style>
