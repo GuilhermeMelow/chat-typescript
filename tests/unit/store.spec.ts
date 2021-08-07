@@ -15,35 +15,35 @@ function build() {
 }
 
 describe('Store class', () => {
-    it("Ao tentar carregar as conversas, deve ocorrer com exito", async () => {
+    it("Ao tentar inicializar as salas, deve ocorrer com exito", async () => {
         // Arrange 
         const { store, chats } = build();
 
         // Act
-        await store.carregarConversas();
+        await store.inicializarSalas();
 
         // Assert
-        expect(store.state.chats).toEqual(chats);
+        expect(store.state.salas).toEqual(chats);
     });
 
 
-    it("Ao adicionar um chat deve conte-lo na lista de chats", () => {
+    it("Ao adicionar uma sala, deve conte-la na lista de salas", () => {
         // Arrange
         const { store, chat } = build();
 
         // Act
-        store.adicionar(chat.nome);
+        store.criarSala(chat.nome);
 
         // Assert
-        expect(store.state.chats[0].nome).toBe(chat.nome);
+        expect(store.state.salas[0].nome).toBe(chat.nome);
     });
 
 
-    it("Ao enviar uma mensagem, deve registrar no conversa ativa", () => {
+    it("Ao enviar uma mensagem, deve registrar na sala ativa", () => {
         // Arrange
         const { store, chat } = build();
         const mensagem = "Teste123";
-        store.adicionar(chat.nome);
+        store.criarSala(chat.nome);
 
         // Act
         store.enviarMensagem(mensagem);
@@ -51,18 +51,4 @@ describe('Store class', () => {
         // Assert
         expect(store.state.chat?.mensagens[0]).toBe(mensagem);
     });
-
-    it("Ao chamar conversas abertas, deve vir todas conversas com este estado", () => {
-        // Arrange
-        const { store } = build();
-        store.adicionar(chat.nome);
-
-        // Act
-        const conversas = store.conversasAbertas();
-
-        // Assert 
-        expect(conversas[0].nome).toBe(chat.nome);
-        expect(conversas[0].isAberto()).toBeTruthy();
-    });
-
 });
