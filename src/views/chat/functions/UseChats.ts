@@ -1,4 +1,4 @@
-import { IStore } from "@/store/IStore";
+import { IStore } from "@/types/IStore";
 import { Chat } from "@/types/Chat";
 import { computed, onMounted, shallowReactive } from "vue";
 import InjectStrict from "@/Utils/InjectStrict";

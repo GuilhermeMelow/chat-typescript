@@ -8,7 +8,7 @@
     import { defineComponent, provide } from "vue";
     import { ChatService } from "./services/ChatService";
     import { CreateStore } from "./store";
-    import { IStore } from "./store/IStore";
+    import { IStore } from "./types/IStore";
 
     export default defineComponent({
         setup() {

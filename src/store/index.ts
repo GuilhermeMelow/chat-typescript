@@ -2,7 +2,7 @@ import { IChatService } from "@/types/IChatService"
 import { Chat } from "@/types/Chat";
 import { reactive } from "vue"
 import { IState } from "../types/IState";
-import { IStore } from "./IStore";
+import { IStore } from "../types/IStore";
 
 export function CreateStore(service: IChatService): IStore {
 

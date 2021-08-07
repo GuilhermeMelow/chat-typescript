@@ -5,7 +5,7 @@
                 :key="sala"
                 v-text="sala.nome"
                 @click="abrirSala(sala)"
-                :class='{"tab_selected": state.chat != null && chat == state.chat}' />
+                :class='{"tab_selected": state.chat != null && sala == state.chat}' />
         </ul>
     </div>
 
