@@ -1,15 +1,15 @@
 <template>
     <div class="main">
         <div class="side-menu">
-            <List class="list" :values="state.chats">
+            <List class="list" :values="state.salas">
                 <template #="{ item }">
-                    <div v-text="item.nome" :data-teste="item.id" @click="abrirConversa(item)" />
+                    <div v-text="item.nome" :data-teste="item.id" @click="abrirSala(item)" />
                 </template>
             </List>
-            <Enviador class="enviador" @send="criarConversa" />
+            <Enviador class="enviador" @send="criarSala" />
         </div>
         <div class="main-container">
-            <Chats-open />
+            <Salas-abertas />
         </div>
     </div>
 </template>
@@ -18,11 +18,11 @@
     import { defineComponent } from "vue";
     import List from "@/components/List.vue";
     import Enviador from "@/components/Enviador.vue";
-    import ChatsOpen from "./components/ChatsOpen.vue";
+    import SalasAbertas from "./components/SalasAbertas.vue";
     import { UseChats } from "./functions/UseChats";
 
     export default defineComponent({
-        components: { List, Enviador, ChatsOpen },
+        components: { List, Enviador, SalasAbertas },
 
         setup() {
             return {

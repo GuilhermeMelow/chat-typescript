@@ -6,10 +6,10 @@ import InjectStrict from "@/Utils/InjectStrict";
 export function UseChats() {
     const store = shallowReactive(InjectStrict<IStore>("store"));
 
-    onMounted(async () => await store.carregarConversas());
+    onMounted(async () => await store.inicializarSalas());
 
     return {
         ...store,
-        chatsOpen: computed<Chat[]>(() => store.state.chats.filter(p => p.isAberto()))
+        salasAbertas: computed<Chat[]>(() => store.state.salas.filter(p => p.isAberto()))
     };
 }

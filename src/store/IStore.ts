@@ -3,8 +3,8 @@ import { IState } from "../types/IState";
 
 export interface IStore {
     state: IState;
-    criarConversa(nome: string): void;
-    abrirConversa(chat: Chat): void;
-    carregarConversas(): Promise<void>;
+    criarSala(nome: string): void;
+    abrirSala(chat: Chat): void;
+    inicializarSalas(): Promise<void>;
     enviarMensagem(mensagem: string): void;
 }

@@ -1,10 +1,10 @@
 <template>
     <div class="tabs-content">
         <ul class="tab-nav">
-            <li v-for="chat in chatsOpen"
-                :key="chat"
-                v-text="chat.nome"
-                @click="abrirConversa(chat)"
+            <li v-for="sala in salasAbertas"
+                :key="sala"
+                v-text="sala.nome"
+                @click="abrirSala(sala)"
                 :class='{"tab_selected": state.chat != null && chat == state.chat}' />
         </ul>
     </div>

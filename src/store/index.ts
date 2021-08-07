@@ -1,34 +1,33 @@
 import { IChatService } from "@/types/IChatService"
 import { Chat } from "@/types/Chat";
-import { reactive, readonly } from "vue"
+import { reactive } from "vue"
 import { IState } from "../types/IState";
 import { IStore } from "./IStore";
 
 export function CreateStore(service: IChatService): IStore {
 
     const state: IState = reactive({
-        chats: [],
+        salas: [],
         chat: null
     });
 
-    const criarConversa = (nome: string): void => {
-        const chat = new Chat(nome);
+    const criarSala = (nome: string): void => {
+        const sala = new Chat(nome);
 
-        service.adicionar(chat);
-        state.chats.push(chat);
+        service.adicionar(sala);
+        state.salas.push(sala);
 
-        abrirConversa(chat);
+        abrirSala(sala);
     }
 
-    const carregarConversas = async (): Promise<void> => {
-        const chats = await service.pegarChats();
-        state.chats = chats;
-        const lastIndex = chats.length - 1;
+    const inicializarSalas = async (): Promise<void> => {
+        state.salas = await service.pegarChats();
+        const lastIndex = state.salas.length - 1;
 
-        abrirConversa(chats[lastIndex]);
+        abrirSala(state.salas[lastIndex]);
     }
 
-    const abrirConversa = (chat: Chat): void => {
+    const abrirSala = (chat?: Chat): void => {
         if (!chat) return;
 
         state.chat = chat;
@@ -44,9 +43,9 @@ export function CreateStore(service: IChatService): IStore {
 
     return {
         state,
-        criarConversa,
-        abrirConversa,
-        carregarConversas,
+        criarSala,
+        abrirSala,
+        inicializarSalas,
         enviarMensagem
     }
 }
