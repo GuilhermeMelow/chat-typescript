@@ -1,32 +1,34 @@
 <template>
     <div class="main">
         <div class="side-menu">
-            <List class="list" :values="state.chats">
+            <List class="list" :values="state.salas">
                 <template #="{ item }">
-                    <div v-text="item.nome" :data-teste="item.id" @click="abrirConversa(item)" />
+                    <div v-text="item.nome" :data-teste="item.id" @click="abrirSala(item)" />
                 </template>
             </List>
-            <Enviador class="enviador" @send="adicionar" />
+            <Enviador class="enviador" @send="criarSala" />
         </div>
         <div class="main-container">
-            <Chats-open />
+            <Salas-abertas />
         </div>
     </div>
 </template>
 
 <script lang="ts">
     import { defineComponent } from "vue";
+    import { UseChats } from "./functions/UseChats";
+    import { IStore } from "@/types/IStore";
+    import InjectStrict from "@/Utils/InjectStrict";
     import List from "@/components/List.vue";
     import Enviador from "@/components/Enviador.vue";
-    import ChatsOpen from "./components/ChatsOpen.vue";
-    import { UseChats } from "./functions/UseChats";
+    import SalasAbertas from "./components/SalasAbertas.vue";
 
     export default defineComponent({
-        components: { List, Enviador, ChatsOpen },
+        components: { List, Enviador, SalasAbertas },
 
         setup() {
             return {
-                ...UseChats(),
+                ...UseChats(InjectStrict<IStore>("store")),
             };
         },
     });

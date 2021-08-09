@@ -1,11 +1,11 @@
 <template>
     <div class="tabs-content">
         <ul class="tab-nav">
-            <li v-for="chat in chatsOpen"
-                :key="chat"
-                v-text="chat.nome"
-                @click="abrirConversa(chat)"
-                :class='{"tab_selected": state.chat != null && chat == state.chat}' />
+            <li v-for="sala in salasAbertas"
+                :key="sala"
+                v-text="sala.nome"
+                @click="abrirSala(sala)"
+                :class='{"tab_selected": state.chat != null && sala == state.chat}' />
         </ul>
     </div>
 
@@ -22,9 +22,11 @@
 
 <script lang="ts">
     import { defineComponent } from "vue";
+    import { UseChats } from "../functions/UseChats";
+    import { IStore } from "@/types/IStore";
     import Enviador from "@/components/Enviador.vue";
     import List from "@/components/List.vue";
-    import { UseChats } from "../functions/UseChats";
+    import InjectStrict from "@/Utils/InjectStrict";
 
     export default defineComponent({
         name: "chatsOpen",
@@ -32,7 +34,7 @@
 
         setup() {
             return {
-                ...UseChats(),
+                ...UseChats(InjectStrict<IStore>("store")),
             };
         },
     });

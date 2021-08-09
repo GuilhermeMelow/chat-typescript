@@ -1,15 +1,12 @@
-import { IStore } from "@/store/IStore";
+import { IStore } from "@/types/IStore";
 import { Chat } from "@/types/Chat";
 import { computed, onMounted, shallowReactive } from "vue";
-import InjectStrict from "@/Utils/InjectStrict";
 
-export function UseChats() {
-    const store = shallowReactive(InjectStrict<IStore>("store"));
-
-    onMounted(async () => await store.carregarConversas());
+export function UseChats(store: IStore) {
+    onMounted(async () => await store.inicializarSalas());
 
     return {
         ...store,
-        chatsOpen: computed<Chat[]>(() => store.conversasAbertas())
+        salasAbertas: computed<Chat[]>(() => store.state.salas.filter(p => p.isAberto()))
     };
 }

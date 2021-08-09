@@ -2,58 +2,50 @@ import { IChatService } from "@/types/IChatService"
 import { Chat } from "@/types/Chat";
 import { reactive } from "vue"
 import { IState } from "../types/IState";
-import { IStore } from "./IStore";
+import { IStore } from "../types/IStore";
 
 export function CreateStore(service: IChatService): IStore {
 
     const state: IState = reactive({
-        chats: [],
+        salas: [],
         chat: null
     });
 
-    const conversasAbertas = () => state.chats.filter(p => p.isAberto())
+    const criarSala = (nome: string): void => {
+        const sala = new Chat(nome);
 
-    const chatAtivo = (): Chat => {
-        if (!state.chat)
-            throw new Error("Não existe chat ativo...");
+        service.adicionar(sala);
+        state.salas.push(sala);
 
-        return state.chat;
+        abrirSala(sala);
     }
 
-    const adicionar = (nome: string): void => {
-        const chat = new Chat(nome);
+    const inicializarSalas = async (): Promise<void> => {
+        state.salas = await service.pegarChats();
+        const lastIndex = state.salas.length - 1;
 
-        service.adicionar(chat);
-        state.chats.push(chat);
-
-        abrirConversa(chat);
+        abrirSala(state.salas[lastIndex]);
     }
 
-    const carregarConversas = async (): Promise<void> => {
-        const chats = await service.pegarChats();
-        state.chats = chats;
-        const lastIndex = chats.length - 1;
-
-        abrirConversa(chats[lastIndex]);
-    }
-
-    const abrirConversa = (chat: Chat): void => {
+    const abrirSala = (chat?: Chat): void => {
         if (!chat) return;
 
-        chat.abrir();
         state.chat = chat;
+        state.chat.abrir();
     }
 
     const enviarMensagem = (mensagem: string): void => {
-        chatAtivo().enviarMensagem(mensagem);
+        if (!state.chat)
+            throw new Error("Não existe chat ativo...");
+
+        state.chat.enviarMensagem(mensagem);
     }
 
     return {
         state,
-        conversasAbertas,
-        adicionar,
-        abrirConversa,
-        carregarConversas,
+        criarSala,
+        abrirSala,
+        inicializarSalas,
         enviarMensagem
     }
 }
