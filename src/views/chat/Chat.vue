@@ -16,17 +16,19 @@
 
 <script lang="ts">
     import { defineComponent } from "vue";
+    import { UseChats } from "./functions/UseChats";
+    import { IStore } from "@/types/IStore";
+    import InjectStrict from "@/Utils/InjectStrict";
     import List from "@/components/List.vue";
     import Enviador from "@/components/Enviador.vue";
     import SalasAbertas from "./components/SalasAbertas.vue";
-    import { UseChats } from "./functions/UseChats";
 
     export default defineComponent({
         components: { List, Enviador, SalasAbertas },
 
         setup() {
             return {
-                ...UseChats(),
+                ...UseChats(InjectStrict<IStore>("store")),
             };
         },
     });

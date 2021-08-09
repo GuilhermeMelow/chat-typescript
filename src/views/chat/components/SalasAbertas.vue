@@ -22,9 +22,11 @@
 
 <script lang="ts">
     import { defineComponent } from "vue";
+    import { UseChats } from "../functions/UseChats";
+    import { IStore } from "@/types/IStore";
     import Enviador from "@/components/Enviador.vue";
     import List from "@/components/List.vue";
-    import { UseChats } from "../functions/UseChats";
+    import InjectStrict from "@/Utils/InjectStrict";
 
     export default defineComponent({
         name: "chatsOpen",
@@ -32,7 +34,7 @@
 
         setup() {
             return {
-                ...UseChats(),
+                ...UseChats(InjectStrict<IStore>("store")),
             };
         },
     });
