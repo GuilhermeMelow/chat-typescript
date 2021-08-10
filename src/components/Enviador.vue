@@ -1,12 +1,12 @@
 <template>
     <div class="enviador-content">
-        <input type="text" v-model="data" data-teste="nome" style="width:65%" />
-        <button @click="send(data)" data-teste="criar" v-text="'Enviar'" style="width:25%" />
+        <input type="text" v-model="text" data-teste="nome" style="width:65%" />
+        <button @click="send()" data-teste="criar" v-text="'Enviar'" style="width:25%" />
     </div>
 </template>
 
 <script lang="ts">
-    import { defineComponent } from "vue";
+    import { defineComponent, ref } from "vue";
 
     export default defineComponent({
         name: "Criar",
@@ -14,7 +14,15 @@
             label: String,
         },
         setup(props, { emit }) {
-            return { data: "", send: (data: string) => emit("send", data) };
+            const text = ref("");
+
+            return {
+                text,
+                send: () => {
+                    emit("send", text.value.slice());
+                    text.value = "";
+                },
+            };
         },
     });
 </script>

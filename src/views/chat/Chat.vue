@@ -1,15 +1,10 @@
 <template>
     <div class="main">
         <div class="side-menu">
-            <List class="list" :values="state.salas">
-                <template #="{ item }">
-                    <div v-text="item.nome" :data-teste="item.id" @click="abrirSala(item)" />
-                </template>
-            </List>
-            <Enviador class="enviador" @send="criarSala" />
+            <Salas-menu :chatsFunctions="useChats" />
         </div>
         <div class="main-container">
-            <Salas-abertas />
+            <Salas-abertas :chatsFunctions="useChats" />
         </div>
     </div>
 </template>
@@ -19,19 +14,18 @@
     import { UseChats } from "./functions/UseChats";
     import { IStore } from "@/types/IStore";
     import InjectStrict from "@/Utils/InjectStrict";
-    import List from "@/components/List.vue";
-    import Enviador from "@/components/Enviador.vue";
     import SalasAbertas from "./components/SalasAbertas.vue";
+    import SalasMenu from "./components/SalasMenu.vue";
 
     export default defineComponent({
-        components: { List, Enviador, SalasAbertas },
+        components: { SalasAbertas, SalasMenu },
 
         setup() {
             const store = InjectStrict<IStore>("store");
             onMounted(async () => await store.inicializarSalas());
 
             return {
-                ...UseChats(store),
+                useChats: UseChats(store),
             };
         },
     });
@@ -51,15 +45,6 @@
         padding: 1%;
         border: 2px solid #333;
         border-radius: 0.75rem;
-
-        .enviador {
-            height: 10%;
-        }
-
-        .list {
-            height: 90%;
-            overflow: auto;
-        }
     }
 
     .main-container {

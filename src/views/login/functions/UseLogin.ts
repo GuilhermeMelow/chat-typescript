@@ -1,10 +1,10 @@
-import { IChatService } from "@/types/IChatService";
+import { IChatApi } from "@/types/IChatApi";
 import { ref } from "vue";
 import { useRouter } from "vue-router";
 import InjectStrict from "@/Utils/InjectStrict";
 
 export function useLogin() {
-    const service = InjectStrict<IChatService>("chatService");
+    const service = InjectStrict<IChatApi>("chatApi");
     const router = useRouter();
     const error = ref("");
 

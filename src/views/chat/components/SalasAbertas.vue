@@ -17,25 +17,23 @@
         </List>
         <Enviador class="enviador" @send=" enviarMensagem" />
     </div>
-
 </template>
 
 <script lang="ts">
-    import { defineComponent } from "vue";
-    import { UseChats } from "../functions/UseChats";
-    import { IStore } from "@/types/IStore";
+    import { defineComponent, toRefs } from "vue";
     import Enviador from "@/components/Enviador.vue";
     import List from "@/components/List.vue";
-    import InjectStrict from "@/Utils/InjectStrict";
 
     export default defineComponent({
         name: "chatsOpen",
         components: { List, Enviador },
+        props: {
+            chatsFunctions: Object,
+        },
+        setup(props) {
+            const { chatsFunctions } = toRefs(props);
 
-        setup() {
-            return {
-                ...UseChats(InjectStrict<IStore>("store")),
-            };
+            return { ...chatsFunctions?.value };
         },
     });
 </script>

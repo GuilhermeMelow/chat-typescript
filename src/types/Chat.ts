@@ -4,7 +4,7 @@ export class Chat {
     private aberto: boolean;
     private _mensagens: string[] = [];
 
-    constructor(nome: string, id?: string, aberto: boolean = false) {
+    constructor(nome: string, id?: string, aberto = false) {
         this.id = id ?? Math.random().toString(36).substring(7);
         this.nome = nome;
         this.aberto = aberto;
