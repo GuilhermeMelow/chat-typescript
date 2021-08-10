@@ -1,23 +1,24 @@
 import { shallowMount } from "@vue/test-utils"
 import List from "@/components/List.vue"
-import { chats } from "../ChatSetup";
 
 describe('List.vue', () => {
     function build() {
-        const wrapper = shallowMount(List, {
-            props: { values: chats }
-        });
-        return { wrapper };
+        const itens = ["123", "124", "125"];
+
+        return {
+            wrapper: shallowMount(List, { props: { values: itens } }),
+            itens
+        };
     }
 
-    it("ao receber chats, deve criar a mesma quantidade de itens", () => {
+    it("ao receber os itens, deve criar a mesma quantidade que recebeu", () => {
         // Arrange
-        const { wrapper, } = build();
+        const { wrapper, itens } = build();
 
         // Act
-        const itens = wrapper.get("[data-teste='itens']");
+        const result = wrapper.get("[data-teste='itens']");
 
         // Assert
-        expect(itens.element.children.length).toEqual(chats.length);
+        expect(result.element.children.length).toEqual(itens.length);
     })
 });
