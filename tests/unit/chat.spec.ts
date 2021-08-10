@@ -1,6 +1,5 @@
 import { Chat } from "@/types/Chat";
 
-
 describe("chat classe", () => {
     function build() {
         return {

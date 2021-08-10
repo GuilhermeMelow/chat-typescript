@@ -1,49 +1,52 @@
 import { CreateStore } from "@/store"
-import { chats, chat } from "./ChatSetup"
-
-function build() {
-    const service = {
-        pegarChats: jest.fn(),
-        adicionar: jest.fn(),
-        entrar: jest.fn()
-    };
-    const store = CreateStore(service);
-
-    service.pegarChats.mockReturnValue(chats);
-
-    return { service, store, chat, chats };
-}
+import { Chat } from "@/types/Chat";
 
 describe('Store class', () => {
+    function build() {
+        const salas = [new Chat("teste1"), new Chat("teste2"), new Chat("teste3")];
+
+        const mockService = {
+            pegarChats: jest.fn().mockReturnValue(salas),
+            adicionar: jest.fn(),
+            entrar: jest.fn()
+        };
+
+        return {
+            store: CreateStore(mockService),
+            salas: salas,
+            sala: new Chat("teste"),
+        };
+    }
+
     it("Ao tentar inicializar as salas, deve ocorrer com exito", async () => {
         // Arrange 
-        const { store, chats } = build();
+        const { store, salas } = build();
 
         // Act
         await store.inicializarSalas();
 
         // Assert
-        expect(store.state.salas).toEqual(chats);
+        expect(store.state.salas).toEqual(salas);
     });
 
 
-    it("Ao adicionar uma sala, deve conte-la na lista de salas", () => {
+    it("Ao criar uma sala, deve conte-la na lista de salas", () => {
         // Arrange
-        const { store, chat } = build();
+        const { store, sala } = build();
 
         // Act
-        store.criarSala(chat.nome);
+        store.criarSala(sala.nome);
 
         // Assert
-        expect(store.state.salas[0].nome).toBe(chat.nome);
+        expect(store.state.salas[0].nome).toBe(sala.nome);
     });
 
 
     it("Ao enviar uma mensagem, deve registrar na sala ativa", () => {
         // Arrange
-        const { store, chat } = build();
+        const { store, sala } = build();
         const mensagem = "Teste123";
-        store.criarSala(chat.nome);
+        store.criarSala(sala.nome);
 
         // Act
         store.enviarMensagem(mensagem);
