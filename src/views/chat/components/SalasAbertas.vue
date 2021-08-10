@@ -1,21 +1,20 @@
 <template>
     <div class="tabs-content">
         <ul class="tab-nav">
-            <li v-for="sala in salasAbertas"
+            <li v-for="sala in salas"
                 :key="sala"
                 v-text="sala.nome"
-                @click="abrirSala(sala)"
-                :class='{"tab_selected": state.chat != null && sala == state.chat}' />
+                @click="$emit('abrirSala', sala)"
+                :class='{"tab_selected": chat != null && sala == chat}' />
         </ul>
     </div>
-
-    <div v-if="state.chat" class="load-content">
-        <List class="list" :values="state.chat.mensagens">
+    <div v-if="chat" class="load-content">
+        <List class="list" :values="chat.mensagens">
             <template #="{ item }">
                 <div v-text="item" />
             </template>
         </List>
-        <Enviador class="enviador" @send=" enviarMensagem" />
+        <Enviador class="enviador" @send="emit('enviar', $event)" />
     </div>
 </template>
 
@@ -28,12 +27,15 @@
         name: "chatsOpen",
         components: { List, Enviador },
         props: {
-            chatsFunctions: Object,
+            salas: Array,
+            chat: Object,
         },
-        setup(props) {
-            const { chatsFunctions } = toRefs(props);
-
-            return { ...chatsFunctions?.value };
+        emits: ["abrirSala", "enviar"],
+        setup(props, { emit }) {
+            return {
+                emit,
+                ...toRefs(props),
+            };
         },
     });
 </script>
