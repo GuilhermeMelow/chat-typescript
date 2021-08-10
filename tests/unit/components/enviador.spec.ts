@@ -1,21 +1,19 @@
 import { shallowMount } from "@vue/test-utils"
 import Enviador from "@/components/Enviador.vue";
 
-
 describe("CriaChat.vue", () => {
     function build() {
-        const wrapper = shallowMount(Enviador);
         return {
-            wrapper,
+            wrapper: shallowMount(Enviador),
         }
     }
 
     it("ao enviar uma informação, a mesma deve ser enviada com sucesso", async () => {
         // Arrange
         const { wrapper } = build();
-        wrapper.vm.$emit('sendInformation', "sucesso");
 
         // Act
+        wrapper.vm.$emit('sendInformation', "sucesso");
         await wrapper.vm.$nextTick();
 
         // Assert

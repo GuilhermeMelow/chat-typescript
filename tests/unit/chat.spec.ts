@@ -1,11 +1,13 @@
-import { chat } from "./ChatSetup";
+import { Chat } from "@/types/Chat";
 
-function build() {
-    return { chat, mensagem: "teste" };
-}
+describe("chat classe", () => {
+    function build() {
+        return {
+            chat: new Chat("teste1", "123"),
+            mensagem: "teste"
+        };
+    }
 
-describe("chat", () =>  { 
-    
     it("Ao enviar uma mensagem, a mesma deve estar na lista de mensagens", () => {
         // Arrange 
         const { chat, mensagem } = build();
@@ -22,21 +24,21 @@ describe("chat", () =>  {
     it("Ao abrir o chat, o mesmo deve constar como aberto", () => {
         // Arrange
         const { chat } = build();
-    
+
         // Act
         chat.abrir();
-    
+
         // Assert
         expect(chat.isAberto()).toBe(true);
     });
-    
+
     it("Ao fechar o chat, o mesmo deve constar como fechado", () => {
         // Arrange
         const { chat } = build();
-    
+
         // Act
         chat.fechar();
-    
+
         // Assert
         expect(chat.isAberto()).toBe(false);
     });
