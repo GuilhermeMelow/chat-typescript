@@ -15,7 +15,7 @@
 </template>
 
 <script lang="ts">
-    import { defineComponent } from "vue";
+    import { defineComponent, onMounted } from "vue";
     import { UseChats } from "./functions/UseChats";
     import { IStore } from "@/types/IStore";
     import InjectStrict from "@/Utils/InjectStrict";
@@ -27,8 +27,11 @@
         components: { List, Enviador, SalasAbertas },
 
         setup() {
+            const store = InjectStrict<IStore>("store");
+            onMounted(async () => await store.inicializarSalas());
+
             return {
-                ...UseChats(InjectStrict<IStore>("store")),
+                ...UseChats(store),
             };
         },
     });
