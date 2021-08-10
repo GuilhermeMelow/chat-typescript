@@ -1,7 +1,7 @@
-import { IChatService } from "@/types/IChatService";
+import { IChatApi } from "@/types/IChatApi";
 import { Chat } from "@/types/Chat";
 
-export class ChatService implements IChatService {
+export class ChatApi implements IChatApi {
     private _chats: Chat[] = [];
 
     async adicionar(chat: Chat): Promise<number> {
