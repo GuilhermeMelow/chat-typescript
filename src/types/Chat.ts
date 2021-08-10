@@ -1,33 +1,30 @@
 export class Chat {
-    public id: string;
     public nome: string;
-    private aberto: boolean;
+    private _aberto: boolean;
     private _mensagens: string[] = [];
 
-    constructor(nome: string, id?: string, aberto = false) {
-        this.id = id ?? Math.random().toString(36).substring(7);
+    constructor(nome: string) {
         this.nome = nome;
-        this.aberto = aberto;
-    }
-
-    public isAberto(): boolean {
-        return this.aberto;
+        this._aberto = false;
     }
 
     public abrir(): void {
-        this.aberto = true
+        this._aberto = true
     }
 
     public fechar(): void {
-        this.aberto = false;
+        this._aberto = false;
     }
 
-    public enviarMensagem(mensagem: string): void {
+    public enviar(mensagem: string): void {
         this._mensagens.push(mensagem);
     }
 
+    public get aberto(): boolean {
+        return this._aberto;
+    }
+
     public get mensagens(): string[] {
-        const copyMensagens = this._mensagens.map(m => m);
-        return copyMensagens;
+        return this._mensagens.slice();
     }
 }

@@ -49,7 +49,7 @@ describe('Store class', () => {
         store.criarSala(sala.nome);
 
         // Act
-        store.enviarMensagem(mensagem);
+        store.enviar(mensagem);
 
         // Assert
         expect(store.state.chat?.mensagens[0]).toBe(mensagem);
