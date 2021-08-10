@@ -1,10 +1,18 @@
+
 <template>
     <div class="main">
         <div class="side-menu">
-            <Salas-menu :chatsFunctions="useChats" />
+            <SalasMenu
+                :salas="state.salas"
+                @criarSala="criarSala"
+                @abrirSala="abrirSala" />
         </div>
         <div class="main-container">
-            <Salas-abertas :chatsFunctions="useChats" />
+            <SalasAbertas
+                :salas="salasAbertas"
+                :chat="state.chat"
+                @abrirSala="abrirSala"
+                @enviar="enviar" />
         </div>
     </div>
 </template>
@@ -25,7 +33,7 @@
             onMounted(async () => await store.inicializarSalas());
 
             return {
-                useChats: UseChats(store),
+                ...UseChats(store),
             };
         },
     });
