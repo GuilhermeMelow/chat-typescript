@@ -4,7 +4,7 @@
             <Salas-menu :chatsFunctions="useChats" />
         </div>
         <div class="main-container">
-            <Salas-abertas />
+            <Salas-abertas :chatsFunctions="useChats" />
         </div>
     </div>
 </template>
