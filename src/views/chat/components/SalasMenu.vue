@@ -18,6 +18,7 @@
         props: {
             salas: Array,
         },
+        emits: ["abrirSala", "criarSala"],
         setup(props, { emit }) {
             return {
                 emit,
