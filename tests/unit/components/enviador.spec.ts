@@ -8,15 +8,15 @@ describe("CriaChat.vue", () => {
         }
     }
 
-    it("ao enviar uma informação, a mesma deve ser enviada com sucesso", async () => {
+    it("Ao enviar uma informação, a mesma deve ser enviada com sucesso", async () => {
         // Arrange
         const { wrapper } = build();
 
         // Act
-        wrapper.vm.$emit('sendInformation', "sucesso");
-        await wrapper.vm.$nextTick();
+        wrapper.get("[data-teste='nome']").setValue("teste");
+        wrapper.get("[data-teste='criar']").trigger("click");
 
         // Assert
-        expect(wrapper.emitted().sendInformation).toBeTruthy();
+        expect(wrapper.emitted().send).toBeTruthy();
     })
 })
