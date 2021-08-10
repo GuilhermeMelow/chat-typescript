@@ -1,4 +1,5 @@
 import { Chat } from "@/types/Chat";
+import { IStore } from "@/types/IStore";
 import { UseChats } from "@/views/chat/functions/UseChats"
 
 describe("UseChats function", () => {
@@ -7,33 +8,33 @@ describe("UseChats function", () => {
         const { store } = build();
         const useChats = UseChats(store);
 
-        const salasFechadas = useChats.salasAbertas.value.find(sala => !sala.isAberto());
+        const todasEstaoAbertas = useChats.salasAbertas.value.every(sala => sala.aberto);
 
         // Act && Assert
-        expect(!salasFechadas).toBeTruthy();
+        expect(todasEstaoAbertas).toBeTruthy();
     })
 });
 
 function build() {
-    const mockStore = {
+    const mockStore: IStore = {
         state: {
-            chat: new Chat("teste", "123"),
+            chat: new Chat("teste"),
             salas: salas()
         },
         criarSala: jest.fn(),
         abrirSala: jest.fn(),
         inicializarSalas: jest.fn(),
-        enviarMensagem: jest.fn(),
+        enviar: jest.fn(),
     };
 
     return { store: mockStore, salas: salas() };
 }
 
 function salas() {
-    return [
-        new Chat("123", "testeAberto1", true),
-        new Chat("124", "testeFechado1", false),
-        new Chat("125", "testeAberto2", true),
-        new Chat("126", "testeFechado2", false),
-    ];
+    const criarSala = (i: Number) => new Chat(`sala${i}`)
+    const salas = [0, 4].map(criarSala)
+
+    salas[0].abrir()
+
+    return salas;
 }

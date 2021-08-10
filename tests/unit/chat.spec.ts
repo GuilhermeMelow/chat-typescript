@@ -3,7 +3,7 @@ import { Chat } from "@/types/Chat";
 describe("chat classe", () => {
     function build() {
         return {
-            chat: new Chat("teste1", "123"),
+            chat: new Chat("teste1"),
             mensagem: "teste"
         };
     }
@@ -13,7 +13,7 @@ describe("chat classe", () => {
         const { chat, mensagem } = build();
 
         // Act
-        chat.enviarMensagem(mensagem);
+        chat.enviar(mensagem);
         const resultMessage = chat.mensagens.find(p => p == mensagem);
 
         // Assert
@@ -29,7 +29,7 @@ describe("chat classe", () => {
         chat.abrir();
 
         // Assert
-        expect(chat.isAberto()).toBe(true);
+        expect(chat.aberto).toBe(true);
     });
 
     it("Ao fechar o chat, o mesmo deve constar como fechado", () => {
@@ -40,6 +40,6 @@ describe("chat classe", () => {
         chat.fechar();
 
         // Assert
-        expect(chat.isAberto()).toBe(false);
+        expect(chat.aberto).toBe(false);
     });
 });

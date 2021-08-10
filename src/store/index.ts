@@ -34,11 +34,11 @@ export function CreateStore(service: IChatApi): IStore {
         state.chat.abrir();
     }
 
-    const enviarMensagem = (mensagem: string): void => {
+    const enviar = (mensagem: string): void => {
         if (!state.chat)
             throw new Error("Não existe chat ativo...");
 
-        state.chat.enviarMensagem(mensagem);
+        state.chat.enviar(mensagem);
     }
 
     return {
@@ -46,6 +46,6 @@ export function CreateStore(service: IChatApi): IStore {
         criarSala,
         abrirSala,
         inicializarSalas,
-        enviarMensagem
+        enviar
     }
 }

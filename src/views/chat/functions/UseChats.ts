@@ -6,6 +6,6 @@ export function UseChats(store: IStore) {
 
     return {
         ...store,
-        salasAbertas: computed<Chat[]>(() => store.state.salas.filter(p => p.isAberto()))
+        salasAbertas: computed<Chat[]>(() => store.state.salas.filter(p => p.aberto))
     };
 }
