@@ -1,5 +1,7 @@
 {
-    "compilerOptions": {
+    "compilerOptions": 
+    {
+        "types": ["node", "jest"],
         "target": "es6",
         "module": "commonjs",
         "strict": true,
@@ -7,5 +9,5 @@
         "rootDir": "./",
         "esModuleInterop": true,
         "sourceMap": true
-    }
+    },
 }
