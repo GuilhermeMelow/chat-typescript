@@ -7,7 +7,7 @@ export class ConversaController {
     private readonly app: Application;
     private readonly handler: ConversaHandler;
 
-    constructor(@Inject("handler.conversa") handler: ConversaHandler, app: Application) {
+    constructor(@Inject("handler.conversa") handler: ConversaHandler, @Inject("app") app: Application) {
         this.handler = handler;
         this.app = app;
 
@@ -17,7 +17,9 @@ export class ConversaController {
     private createController() {
         this.app.get("/conversas", async (req, res) => {
             try {
-                res.status(200).send(await this.handler.GetConversas());
+                const conversas = await this.handler.GetConversas();
+
+                res.status(200).send(conversas);
             } catch (error) {
                 res.status(404).send(error);
             }
@@ -27,7 +29,9 @@ export class ConversaController {
             try {
                 const nome = req.params.nome;
 
-                res.status(200).send(await this.handler.postConversa(nome));
+                await this.handler.postConversa(nome);
+
+                res.status(200).send("Adicionada!");
             } catch (error) {
                 res.status(404).send(error);
             }
