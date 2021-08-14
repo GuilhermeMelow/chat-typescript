@@ -3,9 +3,6 @@ export class Conversa {
     private _mensagens: string[] = [];
 
     constructor(nome: string) {
-        if (nome.trim() === "")
-            throw Error("Não é possível criar uma conversa com um nome vazio!");
-
         this.nome = nome;
     }
 

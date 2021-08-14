@@ -1,6 +1,7 @@
 import { Inject, Service } from "typedi";
-import { Conversa } from "./model/conversa";
-import { RepositoryConversa } from "./repository/repositoryConversa";
+import { Conversa } from "../models/conversa";
+import { RepositoryConversa } from "../repositorys/repositoryConversa";
+import { ErrorHandler } from "../utils/ErrorHandler";
 
 @Service('handler.conversa')
 export class ConversaHandler {
@@ -15,16 +16,22 @@ export class ConversaHandler {
     }
 
     public async FindConversas(nome: string): Promise<Conversa> {
-        const conversa = await this.repositorio.procurar(nome);
+        const conversa: Conversa | undefined = await this.repositorio.procurar(nome);
 
-        if (!conversa)
-            throw Error("Não foi possível encontrar a conversa!");
+        if (!conversa) {
+            throw new ErrorHandler(404, "Não foi possível encontrar a conversa!");
+        }
 
         return conversa;
     }
 
     public async postConversa(nome: string): Promise<void> {
-        const conversa = new Conversa(nome);
+
+        if (nome.trim() === "") {
+            throw new ErrorHandler(404, "Não é possível criar uma conversa com um nome vazio!");
+        }
+
+        const conversa: Conversa = new Conversa(nome);
 
         await this.repositorio.adicionar(conversa);
     }

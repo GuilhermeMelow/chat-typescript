@@ -1,8 +1,9 @@
 import 'reflect-metadata';
 import express, { Response, Request, NextFunction } from 'express';
 import Container from 'typedi';
-import { ConversaController } from './src/conversaController';
-import { ErrorHandler, handleError } from './src/utils/ErrorHandler';
+import { ConversaController } from './src/controllers/conversaController';
+import { ErrorHandler } from './src/utils/ErrorHandler';
+import { handleError } from "./src/utils/handleError";
 
 const app = express();
 
@@ -18,10 +19,10 @@ app.listen(PORT, () => {
     console.log(`\n ⚡️[server]: Server is running at http://localhost:${PORT}/\n`);
 });
 
-app.use((err: ErrorHandler, req: Request, res: Response, next: NextFunction) => {
-    handleError(err, res);
-});
-
 Container.set("app", app);
 
 Container.get(ConversaController);
+
+app.use((err: ErrorHandler, req: Request, res: Response, next: NextFunction) => {
+    handleError(err, res);
+});

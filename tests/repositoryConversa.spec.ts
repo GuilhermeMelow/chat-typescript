@@ -1,5 +1,5 @@
-import { Conversa } from "../src/model/conversa";
-import { RepositoryConversa } from "../src/repository/repositoryConversa";
+import { Conversa } from "../src/models/conversa";
+import { RepositoryConversa } from "../src/repositorys/repositoryConversa";
 
 describe("repositoryConversa.ts", () => {
 

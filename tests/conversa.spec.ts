@@ -1,4 +1,4 @@
-import { Conversa } from "../src/model/conversa"
+import { Conversa } from "../src/models/conversa"
 
 test("Ao enviar uma mensagem, a mesma deve estar na lista de mensagens", () => {
     // Arrange

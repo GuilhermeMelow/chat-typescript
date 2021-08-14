@@ -1,5 +1,5 @@
 import { Service } from "typedi";
-import { Conversa } from "../model/conversa";
+import { Conversa } from "../models/conversa";
 
 @Service("repository.conversa")
 export class RepositoryConversa {
