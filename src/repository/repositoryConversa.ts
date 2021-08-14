@@ -14,10 +14,10 @@ export class RepositoryConversa {
     }
 
     public procurar(nome: string): Promise<Conversa | undefined> {
-        return new Promise(() => this.conversas.find(c => c.nome == nome));
+        return new Promise((resolve) => resolve(this.conversas.find(c => c.nome == nome)));
     }
 
     public async mostrar(): Promise<Conversa[]> {
-        return new Promise(() => this.conversas.slice());
+        return new Promise((resolve) => resolve(this.conversas.slice()));
     }
 }
