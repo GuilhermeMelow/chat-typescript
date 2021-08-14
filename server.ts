@@ -4,6 +4,7 @@ import Container from 'typedi';
 import { ConversaController } from './src/controllers/conversaController';
 import { ErrorHandler } from './src/utils/ErrorHandler';
 import { handleError } from "./src/utils/handleError";
+import { RepositoryConversa } from './src/repositorys/repositoryConversa';
 
 const app = express();
 
@@ -20,6 +21,8 @@ app.listen(PORT, () => {
 });
 
 Container.set("app", app);
+
+Container.set("repository.conversa", new RepositoryConversa());
 
 Container.get(ConversaController);
 

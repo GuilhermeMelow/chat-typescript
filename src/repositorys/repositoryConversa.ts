@@ -1,13 +1,13 @@
-import { Service } from "typedi";
 import { Conversa } from "../models/conversa";
 
-@Service("repository.conversa")
-export class RepositoryConversa {
-    private readonly conversas: Conversa[];
+export interface IRepositoryConversa {
+    adicionar(conversa: Conversa): Promise<void>;
+    procurar(nome: string): Promise<Conversa | undefined>;
+    mostrar(): Promise<Conversa[]>;
+}
 
-    constructor() {
-        this.conversas = [];
-    }
+export class RepositoryConversa implements IRepositoryConversa {
+    private readonly conversas: Conversa[] = []
 
     public async adicionar(conversa: Conversa): Promise<void> {
         this.conversas.push(conversa);

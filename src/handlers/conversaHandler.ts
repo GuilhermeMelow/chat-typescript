@@ -1,13 +1,13 @@
 import { Inject, Service } from "typedi";
 import { Conversa } from "../models/conversa";
-import { RepositoryConversa } from "../repositorys/repositoryConversa";
+import { IRepositoryConversa } from "../repositorys/repositoryConversa";
 import { ErrorHandler } from "../utils/ErrorHandler";
 
 @Service('handler.conversa')
 export class ConversaHandler {
-    private readonly repositorio: RepositoryConversa;
+    private readonly repositorio: IRepositoryConversa;
 
-    constructor(@Inject("repository.conversa") repository: RepositoryConversa) {
+    constructor(@Inject("repository.conversa") repository: IRepositoryConversa) {
         this.repositorio = repository;
     }
 
@@ -26,7 +26,6 @@ export class ConversaHandler {
     }
 
     public async postConversa(nome: string): Promise<void> {
-
         if (nome.trim() === "") {
             throw new ErrorHandler(404, "Não é possível criar uma conversa com um nome vazio!");
         }
