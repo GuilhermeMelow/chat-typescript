@@ -5,6 +5,7 @@ import { ConversaController } from './src/controllers/conversaController';
 import { ErrorHandler } from './src/utils/ErrorHandler';
 import { handleError } from "./src/utils/handleError";
 import { RepositoryConversa } from './src/repositorys/repositoryConversa';
+import cors from "cors";
 
 const startUp = () => {
     const app = express();
@@ -16,6 +17,8 @@ const startUp = () => {
 
 const serverManager = (app: Application) => {
     const PORT = 8001;
+
+    app.use(cors());
 
     app.get('/', (req, res) => res.send('Conectado'));
 
