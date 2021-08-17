@@ -8,7 +8,7 @@ export class ConversaController {
     private readonly app: Application;
     private readonly handler: ConversaHandler;
 
-    constructor(@Inject("handler.conversa") handler: ConversaHandler, @Inject("app") app: Application) {
+    constructor(@Inject("app") app: Application, handler: ConversaHandler,) {
         this.handler = handler;
         this.app = app;
 

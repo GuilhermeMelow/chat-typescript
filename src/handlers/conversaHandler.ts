@@ -3,7 +3,7 @@ import { Conversa } from "../models/conversa";
 import { IRepositoryConversa } from "../repositorys/repositoryConversa";
 import { ErrorHandler } from "../utils/ErrorHandler";
 
-@Service('handler.conversa')
+@Service()
 export class ConversaHandler {
     private readonly repositorio: IRepositoryConversa;
 
