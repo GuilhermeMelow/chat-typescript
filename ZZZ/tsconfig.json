@@ -1,0 +1,15 @@
+{
+    "compilerOptions": 
+    {
+        "emitDecoratorMetadata": true,
+        "experimentalDecorators": true,
+        "types": ["node", "jest"],
+        "target": "es6",
+        "module": "commonjs",
+        "strict": true,
+        "outDir": "dist",
+        "rootDir": "./",
+        "esModuleInterop": true,
+        "sourceMap": true
+    },
+}
