@@ -25,10 +25,10 @@ jobs:
     - uses: actions/checkout@v2
 
     - name: Moving to front-end
-      run: cd view
+      run: cd ./view
 
     - name: Show files
-      run: ls
+      run: cd ./view
 
     - name: Run|Install yarn
       run: yarn
