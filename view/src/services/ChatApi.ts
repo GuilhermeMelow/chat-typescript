@@ -9,7 +9,7 @@ export class ChatApi implements IChatApi {
     async adicionar(chat: Chat): Promise<void> {
         if (chat.nome === "") throw new Error("Não é possível entrar com este nome.");
 
-        await axios.post(`${this.url}/adicionar/${chat.nome}`);
+        await axios.post(`${this.url}/conversas/adicionar/${chat.nome}`);
     }
 
     async entrar(nome: string): Promise<Chat> {
