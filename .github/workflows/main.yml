@@ -8,11 +8,9 @@ jobs:
     
     steps:
     - uses: actions/checkout@v2
-
-    - name: Moving to server
-      run: cd server 
     
     - name: Run|Install yarn
+      working-directory: ./server
       run: yarn
       
     - name: Run jest
@@ -24,13 +22,8 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
-    - name: Moving to front-end
-      run: cd ./view
-
-    - name: Show files
-      run: cd ./view
-
     - name: Run|Install yarn
+      working-directory: ./view
       run: yarn
 
     - name: Run jest
