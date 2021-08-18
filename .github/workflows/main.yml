@@ -1,0 +1,34 @@
+name: Teste
+
+on: [push]
+
+jobs:
+  Test-Server:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Moving to server
+      run: cd server 
+    
+    - name: Run|Install yarn
+      run: yarn
+      
+    - name: Run jest
+      run: yarn jest
+  
+  Test-FrontEnd:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Moving to front-end
+      run: cd view
+
+    - name: Run|Install yarn
+      run: yarn
+
+    - name: Run jest
+      run: yarn jest
