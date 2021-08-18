@@ -26,6 +26,8 @@ jobs:
 
     - name: Moving to front-end
       run: cd view
+
+    - name: Show files
       run: ls
 
     - name: Run|Install yarn
