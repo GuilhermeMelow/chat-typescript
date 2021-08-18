@@ -15,7 +15,7 @@ jobs:
       
     - name: Run jest
       working-directory: ./server
-      run: yarn teste
+      run: yarn test
   
   Test-FrontEnd:
     runs-on: ubuntu-latest
