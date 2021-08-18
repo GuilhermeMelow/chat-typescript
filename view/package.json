@@ -14,6 +14,7 @@
         "core-js": "^3.6.5",
         "dns-packet": "^5.2.4",
         "glob-parent": "^6.0.1",
+        "node": "^16.6.1",
         "node-notifier": "^10.0.0",
         "postcss": "^8.3.5",
         "register-service-worker": "^1.7.1",
