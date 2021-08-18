@@ -3,8 +3,9 @@ export class Chat {
     private _aberto: boolean;
     private _mensagens: string[] = [];
 
-    constructor(nome: string) {
+    constructor(nome: string, mensagens: string[] = []) {
         this.nome = nome;
+        this._mensagens = mensagens;
         this._aberto = false;
     }
 
