@@ -7,20 +7,17 @@ import { handleError } from "./src/utils/handleError";
 import { RepositoryConversa } from './src/repositorys/repositoryConversa';
 import cors from "cors";
 
-const startUp = () => {
+function startUp(): void {
     const app = express();
 
+    middlewares(app);
     serverManager(app);
-    dependeciesManager(app);
+    injectionDependecies(app);
     errorManager(app);
 }
 
-const serverManager = (app: Application) => {
+function serverManager(app: Application): void {
     const PORT = 8001;
-
-    app.use(cors());
-    app.use(express.json());
-    app.use(express.urlencoded());
 
     app.get('/', (req, res) => res.send('Conectado'));
 
@@ -29,14 +26,7 @@ const serverManager = (app: Application) => {
     });
 }
 
-const dependeciesManager = (app: Application) => {
-    Container.set("app", app);
-    Container.set("repository.conversa", new RepositoryConversa());
-
-    Container.get(ConversaController);
-}
-
-const errorManager = (app: Application) => {
+function errorManager(app: Application): void {
     app.get("/error", (req, res) => {
         throw new ErrorHandler(500, "Internal server error");
     });
@@ -44,6 +34,22 @@ const errorManager = (app: Application) => {
     app.use((err: ErrorHandler, req: Request, res: Response, next: NextFunction) => {
         handleError(err, res);
     });
+}
+
+function injectionDependecies(app: Application): void {
+    Container.set("app", app);
+    Container.set("repository.conversa", new RepositoryConversa());
+
+    Container.get(ConversaController);
+}
+
+function middlewares(app: Application): void {
+    app.use(cors({
+        origin: 'http://localhost:8080',
+        optionsSuccessStatus: 200
+    }));
+    app.use(express.json());
+    app.use(express.urlencoded());
 }
 
 startUp();

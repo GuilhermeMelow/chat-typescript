@@ -25,14 +25,14 @@ export class ConversaController {
     private async Get(response: Response) {
         const conversas: Conversa[] = await this.handler.GetConversas();
 
-        response.status(200).send(conversas);
+        response.send(conversas);
     }
 
     private async Add(request: Request, response: Response, next: NextFunction) {
         try {
             const nome: string = request.params.nome;
 
-            response.status(200).send(await this.handler.postConversa(nome));
+            response.send(await this.handler.postConversa(nome));
         } catch (error) {
             next(error);
         }
@@ -42,7 +42,7 @@ export class ConversaController {
         try {
             const nome: string = request.params.nome;
 
-            response.status(200).send(await this.handler.FindConversa(nome));
+            response.send(await this.handler.FindConversa(nome));
         } catch (error) {
             next(error);
         }
@@ -52,7 +52,7 @@ export class ConversaController {
         try {
             const conversaRequest: IConversaRequest = request.body;
 
-            response.status(200).send(await this.handler.AdicionarMensagem(conversaRequest));
+            response.send(await this.handler.AdicionarMensagem(conversaRequest));
         } catch (error) {
             next(error);
         }
