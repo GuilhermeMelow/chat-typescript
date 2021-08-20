@@ -36,6 +36,21 @@ describe("ConversaHandler.ts", () => {
 
             // Act
             await expect(handler.FindConversas("inexistente")).rejects.toThrowError(ErrorHandler);
-        })
+        });
+
+        it("Ao tentar adicionar uma mensagem sem texto, deve lançar uma exceção ErrorHandler", async () => {
+            // Assert
+            expect.assertions(1);
+
+            // Arrange
+            const { handler } = build();
+            const conversaRequest = {
+                nome: "teste",
+                mensagem: ""
+            }
+
+            // Act
+            await expect(handler.AdicionarMensagem(conversaRequest)).rejects.toThrowError(ErrorHandler);
+        });
     });
 });

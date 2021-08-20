@@ -1,5 +1,6 @@
 import { Inject, Service } from "typedi";
 import { Conversa } from "../models/conversa";
+import { IConversaRequest } from "../models/IConversaRequest";
 import { IRepositoryConversa } from "../repositorys/repositoryConversa";
 import { ErrorHandler } from "../utils/ErrorHandler";
 
@@ -33,5 +34,15 @@ export class ConversaHandler {
         const conversa: Conversa = new Conversa(nome);
 
         await this.repositorio.adicionar(conversa);
+    }
+
+    public async AdicionarMensagem(conversaRequest: IConversaRequest): Promise<void> {
+        if (conversaRequest.mensagem === '' || conversaRequest.mensagem == null) {
+            throw new ErrorHandler(404, "Não é possível enviar uma mensagem vazia!")
+        }
+
+        const conversa = await this.FindConversas(conversaRequest.nome);
+
+        conversa.enviar(conversaRequest.mensagem);
     }
 }

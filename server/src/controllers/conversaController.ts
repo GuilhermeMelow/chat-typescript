@@ -2,6 +2,7 @@ import { Application, NextFunction, Request, Response } from 'express';
 import { Inject, Service } from 'typedi';
 import { ConversaHandler } from '../handlers/conversaHandler';
 import { Conversa } from '../models/conversa';
+import { IConversaRequest } from '../models/IConversaRequest';
 
 @Service()
 export class ConversaController {
@@ -17,6 +18,8 @@ export class ConversaController {
         this.app.get("/conversas/:nome", async (req, res, next) => this.Find(req, res, next));
 
         this.app.post("/conversas/adicionar/:nome", async (req, res, next) => this.Add(req, res, next));
+
+        this.app.post("/conversas/mensagens/adicionar", async (req, res, next) => this.AddMensagem(req, res, next));
     }
 
     private async Get(response: Response) {
@@ -40,6 +43,16 @@ export class ConversaController {
             const nome: string = request.params.nome;
 
             response.status(200).send(await this.handler.FindConversas(nome));
+        } catch (error) {
+            next(error);
+        }
+    }
+
+    private async AddMensagem(request: Request, response: Response, next: NextFunction) {
+        try {
+            const conversaRequest: IConversaRequest = request.body;
+
+            response.status(200).send(await this.handler.AdicionarMensagem(conversaRequest));
         } catch (error) {
             next(error);
         }
