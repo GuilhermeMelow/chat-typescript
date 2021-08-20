@@ -19,6 +19,8 @@ const serverManager = (app: Application) => {
     const PORT = 8001;
 
     app.use(cors());
+    app.use(express.json());
+    app.use(express.urlencoded());
 
     app.get('/', (req, res) => res.send('Conectado'));
 
