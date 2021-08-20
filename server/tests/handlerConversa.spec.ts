@@ -1,5 +1,5 @@
 import { ConversaHandler } from "../src/handlers/conversaHandler";
-import { IRepositoryConversa, RepositoryConversa } from "../src/repositorys/repositoryConversa";
+import { IRepositoryConversa } from "../src/repositorys/repositoryConversa";
 import { ErrorHandler } from "../src/utils/ErrorHandler";
 
 describe("ConversaHandler.ts", () => {
@@ -35,7 +35,7 @@ describe("ConversaHandler.ts", () => {
             const { handler } = build();
 
             // Act
-            await expect(handler.FindConversas("inexistente")).rejects.toThrowError(ErrorHandler);
+            await expect(handler.FindConversa("inexistente")).rejects.toThrowError(ErrorHandler);
         });
 
         it("Ao tentar adicionar uma mensagem sem texto, deve lançar uma exceção ErrorHandler", async () => {

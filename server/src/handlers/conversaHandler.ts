@@ -16,32 +16,27 @@ export class ConversaHandler {
         return await this.repositorio.mostrar();
     }
 
-    public async FindConversas(nome: string): Promise<Conversa> {
+    public async FindConversa(nome: string): Promise<Conversa> {
         const conversa: Conversa | undefined = await this.repositorio.procurar(nome);
 
-        if (!conversa) {
+        if (!conversa)
             throw new ErrorHandler(404, "Não foi possível encontrar a conversa!");
-        }
 
         return conversa;
     }
 
     public async postConversa(nome: string): Promise<void> {
-        if (nome.trim() === "") {
+        if (nome.trim() === "")
             throw new ErrorHandler(404, "Não é possível criar uma conversa com um nome vazio!");
-        }
 
-        const conversa: Conversa = new Conversa(nome);
-
-        await this.repositorio.adicionar(conversa);
+        await this.repositorio.adicionar(new Conversa(nome));
     }
 
     public async AdicionarMensagem(conversaRequest: IConversaRequest): Promise<void> {
-        if (conversaRequest.mensagem === '' || conversaRequest.mensagem == null) {
+        if (conversaRequest.mensagem === '' || conversaRequest.mensagem == null)
             throw new ErrorHandler(404, "Não é possível enviar uma mensagem vazia!")
-        }
 
-        const conversa = await this.FindConversas(conversaRequest.nome);
+        const conversa = await this.FindConversa(conversaRequest.nome);
 
         conversa.enviar(conversaRequest.mensagem);
     }

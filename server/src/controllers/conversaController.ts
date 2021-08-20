@@ -42,7 +42,7 @@ export class ConversaController {
         try {
             const nome: string = request.params.nome;
 
-            response.status(200).send(await this.handler.FindConversas(nome));
+            response.status(200).send(await this.handler.FindConversa(nome));
         } catch (error) {
             next(error);
         }
