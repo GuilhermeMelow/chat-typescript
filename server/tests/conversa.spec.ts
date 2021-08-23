@@ -6,7 +6,7 @@ test("Ao enviar uma mensagem, a mesma deve estar na lista de mensagens", () => {
     const conversa = new Conversa("test");
 
     // Act
-    conversa.enviar(mensagem);
+    conversa.adicionarMensagem(mensagem);
 
     // Assert
     expect(conversa.mensagens.includes(mensagem)).toBeTruthy();
