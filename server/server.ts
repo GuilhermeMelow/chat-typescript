@@ -49,7 +49,6 @@ function middlewares(app: Application): void {
         optionsSuccessStatus: 200
     }));
     app.use(express.json());
-    app.use(express.urlencoded());
 }
 
 startUp();
