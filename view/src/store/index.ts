@@ -4,6 +4,7 @@ import { reactive } from "vue"
 import { IState } from "../types/IState";
 import { IStore } from "../types/IStore";
 
+
 export function CreateStore(chatApi: IChatApi): IStore {
 
     const state: IState = reactive({

@@ -6,5 +6,5 @@ export interface IStore {
     criarSala(nome: string): void;
     abrirSala(chat: Chat): void;
     inicializarSalas(): Promise<void>;
-    enviar(mensagem: string): void;
+    enviar(mensagem: string): Promise<void>;
 }
