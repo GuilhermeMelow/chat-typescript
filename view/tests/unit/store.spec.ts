@@ -7,6 +7,7 @@ describe('Store class', () => {
 
         const mockService = {
             pegarChats: jest.fn().mockReturnValue(salas),
+            enviar: jest.fn(),
             adicionar: jest.fn(),
             entrar: jest.fn()
         };
@@ -42,14 +43,14 @@ describe('Store class', () => {
     });
 
 
-    it("Ao enviar uma mensagem, deve registrar na sala ativa", () => {
+    it("Ao enviar uma mensagem, deve registrar na sala ativa", async () => {
         // Arrange
         const { store, sala } = build();
         const mensagem = "Teste123";
         store.criarSala(sala.nome);
 
         // Act
-        store.enviar(mensagem);
+        await store.enviar(mensagem);
 
         // Assert
         expect(store.state.chat?.mensagens[0]).toBe(mensagem);

@@ -6,10 +6,11 @@ describe("ConversaHandler.ts", () => {
 
     function build() {
         const mockRepositorio: IRepositoryConversa = {
-            adicionar: jest.fn(),
-            procurar: jest.fn(),
             mostrar: jest.fn(),
-        }
+            procurar: jest.fn(),
+            adicionar: jest.fn(),
+            adicionarMensagem: jest.fn()
+        };
 
         return { handler: new ConversaHandler(mockRepositorio) }
     };
@@ -27,17 +28,6 @@ describe("ConversaHandler.ts", () => {
             await expect(handler.postConversa("")).rejects.toThrowError(ErrorHandler);
         });
 
-        it("Ao tentar procurar por um nome inexistente, deve lançar uma exceção ErrorHandler", async () => {
-            // Assert
-            expect.assertions(1);
-
-            // Arrange
-            const { handler } = build();
-
-            // Act
-            await expect(handler.FindConversa("inexistente")).rejects.toThrowError(ErrorHandler);
-        });
-
         it("Ao tentar adicionar uma mensagem sem texto, deve lançar uma exceção ErrorHandler", async () => {
             // Assert
             expect.assertions(1);
@@ -53,4 +43,5 @@ describe("ConversaHandler.ts", () => {
             await expect(handler.AdicionarMensagem(conversaRequest)).rejects.toThrowError(ErrorHandler);
         });
     });
+
 });

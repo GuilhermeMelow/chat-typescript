@@ -17,12 +17,7 @@ export class ConversaHandler {
     }
 
     public async FindConversa(nome: string): Promise<Conversa> {
-        const conversa: Conversa | undefined = await this.repositorio.procurar(nome);
-
-        if (!conversa)
-            throw new ErrorHandler(404, "Não foi possível encontrar a conversa!");
-
-        return conversa;
+        return await this.repositorio.procurar(nome);
     }
 
     public async postConversa(nome: string): Promise<void> {
@@ -36,8 +31,6 @@ export class ConversaHandler {
         if (conversaRequest.mensagem === '' || conversaRequest.mensagem == null)
             throw new ErrorHandler(404, "Não é possível enviar uma mensagem vazia!")
 
-        const conversa = await this.FindConversa(conversaRequest.nome);
-
-        conversa.enviar(conversaRequest.mensagem);
+        await this.repositorio.adicionarMensagem(conversaRequest.nome, conversaRequest.mensagem);
     }
 }

@@ -5,21 +5,17 @@ describe("repositoryConversa.ts", () => {
 
     function build() {
         const repository = new RepositoryConversa();
+        const getConversa = () => {
+            const conversa = new Conversa("teste1");
+            repository.adicionar(conversa);
 
-        adicionarConversas(repository);
+            return conversa;
+        }
 
-        return { repository };
+        return { repository, getConversa };
     }
 
-    it("Ao mostrar as conversas do repositorio, deve haver alguma", async () => {
-        // Arrange
-        const { repository } = build();
-
-        // Assert
-        expect((await repository.mostrar()).length > 0).toBeTruthy();
-    });
-
-    it("Ao adicionar uma conversa no repositorio, deve ter exito", async () => {
+    it("Ao adicionar uma conversa no repositorio, deve mostrar a mesma com exito", async () => {
         // Arrange
         const { repository } = build();
         const conversa = new Conversa("teste");
@@ -32,23 +28,43 @@ describe("repositoryConversa.ts", () => {
         expect(conversas.some(c => c.nome == conversa.nome)).toBeTruthy();
     });
 
-    it("Ao procurar por uma conversa presente no repositorio, deve traze-la", async () => {
+    it("Ao procurar uma conversa no repositorio, o repositorio deve traze-la", async () => {
         // Arrange
-        const { repository } = build();
-        const nomeConversa = new Conversa("teste")
-        repository.adicionar(nomeConversa);
+        const { repository, getConversa } = build();
+        const conversa = getConversa();
 
         // Act
-        const conversa = await repository.procurar("teste");
+        const conversaRecuperada = await repository.procurar(conversa.nome);
 
         // Assert
-        expect(conversa).not.toBeUndefined();
+        expect(conversaRecuperada).not.toBeUndefined();
+    });
+
+    it("Ao adicionar uma mensagem em uma conversa, deve ocorrer com exito", async () => {
+        // Arrange 
+        const { repository, getConversa } = build();
+        const conversa = getConversa();
+        const mensagem = "teste";
+
+        // Act 
+        await repository.adicionarMensagem(conversa.nome, mensagem);
+
+        // Assert
+        const conversaAtualizada = await repository.procurar(conversa.nome);
+        expect(conversaAtualizada.mensagens.some(m => m === mensagem)).toBeTruthy();
+    });
+
+    describe("Error", () => {
+        it("Ao procurar por uma conversa inexistente, deve lançar uma exceção", async () => {
+            // Arrange
+            const { repository } = build();
+
+            // Act
+            const action = async () => await repository.procurar("inexistente");
+
+            // Act
+            await expect(action).rejects.toThrow(Error);
+        })
     });
 
 });
-
-function adicionarConversas(repository: RepositoryConversa) {
-    for (var i = 0; i < 4; i++) {
-        repository.adicionar(new Conversa(`conversa${i}`));
-    }
-}

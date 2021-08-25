@@ -6,7 +6,7 @@ export class Conversa {
         this.nome = nome;
     }
 
-    public enviar(mensagem: string): void {
+    public adicionarMensagem(mensagem: string): void {
         this._mensagens.push(mensagem);
     }
 
