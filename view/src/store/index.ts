@@ -5,7 +5,7 @@ import { IState } from "../types/IState";
 import { IStore } from "../types/IStore";
 
 
-export function CreateStore(chatApi: IChatApi): IStore {
+export function CreateStore(chatApi: IChatApi, ws: WebSocket): IStore {
 
     const state: IState = reactive({
         salas: [],
@@ -17,6 +17,7 @@ export function CreateStore(chatApi: IChatApi): IStore {
 
         chatApi.adicionar(sala);
         state.salas.push(sala);
+        ws.send(JSON.stringify(sala));
 
         abrirSala(sala);
     }
@@ -41,7 +42,27 @@ export function CreateStore(chatApi: IChatApi): IStore {
 
         await chatApi.enviar(mensagem, state.chat);
         state.chat.enviar(mensagem);
+
+        ws.send(JSON.stringify({
+            nome: state.chat.nome,
+            mensagem
+        }));
     }
+
+    ws.addEventListener("message", (message) => {
+        const data = JSON.parse(message.data);
+        const criarSala: boolean = data._mensagens !== undefined;
+        const enviarMensagem: boolean = data.mensagem !== undefined;
+
+        if (enviarMensagem) {
+            const sala = state.salas.find(s => s.nome === data.nome);
+            sala?.enviar(data.mensagem);
+        }
+        if (criarSala) {
+            const sala = new Chat(data.nome, data._mensagens);
+            state.salas.push(sala);
+        }
+    })
 
     return {
         state,

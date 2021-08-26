@@ -8,15 +8,15 @@
     import { defineComponent, provide } from "vue";
     import { ChatApi } from "./services/ChatApi";
     import { CreateStore } from "./store";
-    import { IStore } from "./types/IStore";
 
     export default defineComponent({
         setup() {
             const memoryChat = new ChatApi();
-            const store: IStore = CreateStore(memoryChat);
+            const ws = new WebSocket("ws://localhost:3000/");
 
+            provide("store", CreateStore(memoryChat, ws));
             provide("chatApi", memoryChat);
-            provide("store", store);
+            provide("websocket", ws);
         },
     });
 </script>
