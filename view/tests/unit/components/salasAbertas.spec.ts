@@ -1,20 +1,20 @@
 import { shallowMount } from "@vue/test-utils"
 import SalasAbertas from "@/views/chat/components/SalasAbertas.vue";
-import { Chat } from "@/types/Chat";
+import { Sala } from "@/types/Sala";
 
 const salas = [
-    new Chat('Sala-1'),
-    new Chat('Sala-2'),
-    new Chat('Sala-3')
+    new Sala('Sala-1'),
+    new Sala('Sala-2'),
+    new Sala('Sala-3')
 ]
 
 describe("SalasAbertas.vue", () => {
-    function build(chat?: Chat) {
+    function build(sala?: Sala) {
         return {
             wrapper: shallowMount(SalasAbertas, {
                 props: {
                     salas,
-                    chat
+                    sala
                 }
             })
         }

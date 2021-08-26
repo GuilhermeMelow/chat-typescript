@@ -10,7 +10,7 @@
         <div class="main-container">
             <SalasAbertas
                 :salas="salasAbertas"
-                :chat="state.chat"
+                :sala="state.sala"
                 @abrirSala="abrirSala"
                 @enviar="enviar" />
         </div>
@@ -19,7 +19,7 @@
 
 <script lang="ts">
     import { defineComponent, onMounted } from "vue";
-    import { UseChats } from "./functions/UseChats";
+    import { UseSalas } from "./functions/UseSalas";
     import { IStore } from "@/types/IStore";
     import InjectStrict from "@/Utils/InjectStrict";
     import SalasAbertas from "./components/SalasAbertas.vue";
@@ -33,7 +33,7 @@
             onMounted(async () => await store.inicializarSalas());
 
             return {
-                ...UseChats(store),
+                ...UseSalas(store),
             };
         },
     });

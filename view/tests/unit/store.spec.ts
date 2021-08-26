@@ -1,9 +1,9 @@
 import { CreateStore } from "@/store"
-import { Chat } from "@/types/Chat";
+import { Sala } from "@/types/Sala";
 
 describe('Store class', () => {
     function build() {
-        const salas = [new Chat("teste1"), new Chat("teste2"), new Chat("teste3")];
+        const salas = [new Sala("teste1"), new Sala("teste2"), new Sala("teste3")];
 
         const mockService = {
             pegarChats: jest.fn().mockReturnValue(salas),
@@ -15,7 +15,7 @@ describe('Store class', () => {
         return {
             store: CreateStore(mockService),
             salas: salas,
-            sala: new Chat("teste"),
+            sala: new Sala("teste"),
         };
     }
 
@@ -53,6 +53,6 @@ describe('Store class', () => {
         await store.enviar(mensagem);
 
         // Assert
-        expect(store.state.chat?.mensagens[0]).toBe(mensagem);
+        expect(store.state.sala?.mensagens[0]).toBe(mensagem);
     });
 });

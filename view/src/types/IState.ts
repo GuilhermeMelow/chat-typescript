@@ -1,7 +1,7 @@
-import { Chat } from "@/types/Chat";
+import { Sala } from "@/types/Sala";
 import { Ref } from "vue";
 
 export interface IState {
-    salas: Chat[];
-    chat: Chat | null;
+    salas: Sala[];
+    sala: Sala | null;
 }

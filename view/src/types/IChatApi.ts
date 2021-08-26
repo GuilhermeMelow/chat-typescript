@@ -1,11 +1,11 @@
-import { Chat } from "./Chat";
+import { Sala } from "./Sala";
 
 export interface IChatApi {
-    adicionar(chat: Chat): Promise<void>;
+    adicionar(chat: Sala): Promise<void>;
 
-    enviar(mensagem: string, chat: Chat): Promise<void>;
+    enviar(mensagem: string, chat: Sala): Promise<void>;
 
-    entrar(nome: string): Promise<Chat>;
+    entrar(nome: string): Promise<Sala>;
 
-    pegarChats(): Promise<Chat[]>;
+    pegarChats(): Promise<Sala[]>;
 }
