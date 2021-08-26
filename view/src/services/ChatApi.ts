@@ -1,5 +1,6 @@
 import { IChatApi } from "@/types/IChatApi";
 import { Chat } from "@/types/Chat";
+import { IChatResponse } from "./chatResponse";
 import axios, { AxiosResponse } from "axios";
 
 
@@ -29,10 +30,10 @@ export class ChatApi implements IChatApi {
     }
 
     async pegarChats(): Promise<Chat[]> {
-        const response: AxiosResponse<Chat[]> = await axios.get(`${this.url}/conversas`);
+        const response: AxiosResponse<IChatResponse[]> = await axios.get(`${this.url}/conversas`);
         const conversas = response.data;
 
-        return conversas.map(c => new Chat(c.nome, c.mensagens));
+        return conversas.map(c => new Chat(c.nome, c._mensagens));
     }
 
 }
