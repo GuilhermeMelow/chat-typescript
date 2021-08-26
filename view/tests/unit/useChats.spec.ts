@@ -1,14 +1,14 @@
-import { Chat } from "@/types/Chat";
+import { Sala } from "@/types/Sala";
 import { IStore } from "@/types/IStore";
-import { UseChats } from "@/views/chat/functions/UseChats"
+import { UseSalas } from "@/views/chat/functions/UseSalas"
 
-describe("UseChats function", () => {
+describe("UseSalas function", () => {
     it("Ao solicitar pelas salas abertas, não deve trazer as fechadas", async () => {
         // Arrange
         const { store } = build();
-        const useChats = UseChats(store);
+        const useSalas = UseSalas(store);
 
-        const todasEstaoAbertas = useChats.salasAbertas.value.every(sala => sala.aberto);
+        const todasEstaoAbertas = useSalas.salasAbertas.value.every(sala => sala.aberto);
 
         // Act && Assert
         expect(todasEstaoAbertas).toBeTruthy();
@@ -18,7 +18,7 @@ describe("UseChats function", () => {
 function build() {
     const mockStore: IStore = {
         state: {
-            chat: new Chat("teste"),
+            sala: new Sala("teste"),
             salas: salas()
         },
         criarSala: jest.fn(),
@@ -31,7 +31,7 @@ function build() {
 }
 
 function salas() {
-    const criarSala = (i: Number) => new Chat(`sala${i}`)
+    const criarSala = (i: Number) => new Sala(`sala${i}`)
     const salas = [0, 4].map(criarSala)
 
     salas[0].abrir()

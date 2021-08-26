@@ -1,5 +1,5 @@
 import { IChatApi } from "@/types/IChatApi"
-import { Chat } from "@/types/Chat";
+import { Sala } from "@/types/Sala";
 import { reactive } from "vue"
 import { IState } from "../types/IState";
 import { IStore } from "../types/IStore";
@@ -9,11 +9,11 @@ export function CreateStore(chatApi: IChatApi): IStore {
 
     const state: IState = reactive({
         salas: [],
-        chat: null
+        sala: null
     });
 
     const criarSala = (nome: string): void => {
-        const sala = new Chat(nome);
+        const sala = new Sala(nome);
 
         chatApi.adicionar(sala);
         state.salas.push(sala);
@@ -28,19 +28,19 @@ export function CreateStore(chatApi: IChatApi): IStore {
         abrirSala(state.salas[lastIndex]);
     }
 
-    const abrirSala = (chat?: Chat): void => {
-        if (!chat) return;
+    const abrirSala = (sala?: Sala): void => {
+        if (!sala) return;
 
-        state.chat = chat;
-        state.chat.abrir();
+        state.sala = sala;
+        state.sala.abrir();
     }
 
     const enviar = async (mensagem: string): Promise<void> => {
-        if (!state.chat)
+        if (!state.sala)
             throw new Error("Não existe chat ativo...");
 
-        await chatApi.enviar(mensagem, state.chat);
-        state.chat.enviar(mensagem);
+        await chatApi.enviar(mensagem, state.sala);
+        state.sala.enviar(mensagem);
     }
 
     return {

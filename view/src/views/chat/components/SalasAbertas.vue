@@ -1,15 +1,15 @@
 <template>
     <div class="tabs-content">
         <ul class="tab-nav">
-            <li v-for="sala in salas"
-                :key="sala"
-                v-text="sala.nome"
-                @click="$emit('abrirSala', sala)"
-                :class='{"tab_selected": chat != null && sala == chat}' />
+            <li v-for="item in salas"
+                :key="item"
+                v-text="item.nome"
+                @click="$emit('abrirSala', item)"
+                :class='{"tab_selected": sala != null && item == sala}' />
         </ul>
     </div>
-    <div v-if="chat" class="load-content">
-        <List class="list" :values="chat.mensagens">
+    <div v-if="sala" class="load-content">
+        <List class="list" :values="sala.mensagens">
             <template #="{ item }">
                 <div v-text="item" />
             </template>
@@ -24,11 +24,11 @@
     import List from "@/components/List.vue";
 
     export default defineComponent({
-        name: "chatsOpen",
+        name: "salasAbertas",
         components: { List, Enviador },
         props: {
             salas: Array,
-            chat: Object,
+            sala: Object,
         },
         emits: ["abrirSala", "enviar"],
         setup(props, { emit }) {

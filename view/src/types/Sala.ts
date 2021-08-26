@@ -1,4 +1,4 @@
-export class Chat {
+export class Sala {
     public nome: string;
     private _aberto: boolean;
     private _mensagens: string[] = [];
