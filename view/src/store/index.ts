@@ -4,6 +4,12 @@ import { reactive } from "vue"
 import { IState } from "../types/IState";
 import { IStore } from "../types/IStore";
 
+/* eslint-disable  @typescript-eslint/no-explicit-any */
+
+interface IEventListener {
+    key: string,
+    callback(data: any): void
+}
 
 export function CreateStore(chatApi: IChatApi, ws: WebSocket): IStore {
 
@@ -17,7 +23,7 @@ export function CreateStore(chatApi: IChatApi, ws: WebSocket): IStore {
 
         chatApi.adicionar(sala);
         state.salas.push(sala);
-        ws.send(JSON.stringify(sala));
+        ws.send(createEvent("criarSala", sala));
 
         abrirSala(sala);
     }
@@ -43,25 +49,33 @@ export function CreateStore(chatApi: IChatApi, ws: WebSocket): IStore {
         await chatApi.enviar(mensagem, state.chat);
         state.chat.enviar(mensagem);
 
-        ws.send(JSON.stringify({
-            nome: state.chat.nome,
-            mensagem
-        }));
+        ws.send(createEvent("enviarMensagem", { nome: state.chat.nome, mensagem }));
     }
+
+    const eventListeners: IEventListener[] = [];
+
+    const createEvent = (key: string, value: any): string => {
+        return JSON.stringify({ key, value })
+    }
+
+    const createListener = (key: string, callback: (data: any) => void) => {
+        eventListeners.push({ key, callback });
+    }
+
+    createListener("criarSala", (data: any) => {
+        state.salas.push(new Chat(data.nome, data.mensagens));
+    });
+
+    createListener("enviarMensagem", (data: any) => {
+        const sala = state.salas.find(s => s.nome == data.nome);
+        sala?.enviar(data.mensagem);
+    });
 
     ws.addEventListener("message", (message) => {
         const data = JSON.parse(message.data);
-        const criarSala: boolean = data._mensagens !== undefined;
-        const enviarMensagem: boolean = data.mensagem !== undefined;
+        const eventListener = eventListeners.find(l => l.key == data.key);
 
-        if (enviarMensagem) {
-            const sala = state.salas.find(s => s.nome === data.nome);
-            sala?.enviar(data.mensagem);
-        }
-        if (criarSala) {
-            const sala = new Chat(data.nome, data._mensagens);
-            state.salas.push(sala);
-        }
+        eventListener?.callback(data.value);
     })
 
     return {
