@@ -19,12 +19,12 @@ function startUp(): void {
 }
 
 function serverManager(app: Application): void {
-    const PORT = 8001;
+    const PORT = process.env.PORT || 8001;
 
     app.get('/', (req, res) => res.send('Conectado'));
 
     app.listen(PORT, () => {
-        console.log(`\n ⚡️[server]: Server is running at http://localhost:${PORT}/\n`);
+        console.log(`\n ⚡️[server]: Server is running at port: ${PORT}\n`);
     });
 }
 
