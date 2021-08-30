@@ -7,16 +7,16 @@
 <script lang="ts">
     import { defineComponent, provide } from "vue";
     import { ChatApi } from "./services/ChatApi";
+    import { EventWs } from "./services/EventWs";
     import { CreateStore } from "./store";
 
     export default defineComponent({
         setup() {
             const memoryChat = new ChatApi();
-            const ws = new WebSocket("ws://localhost:3000/");
+            const eventWs = new EventWs(new WebSocket("ws://localhost:3000/"));
 
-            provide("store", CreateStore(memoryChat, ws));
+            provide("store", CreateStore(memoryChat, eventWs));
             provide("chatApi", memoryChat);
-            provide("websocket", ws);
         },
     });
 </script>

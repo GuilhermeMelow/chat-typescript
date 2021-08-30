@@ -1,3 +1,4 @@
+import { IEventWs } from "@/services/EventWs";
 import { CreateStore } from "@/store"
 import { Chat } from "@/types/Chat";
 
@@ -12,8 +13,13 @@ describe('Store class', () => {
             entrar: jest.fn()
         };
 
+        const mockEvent: IEventWs = {
+            send: jest.fn(),
+            createListener: jest.fn()
+        };
+
         return {
-            store: CreateStore(mockService),
+            store: CreateStore(mockService, mockEvent),
             salas: salas,
             sala: new Chat("teste"),
         };
@@ -39,7 +45,7 @@ describe('Store class', () => {
         store.criarSala(sala.nome);
 
         // Assert
-        expect(store.state.salas[0].nome).toBe(sala.nome);
+        expect(store.state.salas.some(s => s.nome == sala.nome)).toBeTruthy();
     });
 
 
