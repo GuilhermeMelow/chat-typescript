@@ -5,7 +5,7 @@
     "license": "MIT",
     "scripts": {
         "watch:ts": "tsc -w",
-        "start": "tsc && node dist/server.js",
+        "start": "node server/dist/server.js",
         "serve": "nodemon server.ts",
         "test": "jest"
     },
