@@ -10,6 +10,8 @@
     import { defineComponent } from "vue";
     import Enviador from "@/components/Enviador.vue";
     import { useLogin } from "./functions/UseLogin";
+    import InjectStrict from "@/Utils/InjectStrict";
+    import { IStore } from "@/types/IStore";
 
     export default defineComponent({
         name: "Login",
@@ -17,7 +19,7 @@
 
         setup() {
             return {
-                ...useLogin(),
+                ...useLogin(InjectStrict<IStore>("store")),
                 nome: "",
             };
         },

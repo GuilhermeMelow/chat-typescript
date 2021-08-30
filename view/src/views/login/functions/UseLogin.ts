@@ -1,17 +1,14 @@
-import { IChatApi } from "@/types/IChatApi";
 import { ref } from "vue";
 import { useRouter } from "vue-router";
-import InjectStrict from "@/Utils/InjectStrict";
+import { IStore } from "@/types/IStore";
 
-export function useLogin() {
-    const service = InjectStrict<IChatApi>("chatApi");
+export function useLogin(store: IStore) {
     const router = useRouter();
     const error = ref("");
 
     const entrar = (nome: string) => {
-        service.entrar(nome)
-            .then(() => router.push('/chat'))
-            .catch(catched => error.value = catched);
+        store.criarSala(nome);
+        router.push('/chat');
     }
 
     return { entrar, error };

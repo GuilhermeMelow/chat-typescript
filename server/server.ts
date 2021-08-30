@@ -6,10 +6,12 @@ import { ErrorHandler } from './src/utils/ErrorHandler';
 import { handleError } from "./src/utils/handleError";
 import { RepositoryConversa } from './src/repositorys/repositoryConversa';
 import cors from "cors";
+import { serverWs } from './serverWs';
 
 function startUp(): void {
     const app = express();
 
+    serverWs();
     middlewares(app);
     serverManager(app);
     injectionDependecies(app);

@@ -3,10 +3,10 @@ import { Chat } from "@/types/Chat";
 import { reactive } from "vue"
 import { IState } from "../types/IState";
 import { IStore } from "../types/IStore";
+import { IEventWs } from "@/services/EventWs";
 
 
-export function CreateStore(chatApi: IChatApi): IStore {
-
+export function CreateStore(chatApi: IChatApi, eventWs: IEventWs): IStore {
     const state: IState = reactive({
         salas: [],
         chat: null
@@ -17,6 +17,8 @@ export function CreateStore(chatApi: IChatApi): IStore {
 
         chatApi.adicionar(sala);
         state.salas.push(sala);
+
+        eventWs.send("criarSala", sala);
 
         abrirSala(sala);
     }
@@ -41,7 +43,18 @@ export function CreateStore(chatApi: IChatApi): IStore {
 
         await chatApi.enviar(mensagem, state.chat);
         state.chat.enviar(mensagem);
+
+        eventWs.send("enviarMensagem", { nome: state.chat.nome, mensagem });
     }
+
+    eventWs.createListener("criarSala", (data: any) => {
+        state.salas.push(new Chat(data.nome, data.mensagens));
+    });
+
+    eventWs.createListener("enviarMensagem", (data: any) => {
+        const sala = state.salas.find(s => s.nome == data.nome);
+        sala?.enviar(data.mensagem);
+    });
 
     return {
         state,
