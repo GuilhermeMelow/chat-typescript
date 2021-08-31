@@ -5,9 +5,9 @@
     "license": "MIT",
     "scripts": {
         "watch:ts": "tsc -w",
-        "start": "tsc && node build/server.js",
-        "build": "tsc",
-        "postinstall": "npm run build",
+        "start": "node dist/server.js",
+        "tsc": "tsc",
+        "postinstall": "npm run tsc",
         "serve": "nodemon server.ts",
         "test": "jest"
     },
