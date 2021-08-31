@@ -47,7 +47,7 @@ function injectionDependecies(app: Application): void {
 
 function middlewares(app: Application): void {
     app.use(cors({
-        origin: ['https://chat-front-end.vercel.app/', 'http://localhost:8080'],
+        origin: ['https://chat-front-end.vercel.app', 'http://localhost:8080'],
         optionsSuccessStatus: 200
     }));
     app.use(express.json());
