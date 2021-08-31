@@ -1,21 +1,17 @@
 .DS_Store
-node_modules
-/dist
-/.firebase
+node_modules/
+
+# Ignore the build directory
+server/dist
 
 # local env files
-.env.local
-.env.*.local
+.env
+.env.production
 
 # Log files
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-
-# Test files
-tests/e2e/screenshots/
-tests/e2e/videos/
-cypress.env.json
 
 # Editor directories and files
 .idea
@@ -25,6 +21,3 @@ cypress.env.json
 *.njsproj
 *.sln
 *.sw*
-
-# Local Netlify folder
-.netlify
