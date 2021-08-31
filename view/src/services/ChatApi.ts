@@ -6,7 +6,7 @@ import axios, { AxiosResponse } from "axios";
 
 export class ChatApi implements IChatApi {
 
-    private readonly url = "http://localhost:8001";
+    private readonly url = process.env.VUE_APP_API_ROOT;
 
     async adicionar(chat: Chat): Promise<void> {
         if (chat.nome === "") throw new Error("Não é possível entrar com este nome.");
