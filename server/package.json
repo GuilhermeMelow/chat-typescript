@@ -20,7 +20,8 @@
         "nodemon": "^2.0.12",
         "reflect-metadata": "^0.1.13",
         "typedi": "^0.10.0",
-        "url": "^0.11.0"
+        "url": "^0.11.0",
+        "ws": "^8.2.1"
     },
     "devDependencies": {
         "@types/cors": "^2.8.12",
@@ -38,6 +39,6 @@
         "ts-jest": "^27.0.4",
         "ts-node": "^10.2.0",
         "typescript": "^4.3.5",
-        "ws": "^8.2.0"
+        "ws": "^8.2.1"
     }
 }
