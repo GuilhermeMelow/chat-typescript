@@ -7,23 +7,24 @@ import { handleError } from "./src/utils/handleError";
 import { RepositoryConversa } from './src/repositorys/repositoryConversa';
 import cors from "cors";
 import { serverWs } from './serverWs';
+import { Server } from 'http';
 
 function startUp(): void {
     const app = express();
 
-    serverWs();
+    const server = serverManager(app);
+    serverWs(server);
     middlewares(app);
-    serverManager(app);
     injectionDependecies(app);
     errorManager(app);
 }
 
-function serverManager(app: Application): void {
+function serverManager(app: Application): Server {
     const PORT = process.env.PORT || 8001;
 
     app.get('/', (req, res) => res.send('Conectado'));
 
-    app.listen(PORT, () => {
+    return app.listen(PORT, () => {
         console.log(`\n ⚡️[server]: Server is running at port: ${PORT}\n`);
     });
 }

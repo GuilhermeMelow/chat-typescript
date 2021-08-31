@@ -13,7 +13,9 @@
     export default defineComponent({
         setup() {
             const memoryChat = new ChatApi();
-            const eventWs = new EventWs(new WebSocket("ws://localhost:3000/"));
+
+            const url = process.env.VUE_APP_API_ROOT.replace(/^http/, "ws");
+            const eventWs = new EventWs(new WebSocket(url));
 
             provide("store", CreateStore(memoryChat, eventWs));
             provide("chatApi", memoryChat);

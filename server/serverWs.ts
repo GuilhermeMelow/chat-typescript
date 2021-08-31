@@ -1,8 +1,8 @@
+import { Server } from 'http';
 import ws from 'ws';
 
-export function serverWs() {
-    const wss = new ws.Server({ port: 3000 });
-    console.log("\n 🚀[server]: Server-ws is Running on ws://localhost:3000/");
+export function serverWs(server: Server) {
+    const wss = new ws.Server({ server });
 
     wss.on("connection", (socket: ws) => {
         socket.addEventListener("message", (message) => broadcastMessage(socket, message.data));
