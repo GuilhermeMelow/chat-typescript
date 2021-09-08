@@ -24,51 +24,41 @@
     max-width: 200px;
 
     .fechar-button {
-        height: 1.5em;
-        width: 30px;
-        font-size: small;
-        text-align: center;
-        background-color: #333;
-        color: whitesmoke;
-        border: none;
-        border-radius: 100%;
-        margin: auto;
-        padding: 0;
+      height: 1.5em;
+      width: 30px;
+      font-size: small;
+      text-align: center;
+      background-color: #333;
+      color: whitesmoke;
+      border: none;
+      border-radius: 100%;
+      margin: auto;
+      padding: 0;
 
-        &:hover {
-            background: rgb(168, 167, 167);
-        }
-    }
-
-    li {
-        height: 35%;
-        width: 153px;
-        margin: auto;
-        padding: 0.75em 4em 0.75em 1em;
-        overflow: hidden;
-        text-overflow: ellipsis;
-    }
-
-    &:hover {
-      background: rgb(71, 70, 70);
-  
-      .fechar-button {
-        background: rgb(71, 70, 70);
-        &:hover {
-            background: rgb(105, 105, 105);
-        }
+      &:hover {
+        background: rgb(94, 94, 94);
       }
     }
 
+    li {
+      height: 35%;
+      width: 153px;
+      margin: auto;
+      padding: 0.75em 4em 0.75em 1em;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    &:hover,
     &.tab_selected {
       background: rgb(71, 70, 70);
-      color: white;
 
-      .fechar-button {
+      * {
         background: rgb(71, 70, 70);
-        &:hover {
-            background: rgb(105, 105, 105);
-        }
+      }
+
+      .fechar-button:hover {
+        background: rgb(94, 94, 94);
       }
     }
   }
