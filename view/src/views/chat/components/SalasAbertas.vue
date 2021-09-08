@@ -1,11 +1,15 @@
 <template>
     <div class="tabs-content">
         <ul class="tab-nav">
-            <li v-for="sala in salas"
+            <div v-for="sala in salas"
                 :key="sala"
-                v-text="sala.nome"
-                @click="$emit('abrirSala', sala)"
-                :class='{"tab_selected": chat != null && sala == chat}' />
+                :class='{"tab_selected": chat != null && sala == chat}'>
+                <li @click="$emit('abrirSala', sala)"
+                    :data-teste="sala.nome"> {{sala.nome}} </li>
+
+                <button @click="$emit('fecharSala', sala)"
+                    :data-teste="`${sala.nome}-fechar`" v-text="'X'" />
+            </div>
         </ul>
     </div>
     <div v-if="chat" class="load-content">
@@ -30,7 +34,7 @@
             salas: Array,
             chat: Object,
         },
-        emits: ["abrirSala", "enviar"],
+        emits: ["abrirSala", "fecharSala", "enviar"],
         setup(props, { emit }) {
             return {
                 emit,

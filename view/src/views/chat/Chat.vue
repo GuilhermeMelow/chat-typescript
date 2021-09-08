@@ -12,6 +12,7 @@
                 :salas="salasAbertas"
                 :chat="state.chat"
                 @abrirSala="abrirSala"
+                @fecharSala="fecharSala"
                 @enviar="enviar" />
         </div>
     </div>
