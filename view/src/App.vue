@@ -24,8 +24,8 @@
 </script>
 
 <style lang="scss">
-    @import "../style/custom-scrollbar.scss";
     @import "../style/form-elements.scss";
+    @import "../style/custom-scrollbar.scss";
     @import "@/../style/custom-tabs.scss";
 
     * {

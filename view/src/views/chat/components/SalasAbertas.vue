@@ -8,7 +8,8 @@
                     :data-teste="sala.nome"> {{sala.nome}} </li>
 
                 <button @click="$emit('fecharSala', sala)"
-                    :data-teste="`${sala.nome}-fechar`" v-text="'X'" />
+                    class="fechar-button"
+                    :data-teste="`${sala.nome}-fechar`" v-text="'x'" />
             </div>
         </ul>
     </div>

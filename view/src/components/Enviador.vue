@@ -1,7 +1,7 @@
 <template>
     <div class="enviador-content">
-        <input type="text" v-model="text" data-teste="nome" style="width:65%" />
-        <button @click="send()" data-teste="criar" v-text="'Enviar'" style="width:25%" />
+        <input type="text" v-model="text" data-teste="nome" style="width:65%" class="form-input" />
+        <button @click="send()" data-teste="criar" v-text="'Enviar'" style="width:25%" class="form-button" />
     </div>
 </template>
 
