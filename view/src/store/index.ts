@@ -37,6 +37,21 @@ export function CreateStore(chatApi: IChatApi, eventWs: IEventWs): IStore {
         state.chat.abrir();
     }
 
+    const fecharSala = (sala: Chat): void => {
+        const x = state.salas.find(s => s.nome == sala.nome);
+
+        if (!x) return;
+
+        x.fechar();
+
+        const isSalaAtiva = x?.nome === state.chat?.nome;
+        if (isSalaAtiva) {
+            const salasAtivas = state.salas.filter(s => s.aberto);
+
+            state.chat = salasAtivas.length > 0 ? salasAtivas[0] : null;
+        }
+    }
+
     const enviar = async (mensagem: string): Promise<void> => {
         if (!state.chat)
             throw new Error("Não existe chat ativo...");
@@ -60,6 +75,7 @@ export function CreateStore(chatApi: IChatApi, eventWs: IEventWs): IStore {
         state,
         criarSala,
         abrirSala,
+        fecharSala,
         inicializarSalas,
         enviar
     }
