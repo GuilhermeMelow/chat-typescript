@@ -23,6 +23,7 @@ function build() {
         },
         criarSala: jest.fn(),
         abrirSala: jest.fn(),
+        fecharSala: jest.fn(),
         inicializarSalas: jest.fn(),
         enviar: jest.fn(),
     };

@@ -15,7 +15,7 @@ describe("CriaChat.vue", () => {
 
         // Act
         wrapper.get("[data-teste='nome']").setValue(mensagem);
-        wrapper.get("[data-teste='criar']").trigger("click");
+        await wrapper.get("[data-teste='criar']").trigger("click");
 
         const dadoEmitido = wrapper.emitted().send[0];
 
