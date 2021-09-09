@@ -40,7 +40,7 @@ describe("ConversaHandler.ts", () => {
             }
 
             // Act
-            await expect(handler.AdicionarMensagem(conversaRequest)).rejects.toThrowError(ErrorHandler);
+            await expect(handler.adicionarMensagem(conversaRequest)).rejects.toThrowError(ErrorHandler);
         });
     });
 
