@@ -3,6 +3,7 @@ import { Conversa } from '../models/conversa';
 import { IConversaRequest } from '../models/IConversaRequest';
 import { IRepositoryConversa } from '../repositorys/repositoryConversa';
 import { ErrorHandler } from '../utils/ErrorHandler';
+import ErrorCodes from "../utils/ErrorCodes.json"
 
 @Service()
 export class ConversaHandler {
@@ -22,14 +23,14 @@ export class ConversaHandler {
 
     public async postConversa(nome: string): Promise<void> {
         if (nome.trim() === "")
-            throw new ErrorHandler(404, "Não é possível criar uma conversa com um nome vazio!");
+            throw new ErrorHandler(ErrorCodes.NotFound, "Não é possível criar uma conversa com um nome vazio!");
 
         await this.repositorio.adicionar(new Conversa(nome));
     }
 
     public async AdicionarMensagem(conversaRequest: IConversaRequest): Promise<void> {
         if (conversaRequest.mensagem === '' || conversaRequest.mensagem == null)
-            throw new ErrorHandler(404, "Não é possível enviar uma mensagem vazia!")
+            throw new ErrorHandler(ErrorCodes.NotFound, "Não é possível enviar uma mensagem vazia!")
 
         await this.repositorio.adicionarMensagem(conversaRequest.nome, conversaRequest.mensagem);
     }
