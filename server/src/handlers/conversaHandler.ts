@@ -7,30 +7,29 @@ import ErrorCodes from "../utils/ErrorCodes.json"
 
 @Service()
 export class ConversaHandler {
-    private readonly repositorio: IRepositoryConversa;
 
-    constructor(@Inject("repository.conversa") repository: IRepositoryConversa) {
-        this.repositorio = repository;
-    }
+    constructor(@Inject("repository.conversa") private readonly repositorio: IRepositoryConversa) { }
 
-    public async GetConversas(): Promise<Conversa[]> {
+    public async getConversas(): Promise<Conversa[]> {
         return await this.repositorio.mostrar();
     }
 
-    public async FindConversa(nome: string): Promise<Conversa> {
+    public async findConversa(nome: string): Promise<Conversa> {
         return await this.repositorio.procurar(nome);
     }
 
     public async postConversa(nome: string): Promise<void> {
-        if (nome.trim() === "")
+        if (nome.trim() === "") {
             throw new ErrorHandler(ErrorCodes.NotFound, "Não é possível criar uma conversa com um nome vazio!");
+        }
 
         await this.repositorio.adicionar(new Conversa(nome));
     }
 
-    public async AdicionarMensagem(conversaRequest: IConversaRequest): Promise<void> {
-        if (conversaRequest.mensagem === '' || conversaRequest.mensagem == null)
+    public async adicionarMensagem(conversaRequest: IConversaRequest): Promise<void> {
+        if (conversaRequest.mensagem === '' || conversaRequest.mensagem == null) {
             throw new ErrorHandler(ErrorCodes.NotFound, "Não é possível enviar uma mensagem vazia!")
+        }
 
         await this.repositorio.adicionarMensagem(conversaRequest.nome, conversaRequest.mensagem);
     }
