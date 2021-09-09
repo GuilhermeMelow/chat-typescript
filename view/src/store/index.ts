@@ -37,19 +37,21 @@ export function CreateStore(chatApi: IChatApi, eventWs: IEventWs): IStore {
         state.chat.abrir();
     }
 
+    const redirecionarSala = () => {
+        const salasAtivas = state.salas.filter(s => s.aberto);
+
+        state.chat = salasAtivas.length > 0 ? salasAtivas[0] : null;
+    }
+
     const fecharSala = (sala: Chat): void => {
-        const x = state.salas.find(s => s.nome == sala.nome);
+        const salaNaLista = state.salas.find(s => s.nome == sala.nome);
 
-        if (!x) return;
+        if (!salaNaLista || !state.chat) return;
 
-        x.fechar();
+        salaNaLista.fechar();
 
-        const isSalaAtiva = x?.nome === state.chat?.nome;
-        if (isSalaAtiva) {
-            const salasAtivas = state.salas.filter(s => s.aberto);
-
-            state.chat = salasAtivas.length > 0 ? salasAtivas[0] : null;
-        }
+        const salaAtiva = salaNaLista.nome === state.chat.nome;
+        if (salaAtiva) redirecionarSala();
     }
 
     const enviar = async (mensagem: string): Promise<void> => {

@@ -24,8 +24,9 @@
     max-width: 200px;
 
     .fechar-button {
+      margin: 1em;
       height: 1.5em;
-      width: 30px;
+      width: 20px;
       font-size: small;
       text-align: center;
       background-color: #333;
@@ -42,9 +43,9 @@
 
     li {
       height: 35%;
-      width: 153px;
+      width: 123px;
       margin: auto;
-      padding: 0.75em 4em 0.75em 1em;
+      padding: 0.75em 3em 0.75em 1em;
       overflow: hidden;
       text-overflow: ellipsis;
     }
