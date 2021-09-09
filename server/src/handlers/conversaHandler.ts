@@ -1,8 +1,8 @@
-import { Inject, Service } from "typedi";
-import { Conversa } from "../models/conversa";
-import { IConversaRequest } from "../models/IConversaRequest";
-import { IRepositoryConversa } from "../repositorys/repositoryConversa";
-import { ErrorHandler } from "../utils/ErrorHandler";
+import { Inject, Service } from 'typedi';
+import { Conversa } from '../models/conversa';
+import { IConversaRequest } from '../models/IConversaRequest';
+import { IRepositoryConversa } from '../repositorys/repositoryConversa';
+import { ErrorHandler } from '../utils/ErrorHandler';
 
 @Service()
 export class ConversaHandler {
