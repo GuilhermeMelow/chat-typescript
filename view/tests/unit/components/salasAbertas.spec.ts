@@ -27,16 +27,16 @@ describe("SalasAbertas.vue", () => {
 
         // Assert
         expect(tab.element.children).toHaveLength(salas.length);
-    })
+    });
 
     it("Destacar a tab da sala ativa", async () => {
         // Arrange
-        const activeIndex = 1;
-        const salaAtiva = salas[activeIndex];
+        const IndiceAtivo = 1;
+        const salaAtiva = salas[IndiceAtivo];
         const { wrapper } = build(salaAtiva);
-        const tabs = wrapper.findAll('.tab-nav li');
+        const tabs = wrapper.findAll('.tab-nav div');
 
         // Assert
-        expect(tabs[activeIndex].classes()).toContain('tab_selected');
-    })
+        expect(tabs[IndiceAtivo].classes()).toContain('tab_selected');
+    });
 })

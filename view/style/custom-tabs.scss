@@ -15,21 +15,51 @@
     background: rgb(120, 120, 120);
   }
 
-  li {
-    display: list-item;
-    padding: 1em 5em;
+  div {
     margin: 0 0.25em;
     cursor: pointer;
     color: white;
     border-inline: 3px solid rgb(46, 46, 46);
+    display: flex;
+    max-width: 200px;
 
-    &:hover {
-      background: rgb(71, 70, 70);
+    .fechar-button {
+      margin: 1em;
+      height: 1.5em;
+      width: 2em;
+      font-size: small;
+      text-align: center;
+      background-color: #333;
+      color: whitesmoke;
+      border: none;
+      border-radius: 100%;
+      padding: 0;
+
+      &:hover {
+        background: rgb(94, 94, 94);
+      }
     }
 
+    li {
+      height: 35%;
+      width: 123px;
+      margin: auto;
+      padding: 0.75em 3em 0.75em 1em;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    &:hover,
     &.tab_selected {
       background: rgb(71, 70, 70);
-      color: white;
+
+      * {
+        background: rgb(71, 70, 70);
+      }
+
+      .fechar-button:hover {
+        background: rgb(94, 94, 94);
+      }
     }
   }
 }

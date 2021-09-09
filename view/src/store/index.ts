@@ -12,10 +12,10 @@ export function CreateStore(chatApi: IChatApi, eventWs: IEventWs): IStore {
         chat: null
     });
 
-    const criarSala = (nome: string): void => {
+    const criarSala = async (nome: string): Promise<void> => {
         const sala = new Chat(nome);
 
-        chatApi.adicionar(sala);
+        await chatApi.adicionar(sala);
         state.salas.push(sala);
 
         eventWs.send("criarSala", sala);
@@ -35,6 +35,23 @@ export function CreateStore(chatApi: IChatApi, eventWs: IEventWs): IStore {
 
         state.chat = chat;
         state.chat.abrir();
+    }
+
+    const redirecionarSala = () => {
+        const salasAtivas = state.salas.filter(s => s.aberto);
+
+        state.chat = salasAtivas.length > 0 ? salasAtivas[0] : null;
+    }
+
+    const fecharSala = (sala: Chat): void => {
+        const salaNaLista = state.salas.find(s => s.nome == sala.nome);
+
+        if (!salaNaLista || !state.chat) return;
+
+        salaNaLista.fechar();
+
+        const salaAtiva = salaNaLista.nome === state.chat.nome;
+        if (salaAtiva) redirecionarSala();
     }
 
     const enviar = async (mensagem: string): Promise<void> => {
@@ -60,6 +77,7 @@ export function CreateStore(chatApi: IChatApi, eventWs: IEventWs): IStore {
         state,
         criarSala,
         abrirSala,
+        fecharSala,
         inicializarSalas,
         enviar
     }
