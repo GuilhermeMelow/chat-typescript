@@ -12,10 +12,10 @@ export function CreateStore(chatApi: IChatApi, eventWs: IEventWs): IStore {
         chat: null
     });
 
-    const criarSala = (nome: string): void => {
+    const criarSala = async (nome: string): Promise<void> => {
         const sala = new Chat(nome);
 
-        chatApi.adicionar(sala);
+        await chatApi.adicionar(sala);
         state.salas.push(sala);
 
         eventWs.send("criarSala", sala);
