@@ -9,15 +9,7 @@ import cors from "cors";
 import { serverWs } from './serverWs';
 import { Server } from 'http';
 
-function startUp(): void {
-    const app = express();
-
-    const server = serverManager(app);
-    serverWs(server);
-    middlewares(app);
-    injectionDependecies(app);
-    errorManager(app);
-}
+/* eslint no-console: "error" */
 
 function serverManager(app: Application): Server {
     const PORT = process.env.PORT || 8001;
@@ -48,10 +40,20 @@ function injectionDependecies(app: Application): void {
 
 function middlewares(app: Application): void {
     app.use(cors({
+        optionsSuccessStatus: 200,
         origin: ['https://chat-front-end.vercel.app', 'http://localhost:8080'],
-        optionsSuccessStatus: 200
     }));
     app.use(express.json());
+}
+
+const startUp = (): void => {
+    const app = express();
+
+    const server = serverManager(app);
+    serverWs(server);
+    middlewares(app);
+    injectionDependecies(app);
+    errorManager(app);
 }
 
 startUp();
