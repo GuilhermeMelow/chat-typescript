@@ -3,27 +3,28 @@ import express, { Response, Request, NextFunction, Application } from 'express';
 import Container from 'typedi';
 import { ConversaController } from './src/controllers/conversaController';
 import { ErrorHandler } from './src/utils/ErrorHandler';
-import { handleError } from "./src/utils/handleError";
+import { handleError } from './src/utils/handleError';
 import { RepositoryConversa } from './src/repositorys/repositoryConversa';
-import cors from "cors";
+import cors from 'cors';
 import { serverWs } from './serverWs';
 import { Server } from 'http';
+import errorCode from './src/utils/HttpCodes.json'
 
-/* eslint no-console: "error" */
 
-function serverManager(app: Application): Server {
+const serverManager = (app: Application): Server => {
     const PORT = process.env.PORT || 8001;
 
     app.get('/', (req, res) => res.send('Conectado'));
 
     return app.listen(PORT, () => {
+        /* eslint no-console: "error" */
         console.log(`\n ⚡️[server]: Server is running at port: ${PORT}\n`);
     });
 }
 
-function errorManager(app: Application): void {
+const errorManager = (app: Application): void => {
     app.get("/error", (req, res) => {
-        throw new ErrorHandler(500, "Internal server error");
+        throw new ErrorHandler(errorCode.ServerError, "Internal server error");
     });
 
     app.use((err: ErrorHandler, req: Request, res: Response, next: NextFunction) => {
@@ -31,14 +32,14 @@ function errorManager(app: Application): void {
     });
 }
 
-function injectionDependecies(app: Application): void {
+const injectionDependecies = (app: Application): void => {
     Container.set("app", app);
     Container.set("repository.conversa", new RepositoryConversa());
 
     Container.get(ConversaController);
 }
 
-function middlewares(app: Application): void {
+const middlewares = (app: Application): void => {
     app.use(cors({
         optionsSuccessStatus: 200,
         origin: ['https://chat-front-end.vercel.app', 'http://localhost:8080'],

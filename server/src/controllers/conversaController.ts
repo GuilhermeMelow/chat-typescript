@@ -23,7 +23,7 @@ export class ConversaController {
     }
 
     private async Get(response: Response) {
-        const conversas: Conversa[] = await this.handler.GetConversas();
+        const conversas: Conversa[] = await this.handler.getConversas();
 
         response.send(conversas);
     }
@@ -42,7 +42,7 @@ export class ConversaController {
         try {
             const nome: string = request.params.nome;
 
-            response.send(await this.handler.FindConversa(nome));
+            response.send(await this.handler.findConversa(nome));
         } catch (error) {
             next(error);
         }
@@ -52,7 +52,7 @@ export class ConversaController {
         try {
             const conversaRequest: IConversaRequest = request.body;
 
-            response.send(await this.handler.AdicionarMensagem(conversaRequest));
+            response.send(await this.handler.adicionarMensagem(conversaRequest));
         } catch (error) {
             next(error);
         }
