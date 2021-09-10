@@ -6,29 +6,24 @@ import { IConversaRequest } from '../models/IConversaRequest';
 
 @Service()
 export class ConversaController {
-    private readonly app: Application;
-    private readonly handler: ConversaHandler;
 
-    constructor(@Inject("app") app: Application, handler: ConversaHandler,) {
-        this.handler = handler;
-        this.app = app;
+    constructor(@Inject("app") private readonly app: Application, private readonly handler: ConversaHandler,) {
+        this.app.get("/conversas", async (req, res) => await this.get(res));
 
-        this.app.get("/conversas", async (req, res) => await this.Get(res));
+        this.app.get("/conversas/:nome", async (req, res, next) => this.find(req, res, next));
 
-        this.app.get("/conversas/:nome", async (req, res, next) => this.Find(req, res, next));
+        this.app.post("/conversas/adicionar/:nome", async (req, res, next) => this.add(req, res, next));
 
-        this.app.post("/conversas/adicionar/:nome", async (req, res, next) => this.Add(req, res, next));
-
-        this.app.post("/conversas/mensagens/adicionar", async (req, res, next) => this.AddMensagem(req, res, next));
+        this.app.post("/conversas/mensagens/adicionar", async (req, res, next) => this.addMensagem(req, res, next));
     }
 
-    private async Get(response: Response) {
+    private async get(response: Response): Promise<void> {
         const conversas: Conversa[] = await this.handler.getConversas();
 
         response.send(conversas);
     }
 
-    private async Add(request: Request, response: Response, next: NextFunction) {
+    private async add(request: Request, response: Response, next: NextFunction): Promise<void> {
         try {
             const nome: string = request.params.nome;
 
@@ -38,7 +33,7 @@ export class ConversaController {
         }
     }
 
-    private async Find(request: Request, response: Response, next: NextFunction) {
+    private async find(request: Request, response: Response, next: NextFunction): Promise<void> {
         try {
             const nome: string = request.params.nome;
 
@@ -48,7 +43,7 @@ export class ConversaController {
         }
     }
 
-    private async AddMensagem(request: Request, response: Response, next: NextFunction) {
+    private async addMensagem(request: Request, response: Response, next: NextFunction): Promise<void> {
         try {
             const conversaRequest: IConversaRequest = request.body;
 
