@@ -12,12 +12,12 @@ import errorCode from './src/utils/HttpCodes.json'
 
 
 const serverManager = (app: Application): Server => {
-    const PORT = process.env.PORT || 8001;
+    const LOCALPORT = 8001;
+    const PORT = process.env.PORT || LOCALPORT;
 
     app.get('/', (req, res) => res.send('Conectado'));
 
     return app.listen(PORT, () => {
-        /* eslint no-console: "error" */
         console.log(`\n ⚡️[server]: Server is running at port: ${PORT}\n`);
     });
 }
