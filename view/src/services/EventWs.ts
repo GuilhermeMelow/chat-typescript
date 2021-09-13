@@ -15,11 +15,11 @@ export class EventWs implements IEventWs {
         this.ws.addEventListener("message", (message) => this.getListener(message));
     }
 
-    public send(key: string, value: any): void {
+    public send(key: string, value: unknown): void {
         this.ws.send(JSON.stringify({ key, value }));
     }
 
-    public createListener(key: string, callback: (data: any) => void): void {
+    public createListener(key: string, callback: (data: unknown) => void): void {
         this.eventListeners.push({ key, callback });
     }
 
