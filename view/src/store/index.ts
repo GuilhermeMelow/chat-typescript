@@ -35,17 +35,17 @@ export const CreateStore = (chatApi: IChatApi, eventWs: IEventWs): IStore => {
 
     const inicializarSalas = async (): Promise<void> => {
         state.salas = await chatApi.pegarChats();
-        const ultimaSala = state.salas.slice().pop();
+        const lastIndex = state.salas.length - 1;
+        const ultimaSala = state.salas[lastIndex];
 
         abrirSala(ultimaSala);
     }
 
     const redirecionarSala = () => {
-        const salasAtivas = state.salas.filter((s) => s.aberto);
-        const primeiraSala = salasAtivas.slice().shift();
+        const salaAtiva = state.salas.find((s) => s.aberto);
 
-        if (primeiraSala) {
-            state.chat = primeiraSala;
+        if (salaAtiva) {
+            state.chat = salaAtiva;
         }
     }
 
