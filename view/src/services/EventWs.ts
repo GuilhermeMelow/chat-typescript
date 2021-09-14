@@ -1,6 +1,6 @@
 
 export interface IEventWs {
-    send(key: string, value: any): void,
+    send(key: string, value: unknown): void,
     createListener(key: string, callback: (data: unknown) => void): void
 }
 
