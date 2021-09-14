@@ -42,10 +42,9 @@ export const CreateStore = (chatApi: IChatApi, eventWs: IEventWs): IStore => {
 
     const redirecionarSala = () => {
         const salasAtivas = state.salas.filter((s) => s.aberto);
-        const nenhumaSala = 0;
+        const primeiraSala = salasAtivas.slice().shift();
 
-        if (salasAtivas.length !== nenhumaSala) {
-            const primeiraSala = salasAtivas.slice().shift();
+        if (primeiraSala) {
             state.chat = primeiraSala;
         }
     }
