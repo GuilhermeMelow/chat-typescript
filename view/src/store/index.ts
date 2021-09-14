@@ -11,7 +11,7 @@ export const CreateStore = (chatApi: IChatApi, eventWs: IEventWs): IStore => {
 
     const state: IState = reactive({
         chat: null,
-        salas: []
+        salas: [],
     });
 
     const abrirSala = (chat?: Chat): void => {
@@ -35,17 +35,19 @@ export const CreateStore = (chatApi: IChatApi, eventWs: IEventWs): IStore => {
 
     const inicializarSalas = async (): Promise<void> => {
         state.salas = await chatApi.pegarChats();
-        const lastIndex = state.salas.length - 1;
-        const firstSala = state.salas.slice()[lastIndex];
+        const ultimaSala = state.salas.slice().pop();
 
-        abrirSala(firstSala);
+        abrirSala(ultimaSala);
     }
 
     const redirecionarSala = () => {
         const salasAtivas = state.salas.filter((s) => s.aberto);
         const nenhumaSala = 0;
 
-        state.chat = salasAtivas.length != nenhumaSala ? salasAtivas[0] : null;
+        if (salasAtivas.length !== nenhumaSala) {
+            const primeiraSala = 0;
+            state.chat = salasAtivas[primeiraSala];
+        }
     }
 
     const fecharSala = (sala: Chat): void => {
@@ -89,6 +91,6 @@ export const CreateStore = (chatApi: IChatApi, eventWs: IEventWs): IStore => {
         enviar,
         fecharSala,
         inicializarSalas,
-        state
+        state,
     }
 }
