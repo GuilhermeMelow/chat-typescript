@@ -1,7 +1,7 @@
 
 export interface IEventWs {
-    send(key: string, value: unknown): void,
-    createListener(key: string, callback: (data: unknown) => void): void
+    send<T>(key: string, value: T): void,
+    createListener<T>(key: string, callback: (data: T) => void): void
 }
 
 interface IEventListener {
@@ -15,11 +15,11 @@ export class EventWs implements IEventWs {
         this.ws.addEventListener("message", (message) => this.getListener(message));
     }
 
-    public send(key: string, value: unknown): void {
+    public send<T>(key: string, value: T): void {
         this.ws.send(JSON.stringify({ key, value }));
     }
 
-    public createListener(key: string, callback: (data: unknown) => void): void {
+    public createListener<T>(key: string, callback: (data: T) => void): void {
         this.eventListeners.push({ key, callback });
     }
 
