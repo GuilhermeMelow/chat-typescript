@@ -49,6 +49,7 @@ export const CreateStore = (chatApi: IChatApi, eventWs: IEventWs): IStore => {
         }
     }
 
+    //TODO: Reestruturar esse metodo
     const fecharSala = (sala: Chat): void => {
         const salaNaLista = state.salas.find((s) => s.nome === sala.nome);
         if (!salaNaLista || !state.chat) {
