@@ -10,9 +10,11 @@ export const serverWs = (server: Server): void => {
                 cliente.send(message);
             }
         });
-    }
+    };
 
-    wss.on("connection", (socket: ws) => {
-        socket.addEventListener("message", (message) => broadcastMessage(socket, message.data));
+    wss.on('connection', (socket: ws) => {
+        socket.addEventListener('message', (message) => {
+            broadcastMessage(socket, message.data);
+        });
     });
-}
+};

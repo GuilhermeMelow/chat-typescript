@@ -4,17 +4,18 @@ import { ConversaHandler } from '../handlers/conversaHandler';
 import { Conversa } from '../models/conversa';
 import { IConversaRequest } from '../models/IConversaRequest';
 
+// eslint-disable-next-line new-cap
 @Service()
 export class ConversaController {
+    // eslint-disable-next-line new-cap
+    constructor(@Inject('app') private readonly app: Application, private readonly handler: ConversaHandler) {
+        this.app.get('/conversas', async (req, res) => this.get(res));
 
-    constructor(@Inject("app") private readonly app: Application, private readonly handler: ConversaHandler,) {
-        this.app.get("/conversas", async (req, res) => await this.get(res));
+        this.app.get('/conversas/:nome', async (req, res, next) => this.find(req, res, next));
 
-        this.app.get("/conversas/:nome", async (req, res, next) => this.find(req, res, next));
+        this.app.post('/conversas/adicionar/:nome', async (req, res, next) => this.add(req, res, next));
 
-        this.app.post("/conversas/adicionar/:nome", async (req, res, next) => this.add(req, res, next));
-
-        this.app.post("/conversas/mensagens/adicionar", async (req, res, next) => this.addMensagem(req, res, next));
+        this.app.post('/conversas/mensagens/adicionar', async (req, res, next) => this.addMensagem(req, res, next));
     }
 
     private async get(response: Response): Promise<void> {

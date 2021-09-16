@@ -8,7 +8,7 @@ import { RepositoryConversa } from './src/repositorys/repositoryConversa';
 import cors from 'cors';
 import { serverWs } from './serverWs';
 import { Server } from 'http';
-import errorCode from './src/utils/HttpCodes.json'
+import errorCode from './src/utils/HttpCodes.json';
 
 
 const serverManager = (app: Application): Server => {
@@ -20,24 +20,24 @@ const serverManager = (app: Application): Server => {
     return app.listen(PORT, () => {
         console.log(`\n ⚡️[server]: Server is running at port: ${PORT}\n`);
     });
-}
+};
 
 const errorManager = (app: Application): void => {
-    app.get("/error", (req, res) => {
-        throw new ErrorHandler(errorCode.ServerError, "Internal server error");
+    app.get('/error', (req, res) => {
+        throw new ErrorHandler(errorCode.ServerError, 'Internal server error');
     });
 
     app.use((err: ErrorHandler, req: Request, res: Response, next: NextFunction) => {
         handleError(err, res);
     });
-}
+};
 
 const injectionDependecies = (app: Application): void => {
-    Container.set("app", app);
-    Container.set("repository.conversa", new RepositoryConversa());
+    Container.set('app', app);
+    Container.set('repository.conversa', new RepositoryConversa());
 
     Container.get(ConversaController);
-}
+};
 
 const middlewares = (app: Application): void => {
     app.use(cors({
@@ -45,7 +45,7 @@ const middlewares = (app: Application): void => {
         origin: ['https://chat-front-end.vercel.app', 'http://localhost:8080'],
     }));
     app.use(express.json());
-}
+};
 
 const startUp = (): void => {
     const app = express();
@@ -55,6 +55,6 @@ const startUp = (): void => {
     middlewares(app);
     injectionDependecies(app);
     errorManager(app);
-}
+};
 
 startUp();

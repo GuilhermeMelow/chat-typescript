@@ -9,7 +9,8 @@
         "tsc": "tsc",
         "postinstall": "npm run tsc",
         "serve": "nodemon server.ts",
-        "test": "jest"
+        "test": "jest",
+        "lint": "eslint . --ext .ts"
     },
     "dependencies": {
         "@types/url-parse": "^1.4.4",

@@ -3,24 +3,25 @@ import { Conversa } from '../models/conversa';
 import { IConversaRequest } from '../models/IConversaRequest';
 import { IRepositoryConversa } from '../repositorys/repositoryConversa';
 import { ErrorHandler } from '../utils/ErrorHandler';
-import httpCodes from "../utils/HttpCodes.json"
+import httpCodes from '../utils/HttpCodes.json';
 
+// eslint-disable-next-line new-cap
 @Service()
 export class ConversaHandler {
-
-    constructor(@Inject("repository.conversa") private readonly repositorio: IRepositoryConversa) { }
+    // eslint-disable-next-line new-cap
+    constructor(@Inject('repository.conversa') private readonly repositorio: IRepositoryConversa) { }
 
     public async getConversas(): Promise<Conversa[]> {
-        return await this.repositorio.mostrar();
+        return this.repositorio.mostrar();
     }
 
     public async findConversa(nome: string): Promise<Conversa> {
-        return await this.repositorio.procurar(nome);
+        return this.repositorio.procurar(nome);
     }
 
     public async postConversa(nome: string): Promise<void> {
-        if (nome.trim() === "") {
-            throw new ErrorHandler(httpCodes.NotFound, "Não é possível criar uma conversa com um nome vazio!");
+        if (nome.trim() === '') {
+            throw new ErrorHandler(httpCodes.NotFound, 'Não é possível criar uma conversa com um nome vazio!');
         }
 
         await this.repositorio.adicionar(new Conversa(nome));
@@ -28,7 +29,7 @@ export class ConversaHandler {
 
     public async adicionarMensagem(conversaRequest: IConversaRequest): Promise<void> {
         if (conversaRequest.mensagem === '' || conversaRequest.mensagem == null) {
-            throw new ErrorHandler(httpCodes.NotFound, "Não é possível enviar uma mensagem vazia!")
+            throw new ErrorHandler(httpCodes.NotFound, 'Não é possível enviar uma mensagem vazia!');
         }
 
         await this.repositorio.adicionarMensagem(conversaRequest.nome, conversaRequest.mensagem);
