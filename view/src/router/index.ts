@@ -1,22 +1,20 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
 import Home from '../views/Home.vue'
 
-const routes: Array<RouteRecordRaw> = [
+const routes: RouteRecordRaw[] = [
     {
         path: '/',
         name: 'Home',
-        component: Home
+        component: Home,
     },
     {
         path: '/chat/',
         name: 'Chat',
-        component: () => import('@/views/chat/Chat.vue')
-    }
+        component: () => import('@/views/chat/Chat.vue'),
+    },
 ]
 
-const router = createRouter({
+export const router = createRouter({
     history: createWebHistory(process.env.BASE_URL),
-    routes
+    routes,
 })
-
-export default router

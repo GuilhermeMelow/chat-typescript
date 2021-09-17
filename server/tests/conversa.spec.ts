@@ -1,9 +1,9 @@
-import { Conversa } from "../src/models/conversa"
+import { Conversa } from '../src/models/conversa';
 
-test("Ao enviar uma mensagem, a mesma deve estar na lista de mensagens", () => {
+test('Ao enviar uma mensagem, a mesma deve estar na lista de mensagens', () => {
     // Arrange
-    const mensagem = "testando...";
-    const conversa = new Conversa("test");
+    const mensagem = 'testando...';
+    const conversa = new Conversa('test');
 
     // Act
     conversa.adicionarMensagem(mensagem);

@@ -2,7 +2,7 @@ import { ref } from "vue";
 import { useRouter } from "vue-router";
 import { IStore } from "@/types/IStore";
 
-export function useLogin(store: IStore) {
+export const useLogin = (store: IStore) => {
     const router = useRouter();
     const error = ref("");
 

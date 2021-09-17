@@ -4,20 +4,30 @@ import { reactive } from "vue"
 import { IState } from "../types/IState";
 import { IStore } from "../types/IStore";
 import { IEventWs } from "@/services/EventWs";
+import { IMessage } from "@/types/IMessage";
 
 
-export function CreateStore(chatApi: IChatApi, eventWs: IEventWs): IStore {
+export const createStore = (chatApi: IChatApi, eventWs: IEventWs): IStore => {
+
     const state: IState = reactive({
+        chat: null,
         salas: [],
-        chat: null
     });
+
+    const abrirSala = (chat?: Chat): void => {
+        if (!chat) {
+            return;
+        }
+
+        state.chat = chat;
+        state.chat.abrir();
+    }
 
     const criarSala = async (nome: string): Promise<void> => {
         const sala = new Chat(nome);
 
         await chatApi.adicionar(sala);
         state.salas.push(sala);
-
         eventWs.send("criarSala", sala);
 
         abrirSala(sala);
@@ -26,59 +36,61 @@ export function CreateStore(chatApi: IChatApi, eventWs: IEventWs): IStore {
     const inicializarSalas = async (): Promise<void> => {
         state.salas = await chatApi.pegarChats();
         const lastIndex = state.salas.length - 1;
+        const ultimaSala = state.salas[lastIndex];
 
-        abrirSala(state.salas[lastIndex]);
-    }
-
-    const abrirSala = (chat?: Chat): void => {
-        if (!chat) return;
-
-        state.chat = chat;
-        state.chat.abrir();
+        abrirSala(ultimaSala);
     }
 
     const redirecionarSala = () => {
-        const salasAtivas = state.salas.filter(s => s.aberto);
+        const salaAtiva = state.salas.find((s) => s.aberto);
 
-        state.chat = salasAtivas.length > 0 ? salasAtivas[0] : null;
+        if (salaAtiva) {
+            state.chat = salaAtiva;
+        }
     }
 
+    // TODO: Reestruturar esse metodo
     const fecharSala = (sala: Chat): void => {
-        const salaNaLista = state.salas.find(s => s.nome == sala.nome);
-
-        if (!salaNaLista || !state.chat) return;
+        const salaNaLista = state.salas.find((s) => s.nome === sala.nome);
+        if (!salaNaLista || !state.chat) {
+            return;
+        }
 
         salaNaLista.fechar();
 
         const salaAtiva = salaNaLista.nome === state.chat.nome;
-        if (salaAtiva) redirecionarSala();
+        if (salaAtiva) {
+            redirecionarSala();
+        }
     }
 
     const enviar = async (mensagem: string): Promise<void> => {
-        if (!state.chat)
+        if (!state.chat) {
             throw new Error("Não existe chat ativo...");
+        }
 
         await chatApi.enviar(mensagem, state.chat);
         state.chat.enviar(mensagem);
+        const message: IMessage = { nome: state.chat.nome, mensagem };
 
-        eventWs.send("enviarMensagem", { nome: state.chat.nome, mensagem });
+        eventWs.send<IMessage>("enviarMensagem", message);
     }
 
-    eventWs.createListener("criarSala", (data: any) => {
+    eventWs.createListener<Chat>("criarSala", (data: Chat) => {
         state.salas.push(new Chat(data.nome, data.mensagens));
     });
 
-    eventWs.createListener("enviarMensagem", (data: any) => {
-        const sala = state.salas.find(s => s.nome == data.nome);
+    eventWs.createListener<IMessage>("enviarMensagem", (data: IMessage) => {
+        const sala = state.salas.find((s) => s.nome === data.nome);
         sala?.enviar(data.mensagem);
     });
 
     return {
-        state,
-        criarSala,
         abrirSala,
+        criarSala,
+        enviar,
         fecharSala,
         inicializarSalas,
-        enviar
+        state,
     }
 }

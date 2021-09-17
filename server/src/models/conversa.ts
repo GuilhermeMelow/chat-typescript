@@ -6,11 +6,11 @@ export class Conversa {
         this.nome = nome;
     }
 
-    public adicionarMensagem(mensagem: string): void {
-        this._mensagens.push(mensagem);
-    }
-
     public get mensagens(): string[] {
         return this._mensagens.slice();
+    }
+
+    public adicionarMensagem(mensagem: string): void {
+        this._mensagens.push(mensagem);
     }
 }

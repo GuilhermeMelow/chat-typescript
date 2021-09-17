@@ -1,4 +1,4 @@
-import { Conversa } from "../models/conversa";
+import { Conversa } from '../models/conversa';
 
 export interface IRepositoryConversa {
     mostrar(): Promise<Conversa[]>;
@@ -21,15 +21,16 @@ export class RepositoryConversa implements IRepositoryConversa {
     }
 
     public procurar(nome: string): Promise<Conversa> {
-        const conversa = this.conversas.find(c => c.nome == nome);
+        const conversa = this.conversas.find((c) => c.nome === nome);
 
-        if (!conversa)
-            throw new Error("Não foi possível encontrar a conversa!");
+        if (!conversa) {
+            throw new Error('Não foi possível encontrar a conversa!');
+        }
 
-        return new Promise((resolve) => resolve(conversa));
+        return Promise.resolve(conversa);
     }
 
     public async mostrar(): Promise<Conversa[]> {
-        return new Promise((resolve) => resolve(this.conversas.slice()));
+        return Promise.resolve(this.conversas.slice());
     }
 }

@@ -9,6 +9,14 @@ export class Chat {
         this._aberto = false;
     }
 
+    public get aberto(): boolean {
+        return this._aberto;
+    }
+
+    public get mensagens(): string[] {
+        return this._mensagens.slice();
+    }
+
     public abrir(): void {
         this._aberto = true
     }
@@ -19,13 +27,5 @@ export class Chat {
 
     public enviar(mensagem: string): void {
         this._mensagens.push(mensagem);
-    }
-
-    public get aberto(): boolean {
-        return this._aberto;
-    }
-
-    public get mensagens(): string[] {
-        return this._mensagens.slice();
     }
 }

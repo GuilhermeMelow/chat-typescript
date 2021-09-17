@@ -1,32 +1,38 @@
-import { IEventWs } from "@/services/EventWs";
-import { CreateStore } from "@/store"
+import { createStore } from "@/store"
 import { Chat } from "@/types/Chat";
 
+
+const getMockEvent = () => {
+    return {
+        createListener: jest.fn(),
+        send: jest.fn(),
+    };
+}
+
+const getMockService = (salas: Chat[]) => {
+    return {
+        adicionar: jest.fn(),
+        entrar: jest.fn(),
+        enviar: jest.fn(),
+        pegarChats: jest.fn().mockReturnValue(salas),
+    };
+}
+
 describe('Store class', () => {
-    function build() {
+    const build = () => {
         const salas = [new Chat("teste1"), new Chat("teste2"), new Chat("teste3")];
-
-        const mockService = {
-            pegarChats: jest.fn().mockReturnValue(salas),
-            enviar: jest.fn(),
-            adicionar: jest.fn(),
-            entrar: jest.fn()
-        };
-
-        const mockEvent: IEventWs = {
-            send: jest.fn(),
-            createListener: jest.fn()
-        };
+        const mockService = getMockService(salas);
+        const mockEvent = getMockEvent();
 
         return {
-            store: CreateStore(mockService, mockEvent),
-            salas: salas,
             sala: new Chat("teste"),
+            salas,
+            store: createStore(mockService, mockEvent),
         };
     }
 
     it("Ao tentar inicializar as salas, deve ocorrer com exito", async () => {
-        // Arrange 
+        // Arrange
         const { store, salas } = build();
 
         // Act
@@ -45,7 +51,7 @@ describe('Store class', () => {
         await store.criarSala(sala.nome);
 
         // Assert
-        expect(store.state.salas.some(s => s.nome == sala.nome)).toBeTruthy();
+        expect(store.state.salas.some((s) => s.nome === sala.nome)).toBeTruthy();
     });
 
 

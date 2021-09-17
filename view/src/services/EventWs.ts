@@ -1,35 +1,31 @@
 
 export interface IEventWs {
-    send(key: string, value: any): void,
-    createListener(key: string, callback: (data: any) => void): void
+    send<T>(key: string, value: T): void,
+    createListener<T>(key: string, callback: (data: T) => void): void
 }
 
 interface IEventListener {
     key: string,
-    callback(data: any): void
+    callback(data: unknown): void
 }
 
 export class EventWs implements IEventWs {
-    private readonly ws: WebSocket;
-    private static readonly eventListeners: IEventListener[] = [];
 
-    constructor(ws: WebSocket) {
-        this.ws = ws;
-
+    constructor(private readonly ws: WebSocket, private readonly eventListeners: IEventListener[] = []) {
         this.ws.addEventListener("message", (message) => this.getListener(message));
     }
 
-    public send(key: string, value: any) {
+    public send<T>(key: string, value: T): void {
         this.ws.send(JSON.stringify({ key, value }));
     }
 
-    public createListener(key: string, callback: (data: any) => void): void {
-        EventWs.eventListeners.push({ key, callback });
+    public createListener<T>(key: string, callback: (data: T) => void): void {
+        this.eventListeners.push({ key, callback });
     }
 
-    private getListener(message: MessageEvent) {
+    private getListener(message: MessageEvent): void {
         const data = JSON.parse(message.data);
-        const eventListener = EventWs.eventListeners.find(l => l.key == data.key);
+        const eventListener = this.eventListeners.find((l) => l.key === data.key);
 
         eventListener?.callback(data.value);
     }

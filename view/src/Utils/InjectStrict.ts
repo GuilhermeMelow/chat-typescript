@@ -1,6 +1,6 @@
 import { inject, InjectionKey } from "vue";
 
-export default function <T>(key: string | InjectionKey<unknown>): T {
+export const injecStrict = <T>(key: string | InjectionKey<unknown>) => {
     const injectObject = inject<T>(key);
 
     if (!injectObject) {
