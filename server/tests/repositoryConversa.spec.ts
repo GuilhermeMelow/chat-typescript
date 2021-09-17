@@ -1,19 +1,21 @@
 import { Conversa } from '../src/models/conversa';
 import { RepositoryConversa } from '../src/repositorys/repositoryConversa';
 
-const build = () => {
-    const repository = new RepositoryConversa();
-    const getConversa = () => {
-        const conversa = new Conversa('teste1');
-        repository.adicionar(conversa);
 
-        return conversa;
-    };
-
-    return { getConversa, repository, };
-};
 
 describe('repositoryConversa.ts', () => {
+    const build = () => {
+        const repository = new RepositoryConversa();
+        const getConversa = () => {
+            const conversa = new Conversa('teste1');
+            repository.adicionar(conversa);
+
+            return conversa;
+        };
+
+        return { getConversa, repository };
+    };
+
     it('Ao adicionar uma conversa no repositorio, deve mostrar a mesma com exito', async () => {
         // Arrange
         const { repository } = build();
