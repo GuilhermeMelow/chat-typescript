@@ -1,4 +1,3 @@
-import { IEventWs } from "@/services/EventWs";
 import { CreateStore } from "@/store"
 import { Chat } from "@/types/Chat";
 
@@ -56,7 +55,7 @@ describe('Store class', () => {
         await store.criarSala(sala.nome);
 
         // Assert
-        expect(store.state.salas.some(s => s.nome === sala.nome)).toBeTruthy();
+        expect(store.state.salas.some((s) => s.nome === sala.nome)).toBeTruthy();
     });
 
 

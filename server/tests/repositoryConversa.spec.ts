@@ -10,7 +10,7 @@ const build = () => {
         return conversa;
     };
 
-    return { repository, getConversa };
+    return { getConversa, repository, };
 };
 
 describe('repositoryConversa.ts', () => {
@@ -24,7 +24,7 @@ describe('repositoryConversa.ts', () => {
 
         // Assert
         const conversas = await repository.mostrar();
-        expect(conversas.some((c) => c.nome == conversa.nome)).toBeTruthy();
+        expect(conversas.some((c) => c.nome === conversa.nome)).toBeTruthy();
     });
 
     it('Ao procurar uma conversa no repositorio, o repositorio deve traze-la', async () => {

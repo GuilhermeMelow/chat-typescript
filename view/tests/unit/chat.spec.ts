@@ -14,7 +14,7 @@ describe("chat classe", () => {
 
         // Act
         chat.enviar(mensagem);
-        const resultMessage = chat.mensagens.find(p => p == mensagem);
+        const resultMessage = chat.mensagens.find((p) => p == mensagem);
 
         // Assert
         const hasMessage = resultMessage != undefined;

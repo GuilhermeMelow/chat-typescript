@@ -8,7 +8,7 @@ describe("UseChats function", () => {
         const { store } = build();
         const useChats = UseChats(store);
 
-        const todasEstaoAbertas = useChats.salasAbertas.value.every(sala => sala.aberto);
+        const todasEstaoAbertas = useChats.salasAbertas.value.every((sala) => sala.aberto);
 
         // Act && Assert
         expect(todasEstaoAbertas).toBeTruthy();
@@ -32,7 +32,7 @@ function build() {
 }
 
 function salas() {
-    const criarSala = (i: Number) => new Chat(`sala${i}`)
+    const criarSala = (i: number) => new Chat(`sala${i}`)
     const salas = [0, 4].map(criarSala)
 
     salas[0].abrir()

@@ -2,7 +2,8 @@ import express from 'express';
 import { ErrorHandler } from './ErrorHandler';
 
 export const handleError = (err: ErrorHandler, res: express.Response): void => {
-    let { statusCode, message } = err;
+    const { message } = err;
+    let { statusCode } = err;
     let status = 'Error';
 
     if (!statusCode) {
@@ -11,8 +12,8 @@ export const handleError = (err: ErrorHandler, res: express.Response): void => {
     }
 
     res.status(statusCode).json({
+        message,
         status,
         statusCode,
-        message,
     });
 };

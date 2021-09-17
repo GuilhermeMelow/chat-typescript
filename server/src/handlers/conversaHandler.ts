@@ -28,7 +28,7 @@ export class ConversaHandler {
     }
 
     public async adicionarMensagem(conversaRequest: IConversaRequest): Promise<void> {
-        if (conversaRequest.mensagem === '' || conversaRequest.mensagem == null) {
+        if (conversaRequest.mensagem === '' || conversaRequest.mensagem === null) {
             throw new ErrorHandler(httpCodes.NotFound, 'Não é possível enviar uma mensagem vazia!');
         }
 

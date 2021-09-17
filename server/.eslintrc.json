@@ -1,4 +1,5 @@
 {
+    "root": true,
     "env": {
         "browser": true,
         "commonjs": true,
@@ -8,7 +9,6 @@
         "@typescript-eslint"
     ],
     "extends": [
-        "google",
         "eslint:recommended",
         "plugin:@typescript-eslint/eslint-recommended",
         "plugin:@typescript-eslint/recommended"
@@ -22,6 +22,11 @@
         "object-curly-spacing": "off",
         "indent": "off",
         "max-len": "off",
-        "require-jsdoc": "off"
+        "require-jsdoc": "off",
+        "eqeqeq": "warn",
+        "curly": "warn",
+        "sort-keys": "warn",
+        "arrow-parens": "error",
+        "eol-last": "error"
     }
 }

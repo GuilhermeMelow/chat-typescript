@@ -5,10 +5,10 @@ import { ErrorHandler } from '../src/utils/ErrorHandler';
 describe('ConversaHandler.ts', () => {
     const build = () => {
         const mockRepositorio: IRepositoryConversa = {
-            mostrar: jest.fn(),
-            procurar: jest.fn(),
             adicionar: jest.fn(),
             adicionarMensagem: jest.fn(),
+            mostrar: jest.fn(),
+            procurar: jest.fn(),
         };
 
         return { handler: new ConversaHandler(mockRepositorio) };
@@ -33,8 +33,8 @@ describe('ConversaHandler.ts', () => {
             // Arrange
             const { handler } = build();
             const conversaRequest = {
-                nome: 'teste',
                 mensagem: '',
+                nome: 'teste',
             };
 
             // Act
