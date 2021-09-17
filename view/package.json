@@ -6,6 +6,7 @@
         "serve": "vue-cli-service serve",
         "build": "vue-cli-service build",
         "test:unit": "vue-cli-service test:unit",
+        "tslint": "tslint -p . -c ./tslint.json",
         "lint": "vue-cli-service lint",
         "test": "jest"
     },

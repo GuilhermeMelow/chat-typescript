@@ -20,21 +20,21 @@
 
 <script lang="ts">
     import { defineComponent, onMounted } from "vue";
-    import { UseChats } from "./functions/UseChats";
+    import { useChats } from "./functions/UseChats";
     import { IStore } from "@/types/IStore";
-    import InjectStrict from "@/Utils/InjectStrict";
     import SalasAbertas from "./components/SalasAbertas.vue";
     import SalasMenu from "./components/SalasMenu.vue";
+    import { injecStrict } from "@/Utils/InjectStrict";
 
     export default defineComponent({
         components: { SalasAbertas, SalasMenu },
 
         setup() {
-            const store = InjectStrict<IStore>("store");
-            onMounted(async () => await store.inicializarSalas());
+            const store = injecStrict<IStore>("store");
+            onMounted(async () => store.inicializarSalas());
 
             return {
-                ...UseChats(store),
+                ...useChats(store),
             };
         },
     });

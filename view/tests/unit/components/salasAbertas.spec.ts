@@ -5,18 +5,18 @@ import { Chat } from "@/types/Chat";
 const salas = [
     new Chat('Sala-1'),
     new Chat('Sala-2'),
-    new Chat('Sala-3')
+    new Chat('Sala-3'),
 ]
 
 describe("SalasAbertas.vue", () => {
-    function build(chat?: Chat) {
+    const build = (chat?: Chat) => {
         return {
             wrapper: shallowMount(SalasAbertas, {
                 props: {
+                    chat,
                     salas,
-                    chat
-                }
-            })
+                },
+            }),
         }
     }
 

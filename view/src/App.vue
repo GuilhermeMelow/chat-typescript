@@ -8,7 +8,7 @@
     import { defineComponent, provide } from "vue";
     import { ChatApi } from "./services/ChatApi";
     import { EventWs } from "./services/EventWs";
-    import { CreateStore } from "./store";
+    import { createStore } from "./store";
 
     export default defineComponent({
         setup() {
@@ -17,7 +17,7 @@
             const url = process.env.VUE_APP_API_ROOT.replace(/^http/, "ws");
             const eventWs = new EventWs(new WebSocket(url));
 
-            provide("store", CreateStore(memoryChat, eventWs));
+            provide("store", createStore(memoryChat, eventWs));
             provide("chatApi", memoryChat);
         },
     });

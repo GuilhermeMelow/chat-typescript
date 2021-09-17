@@ -1,4 +1,4 @@
-import { CreateStore } from "@/store"
+import { createStore } from "@/store"
 import { Chat } from "@/types/Chat";
 
 
@@ -18,25 +18,21 @@ const getMockService = (salas: Chat[]) => {
     };
 }
 
-
-const build = () => {
-    const salas = [new Chat("teste1"), new Chat("teste2"), new Chat("teste3")];
-    const mockService = getMockService(salas);
-    const mockEvent = getMockEvent();
-
-    return {
-        sala: new Chat("teste"),
-        salas,
-        store: CreateStore(mockService, mockEvent),
-    };
-}
-
 describe('Store class', () => {
+    const build = () => {
+        const salas = [new Chat("teste1"), new Chat("teste2"), new Chat("teste3")];
+        const mockService = getMockService(salas);
+        const mockEvent = getMockEvent();
 
-
+        return {
+            sala: new Chat("teste"),
+            salas,
+            store: createStore(mockService, mockEvent),
+        };
+    }
 
     it("Ao tentar inicializar as salas, deve ocorrer com exito", async () => {
-        // Arrange 
+        // Arrange
         const { store, salas } = build();
 
         // Act
@@ -49,7 +45,7 @@ describe('Store class', () => {
 
     it("Ao criar uma sala, deve conte-la na lista de salas", async () => {
         // Arrange
-        const { store, sala, } = build();
+        const { store, sala } = build();
 
         // Act
         await store.criarSala(sala.nome);
@@ -61,7 +57,7 @@ describe('Store class', () => {
 
     it("Ao enviar uma mensagem, deve registrar na sala ativa", async () => {
         // Arrange
-        const { store, sala, } = build();
+        const { store, sala } = build();
         const mensagem = "Teste123";
         await store.criarSala(sala.nome);
 
@@ -74,7 +70,7 @@ describe('Store class', () => {
 
     it("Ao fechar uma sala que está ativa e haja outra aberta, deve redirecionar para a que esta aberta", async () => {
         // Arrange
-        const { store, salas, } = build();
+        const { store, salas } = build();
         await store.inicializarSalas();
         store.abrirSala(salas[1]);
         store.abrirSala(salas[0]);

@@ -2,12 +2,12 @@ import { shallowMount } from "@vue/test-utils"
 import List from "@/components/List.vue"
 
 describe('List.vue', () => {
-    function build() {
+    const build = () => {
         const itens = ["123", "124", "125"];
 
         return {
+            itens,
             wrapper: shallowMount(List, { props: { values: itens } }),
-            itens
         };
     }
 
