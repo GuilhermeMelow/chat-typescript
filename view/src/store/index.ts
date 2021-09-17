@@ -41,26 +41,14 @@ export const createStore = (chatApi: IChatApi, eventWs: IEventWs): IStore => {
         abrirSala(ultimaSala);
     }
 
-    const redirecionarSala = () => {
-        const salaAtiva = state.salas.find((s) => s.aberto);
-
-        if (salaAtiva) {
-            state.chat = salaAtiva;
-        }
-    }
-
-    // TODO: Reestruturar esse metodo
     const fecharSala = (sala: Chat): void => {
-        const salaNaLista = state.salas.find((s) => s.nome === sala.nome);
-        if (!salaNaLista || !state.chat) {
-            return;
-        }
 
-        salaNaLista.fechar();
+        sala.fechar();
 
-        const salaAtiva = salaNaLista.nome === state.chat.nome;
-        if (salaAtiva) {
-            redirecionarSala();
+        const isSalaAtiva = sala.nome === state.chat?.nome;
+
+        if (isSalaAtiva) {
+            state.chat = state.salas.filter((p) => p.aberto)?.[0];
         }
     }
 
