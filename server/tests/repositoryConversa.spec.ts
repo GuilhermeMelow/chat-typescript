@@ -1,8 +1,6 @@
 import { Conversa } from '../src/models/conversa';
 import { RepositoryConversa } from '../src/repositorys/repositoryConversa';
 
-
-
 describe('repositoryConversa.ts', () => {
     const build = () => {
         const repository = new RepositoryConversa();
