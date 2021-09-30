@@ -25,13 +25,19 @@
     import SalasAbertas from "./components/SalasAbertas.vue";
     import SalasMenu from "./components/SalasMenu.vue";
     import { injecStrict } from "@/Utils/InjectStrict";
+    import { IUserStore } from "@/store/userStore";
 
     export default defineComponent({
         components: { SalasAbertas, SalasMenu },
 
         setup() {
             const store = injecStrict<IStore>("store");
-            onMounted(async () => store.inicializarSalas());
+            const userStore = injecStrict<IUserStore>("userStore");
+
+            onMounted(async () => {
+                await store.inicializarSalas();
+                await userStore.createUser();
+            });
 
             return {
                 ...useChats(store),

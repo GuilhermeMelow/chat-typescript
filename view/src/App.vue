@@ -9,16 +9,18 @@
     import { ChatApi } from "./services/ChatApi";
     import { EventWs } from "./services/EventWs";
     import { createStore } from "./store";
+    import { createUserStore, UserApi } from "./store/userStore";
 
     export default defineComponent({
         setup() {
-            const memoryChat = new ChatApi();
+            const chatApi = new ChatApi();
 
             const url = process.env.VUE_APP_API_ROOT.replace(/^http/, "ws");
             const eventWs = new EventWs(new WebSocket(url));
 
-            provide("store", createStore(memoryChat, eventWs));
-            provide("chatApi", memoryChat);
+            provide("userStore", createUserStore(new UserApi()));
+            provide("store", createStore(chatApi, eventWs));
+            provide("chatApi", chatApi);
         },
     });
 </script>
