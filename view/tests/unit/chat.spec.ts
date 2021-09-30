@@ -1,4 +1,4 @@
-import { Chat } from "@/types/Chat";
+import { Chat } from "@/store/models/chat/Chat";
 
 describe("chat classe", () => {
     const build = () => {

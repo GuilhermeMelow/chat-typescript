@@ -1,10 +1,8 @@
 import { IChatApi } from "@/types/IChatApi"
-import { Chat } from "@/types/Chat";
 import { reactive } from "vue"
-import { IState } from "../types/IState";
-import { IStore } from "../types/IStore";
 import { IEventWs } from "@/services/EventWs";
 import { IMessage } from "@/types/IMessage";
+import { Chat, IState, IStore } from "./models/chat/Index";
 
 
 export const createStore = (chatApi: IChatApi, eventWs: IEventWs): IStore => {

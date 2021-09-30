@@ -21,11 +21,11 @@
 <script lang="ts">
     import { defineComponent, onMounted } from "vue";
     import { useChats } from "./functions/UseChats";
-    import { IStore } from "@/types/IStore";
+    import { IStore } from "@/store/models/chat/IChatStore";
     import SalasAbertas from "./components/SalasAbertas.vue";
     import SalasMenu from "./components/SalasMenu.vue";
     import { injecStrict } from "@/Utils/InjectStrict";
-    import { IUserStore } from "@/store/userStore";
+    import { IUserStore } from "@/store/models/user/IUserStore";
 
     export default defineComponent({
         components: { SalasAbertas, SalasMenu },

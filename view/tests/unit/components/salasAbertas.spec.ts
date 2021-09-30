@@ -1,6 +1,6 @@
 import { shallowMount } from "@vue/test-utils"
 import SalasAbertas from "@/views/chat/components/SalasAbertas.vue";
-import { Chat } from "@/types/Chat";
+import { Chat } from "@/store/models/chat/Chat";
 
 const salas = [
     new Chat('Sala-1'),
