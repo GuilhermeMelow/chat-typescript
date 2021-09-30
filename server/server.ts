@@ -9,6 +9,8 @@ import cors from 'cors';
 import { serverWs } from './serverWs';
 import { Server } from 'http';
 import errorCode from './src/utils/HttpCodes.json';
+import { UsuarioRepository } from './src/repositorys/usuarioRepository';
+import { UserController } from './src/controllers/userController';
 
 
 const serverManager = (app: Application): Server => {
@@ -35,8 +37,10 @@ const errorManager = (app: Application): void => {
 const injectionDependecies = (app: Application): void => {
     Container.set('app', app);
     Container.set('repository.conversa', new RepositoryConversa());
+    Container.set('repository.usuario', new UsuarioRepository());
 
     Container.get(ConversaController);
+    Container.get(UserController);
 };
 
 const middlewares = (app: Application): void => {
