@@ -1,5 +1,6 @@
 import { createStore } from "@/store"
 import { Chat } from "@/store/models/chat/Chat";
+import { Message } from "@/types/Message";
 
 
 const getMockEvent = () => {
@@ -58,11 +59,11 @@ describe('Store class', () => {
     it("Ao enviar uma mensagem, deve registrar na sala ativa", async () => {
         // Arrange
         const { store, sala } = build();
-        const mensagem = { sender: "1234", value: "Teste123" };
+        const mensagem: Message = { sender: "1234", value: "Teste123" };
         await store.criarSala(sala.nome);
 
         // Act
-        await store.enviar(mensagem);
+        await store.enviar(mensagem.value, mensagem.sender);
 
         // Assert
         expect(store.state.chat?.mensagens[0]).toEqual(mensagem);
