@@ -1,10 +1,11 @@
 import { Conversa } from '../models/conversa';
+import { Mensagem } from '../models/mensagem';
 
 export interface IRepositoryConversa {
     mostrar(): Promise<Conversa[]>;
     procurar(nome: string): Promise<Conversa>;
     adicionar(conversa: Conversa): Promise<void>;
-    adicionarMensagem(nome: string, mensagem: string): Promise<void>;
+    adicionarMensagem(nome: string, mensagem: Mensagem): Promise<void>;
 }
 
 export class RepositoryConversa implements IRepositoryConversa {
@@ -14,7 +15,7 @@ export class RepositoryConversa implements IRepositoryConversa {
         this.conversas.push(conversa);
     }
 
-    public async adicionarMensagem(nome: string, mensagem: string): Promise<void> {
+    public async adicionarMensagem(nome: string, mensagem: Mensagem): Promise<void> {
         const conversa = await this.procurar(nome);
 
         conversa.adicionarMensagem(mensagem);
