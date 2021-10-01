@@ -11,7 +11,7 @@
             <SalasAbertas
                 :salas="salasAbertas"
                 :chat="state.chat"
-                :user="user"
+                :user="userState.user"
                 @abrirSala="abrirSala"
                 @fecharSala="fecharSala"
                 @enviar="enviar" />
@@ -48,11 +48,16 @@
 </script>
 
 <style lang="scss">
+    .side-menu,
+    .main,
+    .main-container {
+        margin: 0 auto;
+    }
+
     .main {
-        margin: auto;
         width: 95%;
         display: flex;
-        height: 500px;
+        height: 650px;
     }
 
     .side-menu {
@@ -64,7 +69,6 @@
     }
 
     .main-container {
-        margin: 0 auto;
         width: 50%;
         height: 100%;
         padding: 1%;

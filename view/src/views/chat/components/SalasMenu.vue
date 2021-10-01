@@ -1,7 +1,10 @@
 <template>
-    <List class="list" v-if="salas != null" :values="salas">
+    <List class="list-menu" v-if="salas !== null" :values="salas">
         <template #="{ item }">
-            <div v-text="item.nome" :data-teste="item.id" @click="emit('abrirSala', item)" />
+            <div class="list-item-menu"
+                v-text="item.nome.charAt(0).toUpperCase() + item.nome.slice(1)"
+                :data-teste="item.id"
+                @click="emit('abrirSala', item)" />
         </template>
     </List>
     <Enviador class="enviador" @send="emit('criarSala', $event)" />
@@ -29,12 +32,31 @@
 </script>
 
 <style lang="scss">
+    .title {
+        text-align: center;
+        font-size: 2em;
+        font-weight: 450;
+    }
     .enviador {
         height: 10%;
     }
 
-    .list {
+    .list-item-menu {
+        padding: 1em;
+        margin: 1em;
+
+        font-size: 1.05em;
+        color: white;
+
+        background: rgb(87, 87, 87);
+        border: 2px solid rgb(87, 87, 87);
+        border-radius: 0.25em;
+    }
+
+    .list-menu {
         height: 90%;
         overflow: auto;
+
+        border-bottom: 1px solid rgb(87, 87, 87);
     }
 </style>

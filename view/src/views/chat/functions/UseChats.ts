@@ -7,7 +7,7 @@ export const useChats = (chatStore: IStore, userStore: IUserStore) => {
 
     return {
         ...chatStore,
-        user: userStore.state.user,
+        userState: userStore.state,
         salasAbertas: computed<Chat[]>(() => chatStore.state.salas.filter((p) => p.aberto)),
     };
 }
