@@ -1,6 +1,6 @@
 import { IChatApi } from "@/types/IChatApi";
-import { Chat } from "@/types/Chat";
-import { IChatResponse } from "./chatResponse";
+import { Chat } from "@/store/models/chat/Chat";
+import { IChatResponse } from "./ChatResponse";
 import axios, { AxiosResponse } from "axios";
 
 

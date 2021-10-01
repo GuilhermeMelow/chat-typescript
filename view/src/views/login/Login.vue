@@ -11,7 +11,7 @@
     import Enviador from "@/components/Enviador.vue";
     import { useLogin } from "./functions/UseLogin";
     import { injecStrict } from "@/Utils/InjectStrict";
-    import { IStore } from "@/types/IStore";
+    import { IStore } from "@/store/models/chat/IChatStore";
 
     export default defineComponent({
         name: "Login",

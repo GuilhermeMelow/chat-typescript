@@ -5,10 +5,9 @@ import { IRepositoryConversa } from '../repositorys/repositoryConversa';
 import { ErrorHandler } from '../utils/ErrorHandler';
 import httpCodes from '../utils/HttpCodes.json';
 
-// eslint-disable-next-line new-cap
+
 @Service()
 export class ConversaHandler {
-    // eslint-disable-next-line new-cap
     constructor(@Inject('repository.conversa') private readonly repositorio: IRepositoryConversa) { }
 
     public async getConversas(): Promise<Conversa[]> {

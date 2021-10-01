@@ -1,4 +1,4 @@
-import { Chat } from "./Chat";
+import { Chat } from "../store/models/chat/Chat";
 
 export interface IChatApi {
     adicionar(chat: Chat): Promise<void>;

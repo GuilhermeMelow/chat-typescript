@@ -1,5 +1,5 @@
-import { Chat } from "@/types/Chat";
-import { IState } from "./IState";
+import { Chat } from "@/store/models/chat/Chat";
+import { IState } from "./IChatState";
 
 export interface IStore {
     state: IState;

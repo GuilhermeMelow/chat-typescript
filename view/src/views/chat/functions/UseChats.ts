@@ -1,5 +1,5 @@
-import { IStore } from "@/types/IStore";
-import { Chat } from "@/types/Chat";
+import { IStore } from "@/store/models/chat/IChatStore";
+import { Chat } from "@/store/models/chat/Chat";
 import { computed } from "vue";
 
 export const useChats = (store: IStore) => {

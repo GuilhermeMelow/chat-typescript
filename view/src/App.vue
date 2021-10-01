@@ -8,17 +8,17 @@
     import { defineComponent, provide } from "vue";
     import { ChatApi } from "./services/ChatApi";
     import { EventWs } from "./services/EventWs";
+    import { UserApi } from "./services/UserApi";
     import { createStore } from "./store";
+    import { createUserStore } from "./store/userStore";
 
     export default defineComponent({
         setup() {
-            const memoryChat = new ChatApi();
-
             const url = process.env.VUE_APP_API_ROOT.replace(/^http/, "ws");
             const eventWs = new EventWs(new WebSocket(url));
 
-            provide("store", createStore(memoryChat, eventWs));
-            provide("chatApi", memoryChat);
+            provide("userStore", createUserStore(new UserApi()));
+            provide("store", createStore(new ChatApi(), eventWs));
         },
     });
 </script>

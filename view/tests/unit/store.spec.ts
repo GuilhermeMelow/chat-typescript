@@ -1,5 +1,5 @@
 import { createStore } from "@/store"
-import { Chat } from "@/types/Chat";
+import { Chat } from "@/store/models/chat/Chat";
 
 
 const getMockEvent = () => {
