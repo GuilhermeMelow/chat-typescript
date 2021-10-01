@@ -11,6 +11,7 @@
             <SalasAbertas
                 :salas="salasAbertas"
                 :chat="state.chat"
+                :user="user"
                 @abrirSala="abrirSala"
                 @fecharSala="fecharSala"
                 @enviar="enviar" />
@@ -31,16 +32,16 @@
         components: { SalasAbertas, SalasMenu },
 
         setup() {
-            const store = injecStrict<IStore>("store");
+            const chatStore = injecStrict<IStore>("store");
             const userStore = injecStrict<IUserStore>("userStore");
 
             onMounted(async () => {
-                await store.inicializarSalas();
+                await chatStore.inicializarSalas();
                 await userStore.createUser();
             });
 
             return {
-                ...useChats(store),
+                ...useChats(chatStore, userStore),
             };
         },
     });

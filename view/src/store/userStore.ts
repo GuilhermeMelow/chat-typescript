@@ -14,5 +14,5 @@ export const createUserStore = (userApi: UserApi): IUserStore => {
         state.user = new User(id);
     }
 
-    return { createUser };
+    return { state, createUser };
 }

@@ -16,10 +16,10 @@
     <div v-if="chat" class="load-content">
         <List class="list" :values="chat.mensagens">
             <template #="{ item }">
-                <div v-text="item" />
+                <div v-text="item.value" />
             </template>
         </List>
-        <Enviador class="enviador" @send="emit('enviar', $event)" />
+        <Enviador class="enviador" @send="emit('enviar', $event, user.id)" />
     </div>
 </template>
 
@@ -33,6 +33,7 @@
         components: { List, Enviador },
         props: {
             salas: Array,
+            user: Object,
             chat: Object,
         },
         emits: ["abrirSala", "fecharSala", "enviar"],

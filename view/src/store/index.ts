@@ -51,7 +51,9 @@ export const createStore = (chatApi: IChatApi, eventWs: IEventWs): IStore => {
         }
     }
 
-    const enviar = async (mensagem: Message): Promise<void> => {
+    const enviar = async (value: string, sender: string): Promise<void> => {
+        const mensagem: Message = { sender, value };
+
         if (!state.chat) {
             throw new Error("Não existe chat ativo...");
         }
