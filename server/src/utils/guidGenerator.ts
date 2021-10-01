@@ -1,6 +1,6 @@
 export class Guid {
-    private readonly mask = "00000000-0000-0000-0000-000000000000"
-    private readonly separatorChar = '-';
+    private readonly mask: string = "00000000-0000-0000-0000-000000000000"
+    private readonly separatorChar: string = '-';
     private readonly value: string;
 
     constructor() {
