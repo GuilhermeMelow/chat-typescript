@@ -1,8 +1,9 @@
 import { IChatApi } from "@/types/IChatApi"
 import { reactive } from "vue"
 import { IEventWs } from "@/services/EventWs";
-import { IMessage } from "@/types/IMessage";
+import { IMessageResponse } from "@/types/IMessageResponse";
 import { Chat, IState, IStore } from "./models/chat/Index";
+import { Message } from "@/types/Message";
 
 
 export const createStore = (chatApi: IChatApi, eventWs: IEventWs): IStore => {
@@ -50,23 +51,23 @@ export const createStore = (chatApi: IChatApi, eventWs: IEventWs): IStore => {
         }
     }
 
-    const enviar = async (mensagem: string): Promise<void> => {
+    const enviar = async (mensagem: Message): Promise<void> => {
         if (!state.chat) {
             throw new Error("Não existe chat ativo...");
         }
 
         await chatApi.enviar(mensagem, state.chat);
         state.chat.enviar(mensagem);
-        const message: IMessage = { nome: state.chat.nome, mensagem };
+        const message: IMessageResponse = { nome: state.chat.nome, mensagem };
 
-        eventWs.send<IMessage>("enviarMensagem", message);
+        eventWs.send<IMessageResponse>("enviarMensagem", message);
     }
 
     eventWs.createListener<Chat>("criarSala", (data: Chat) => {
         state.salas.push(new Chat(data.nome, data.mensagens));
     });
 
-    eventWs.createListener<IMessage>("enviarMensagem", (data: IMessage) => {
+    eventWs.createListener<IMessageResponse>("enviarMensagem", (data: IMessageResponse) => {
         const sala = state.salas.find((s) => s.nome === data.nome);
         sala?.enviar(data.mensagem);
     });

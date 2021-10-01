@@ -2,6 +2,7 @@ import { IChatApi } from "@/types/IChatApi";
 import { Chat } from "@/store/models/chat/Chat";
 import { IChatResponse } from "./ChatResponse";
 import axios, { AxiosResponse } from "axios";
+import { Message } from "@/types/Message";
 
 
 export class ChatApi implements IChatApi {
@@ -16,7 +17,7 @@ export class ChatApi implements IChatApi {
         await axios.post(`${this.url}/conversas/adicionar/${chat.nome}`);
     }
 
-    public async enviar(mensagem: string, chat: Chat): Promise<void> {
+    public async enviar(mensagem: Message, chat: Chat): Promise<void> {
         await axios.post(`${this.url}/conversas/mensagens/adicionar`, {
             mensagem,
             nome: chat.nome,

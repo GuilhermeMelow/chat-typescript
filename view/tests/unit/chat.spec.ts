@@ -4,7 +4,7 @@ describe("chat classe", () => {
     const build = () => {
         return {
             chat: new Chat("teste1"),
-            mensagem: "teste",
+            mensagem: { sender: "1234", value: "teste" },
         };
     }
 
