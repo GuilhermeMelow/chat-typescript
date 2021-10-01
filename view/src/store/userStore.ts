@@ -5,7 +5,7 @@ import { reactive } from "vue";
 
 export const createUserStore = (userApi: UserApi): IUserStore => {
     const state: IUserState = reactive({
-        user: null
+        user: null,
     });
 
     const createUser = async (): Promise<void> => {
