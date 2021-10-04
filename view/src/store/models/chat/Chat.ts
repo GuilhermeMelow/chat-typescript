@@ -1,9 +1,11 @@
+import { Message } from "@/types/Message";
+
 export class Chat {
     public nome: string;
     private _aberto: boolean;
-    private _mensagens: string[] = [];
+    private _mensagens: Message[] = [];
 
-    constructor(nome: string, mensagens: string[] = []) {
+    constructor(nome: string, mensagens: Message[] = []) {
         this.nome = nome;
         this._mensagens = mensagens;
         this._aberto = false;
@@ -13,7 +15,7 @@ export class Chat {
         return this._aberto;
     }
 
-    public get mensagens(): string[] {
+    public get mensagens(): Message[] {
         return this._mensagens.slice();
     }
 
@@ -25,7 +27,7 @@ export class Chat {
         this._aberto = false;
     }
 
-    public enviar(mensagem: string): void {
+    public enviar(mensagem: Message): void {
         this._mensagens.push(mensagem);
     }
 }

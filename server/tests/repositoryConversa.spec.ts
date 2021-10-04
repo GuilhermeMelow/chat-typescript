@@ -1,5 +1,7 @@
 import { Conversa } from '../src/models/conversa';
+import { Mensagem } from '../src/models/mensagem';
 import { RepositoryConversa } from '../src/repositorys/repositoryConversa';
+import { Guid } from '../src/utils/guidGenerator';
 
 describe('repositoryConversa.ts', () => {
     const build = () => {
@@ -43,7 +45,7 @@ describe('repositoryConversa.ts', () => {
         // Arrange
         const { repository, getConversa } = build();
         const conversa = getConversa();
-        const mensagem = 'teste';
+        const mensagem: Mensagem = { sender: new Guid(), value: 'teste' };
 
         // Act
         await repository.adicionarMensagem(conversa.nome, mensagem);

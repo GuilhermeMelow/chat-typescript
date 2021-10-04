@@ -1,6 +1,7 @@
 import { ConversaHandler } from '../src/handlers/conversaHandler';
 import { IRepositoryConversa } from '../src/repositorys/repositoryConversa';
 import { ErrorHandler } from '../src/utils/ErrorHandler';
+import { Guid } from '../src/utils/guidGenerator';
 
 describe('ConversaHandler.ts', () => {
     const build = () => {
@@ -33,8 +34,9 @@ describe('ConversaHandler.ts', () => {
             // Arrange
             const { handler } = build();
             const conversaRequest = {
-                mensagem: '',
+                mensagem: { sender: new Guid(), value: "" },
                 nome: 'teste',
+
             };
 
             // Act
