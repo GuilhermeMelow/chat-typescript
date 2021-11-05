@@ -1,8 +1,8 @@
 <template>
-    <div class="enviador-content">
-        <input type="text" v-model="text" data-teste="nome" style="width:65%" class="form-input" />
-        <button @click="send()" data-teste="criar" v-text="'Enviar'" style="width:25%" class="form-button" />
-    </div>
+    <q-input class=" q-mx-auto" label="NickName" v-model="text" data-teste="nome" />
+    <q-btn size="md" class="my-button q-mx-auto" data-teste="criar" @click="send()">
+        <span class="my-font q-ma-sm"> Sign in </span>
+    </q-btn>
 </template>
 
 <script lang="ts">
@@ -28,10 +28,15 @@
 </script>
 
 <style lang="scss" >
-    .enviador-content {
-        display: flex;
-        * {
-            margin: auto;
-        }
+    @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap");
+
+    .my-font {
+        font-family: "Roboto", sans-serif;
+        font-size: 0.85rem;
+    }
+
+    .my-button {
+        background-color: #333;
+        color: white;
     }
 </style>
