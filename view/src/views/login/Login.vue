@@ -1,9 +1,16 @@
 <template>
-    <div class="login-content">
-        <h3> Logar </h3>
-        <enviador :label="'Escreva seu nome:'" @send="entrar"></enviador>
-        <p v-text="error" data-teste="error-message" />
-    </div>
+    <q-card flat bordered class="my-card q-mx-auto q-pa-md">
+        <q-card-section>
+            <div class="text-h5"> Login </div>
+        </q-card-section>
+
+        <q-separator inset />
+
+        <q-card-actions>
+            <enviador :label="'Escreva seu nome:'" @send="entrar"></enviador>
+            <p v-text="error" data-teste="error-message" />
+        </q-card-actions>
+    </q-card>
 </template>
 
 <script lang="ts">
@@ -27,9 +34,11 @@
 </script>
 
 <style lang="scss">
-    .login-content {
-        margin: auto;
-        width: 25%;
-        padding: 7.5em;
+    .my-card {
+        width: 100%;
+        max-width: 350px;
+
+        height: 100%;
+        max-height: 350px;
     }
 </style>

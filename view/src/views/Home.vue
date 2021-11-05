@@ -1,7 +1,9 @@
 <template>
-    <div class="home">
-        <Login />
-    </div>
+    <q-page>
+        <div class="fixed-center">
+            <Login />
+        </div>
+    </q-page>
 </template>
 
 <script lang="ts">
