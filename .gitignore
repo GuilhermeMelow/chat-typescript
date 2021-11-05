@@ -21,3 +21,4 @@ yarn-error.log*
 *.njsproj
 *.sln
 *.sw*
+view/src/styles/quasar.variables.scss
