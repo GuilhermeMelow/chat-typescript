@@ -1,8 +1,12 @@
 <template>
-    <q-input class=" q-mx-auto" label="NickName" v-model="text" data-teste="nome" />
-    <q-btn size="md" class="my-button q-mx-auto" data-teste="criar" @click="send()">
-        <span class="my-font q-ma-sm"> Sign in </span>
-    </q-btn>
+    <div class="q-pb-md q-mx-auto">
+        <q-input style="width:200px" class=" q-ma-auto" label="NickName" v-model="text" data-teste="nome" />
+    </div>
+    <div class="q-ma-md" style="heigth: 100%">
+        <q-btn size="md" class="my-button q-mx-auto" data-teste="criar" @click="send()">
+            <span class="my-font q-ma-sm"> Sign in </span>
+        </q-btn>
+    </div>
 </template>
 
 <script lang="ts">
@@ -36,6 +40,7 @@
     }
 
     .my-button {
+        width: 100%;
         background-color: #333;
         color: white;
     }
