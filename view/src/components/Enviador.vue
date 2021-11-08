@@ -18,6 +18,7 @@
             label: String,
             buttonTitle: String,
         },
+        emits: ["send"],
         setup(props, { emit }) {
             const text = ref("");
 
