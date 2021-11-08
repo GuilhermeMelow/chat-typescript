@@ -7,7 +7,7 @@
         <q-separator inset />
 
         <q-card-actions>
-            <enviador :label="'Escreva seu nome:'" @send="entrar"></enviador>
+            <enviador :label="'Nickname'" :buttonTitle="'Sign in'" @send="entrar"></enviador>
             <p v-text="error" data-teste="error-message" />
         </q-card-actions>
     </q-card>
