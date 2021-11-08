@@ -1,17 +1,13 @@
 <template>
-    <q-layout view="lHh Lpr lFf">
-        <q-header>
-            <q-toolbar color="primary" style="background-color: #333">
-                <q-toolbar-title>
-                    Chat
-                </q-toolbar-title>
-            </q-toolbar>
-        </q-header>
+    <div id="app">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#">Chat</a>
+            </div>
+        </nav>
 
-        <q-page-container>
-            <router-view />
-        </q-page-container>
-    </q-layout>
+        <router-view></router-view>
+    </div>
 </template>
 
 <script lang="ts">

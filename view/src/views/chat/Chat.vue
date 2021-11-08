@@ -1,4 +1,3 @@
-
 <template>
     <div class="main">
         <div class="side-menu">
