@@ -7,7 +7,7 @@
                 @click="emit('abrirSala', item)" />
         </template>
     </List>
-    <Enviador class="enviador" @send="emit('criarSala', $event)" />
+    <Enviador :buttonTitle="'Criar Sala'" class="enviador" @send="emit('criarSala', $event)" />
 </template>
 
 <script lang="ts">

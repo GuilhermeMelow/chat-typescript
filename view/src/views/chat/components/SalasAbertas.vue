@@ -23,7 +23,7 @@
                 </div>
             </template>
         </List>
-        <Enviador class="enviador" @send="emit('enviar', $event, user.id)" />
+        <Enviador :buttonTitle="'Enviar'" class="enviador" @send="emit('enviar', $event, user.id)" />
     </div>
 </template>
 

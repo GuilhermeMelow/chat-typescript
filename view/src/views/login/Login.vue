@@ -1,16 +1,8 @@
 <template>
-    <q-card flat bordered class="my-card q-mx-auto q-pa-md">
-        <q-card-section>
-            <div class="text-h5"> Login </div>
-        </q-card-section>
-
-        <q-separator inset />
-
-        <q-card-actions>
-            <enviador :label="'Escreva seu nome:'" @send="entrar"></enviador>
-            <p v-text="error" data-teste="error-message" />
-        </q-card-actions>
-    </q-card>
+    <b-card title="Login" style="max-width: 20rem;">
+        <enviador :label="'Nickname'" :buttonTitle="'Sign in'" @send="entrar"></enviador>
+        <p v-text="error" data-teste="error-message" />
+    </b-card>
 </template>
 
 <script lang="ts">
@@ -32,13 +24,3 @@
         },
     });
 </script>
-
-<style lang="scss">
-    .my-card {
-        width: 100%;
-        max-width: 350px;
-
-        height: 100%;
-        max-height: 350px;
-    }
-</style>
