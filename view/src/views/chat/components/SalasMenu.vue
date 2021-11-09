@@ -1,13 +1,12 @@
 <template>
-    <List class="list-menu" v-if="salas !== null" :values="salas">
-        <template #="{ item }">
-            <div class="list-item-menu"
-                v-text="item.nome.charAt(0).toUpperCase() + item.nome.slice(1)"
-                :data-teste="item.id"
-                @click="emit('abrirSala', item)" />
-        </template>
-    </List>
-    <Enviador :buttonTitle="'Criar Sala'" class="enviador" @send="emit('criarSala', $event)" />
+    <div class="row control-overflow" style="max-height: 75%">
+        <List v-if="salas !== null"
+            :values="salas"
+            @itemClicked="abrirSala" />
+    </div>
+    <div class="row" style="max-height: 25%">
+        <Enviador :buttonTitle="'Criar Sala'" class="enviador" @send="emit('criarSala', $event)" />
+    </div>
 </template>
 
 <script lang="ts">
@@ -25,6 +24,7 @@
         setup(props, { emit }) {
             return {
                 emit,
+                abrirSala: (sala: any) => emit("abrirSala", sala),
                 ...toRefs(props),
             };
         },
@@ -32,31 +32,7 @@
 </script>
 
 <style lang="scss">
-    .title {
-        text-align: center;
-        font-size: 2em;
-        font-weight: 450;
-    }
-    .enviador {
-        height: 10%;
-    }
-
-    .list-item-menu {
-        padding: 1em;
-        margin: 1em;
-
-        font-size: 1.05em;
-        color: white;
-
-        background: rgb(87, 87, 87);
-        border: 2px solid rgb(87, 87, 87);
-        border-radius: 0.25em;
-    }
-
-    .list-menu {
-        height: 90%;
+    .control-overflow {
         overflow: auto;
-
-        border-bottom: 1px solid rgb(87, 87, 87);
     }
 </style>
