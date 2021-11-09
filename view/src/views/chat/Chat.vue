@@ -1,19 +1,21 @@
 <template>
-    <div class="main">
-        <div class="side-menu">
-            <SalasMenu
-                :salas="state.salas"
-                @criarSala="criarSala"
-                @abrirSala="abrirSala" />
-        </div>
-        <div class="main-container">
-            <SalasAbertas
-                :salas="salasAbertas"
-                :chat="state.chat"
-                :user="userState.user"
-                @abrirSala="abrirSala"
-                @fecharSala="fecharSala"
-                @enviar="enviar" />
+    <div class="container">
+        <div class="row" style="height: 670px">
+            <div class="col height-100">
+                <SalasMenu
+                    :salas="state.salas"
+                    @criarSala="criarSala"
+                    @abrirSala="abrirSala" />
+            </div>
+            <div class="col height-100">
+                <SalasAbertas
+                    :salas="salasAbertas"
+                    :chat="state.chat"
+                    :user="userState.user"
+                    @abrirSala="abrirSala"
+                    @fecharSala="fecharSala"
+                    @enviar="enviar" />
+            </div>
         </div>
     </div>
 </template>
@@ -47,31 +49,7 @@
 </script>
 
 <style lang="scss">
-    .side-menu,
-    .main,
-    .main-container {
-        margin: 0 auto;
-    }
-
-    .main {
-        width: 95%;
-        display: flex;
-        height: 650px;
-    }
-
-    .side-menu {
-        width: 30%;
+    .height-100 {
         height: 100%;
-        padding: 1%;
-        border: 2px solid #333;
-        border-radius: 0.75rem;
-    }
-
-    .main-container {
-        width: 50%;
-        height: 100%;
-        padding: 1%;
-        border: 2px solid #333;
-        border-radius: 0.75rem;
     }
 </style>
